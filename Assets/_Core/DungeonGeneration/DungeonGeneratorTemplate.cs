@@ -29,7 +29,7 @@ public class DungeonGeneratorTemplate : DungeonGenerator
 
         for (int i = 0; i < parameters.iterations; i++)
         {
-            var path = DungeonGenerationAlgorithms.GetRandomFloorPositions(currentPosition, parameters.pathLength);
+            var path = DungeonGenerationAlgorithms.GetRandomFloorPositions(currentPosition, parameters.floorPositionsCount);
             floorPositions.UnionWith(path);
 
             if (parameters.isRandomEachIteration)

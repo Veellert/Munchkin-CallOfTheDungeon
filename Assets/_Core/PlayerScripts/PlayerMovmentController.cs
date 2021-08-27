@@ -58,7 +58,7 @@ public class PlayerMovmentController : MonoBehaviour
 
     private void TryStartAnimation(string[] animations, bool condition = true)
     {
-        if (condition)
+        if (condition && _directionManager.GetCurrentDirectionStatement() != null)
         {
             string animation = animations[(int)_directionManager.CurrentDirection];
 

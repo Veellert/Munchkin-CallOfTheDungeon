@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b91c5a6ea096bc148b9b3b60f6272ef8, type: 3}
-  m_Name: SimpleRandomDungeonParametres_SmallDungeon
+  m_Script: {fileID: 11500000, guid: 0721782d440adac4e9c6c924a111fc7d, type: 3}
+  m_Name: PlayerDungeonSpawner
   m_EditorClassIdentifier: 
-  iterations: 20
-  pathLength: 20
-  isRandomEachIteration: 0
+  spawnerType: 0
+  spawnPosition: {x: 0, y: 0}
+  spawnTarget: {fileID: 8984112705814933617, guid: ce85f992fd0228e4aa17f60e22bcb0ce, type: 3}

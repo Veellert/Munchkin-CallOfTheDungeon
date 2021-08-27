@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b91c5a6ea096bc148b9b3b60f6272ef8, type: 3}
-  m_Name: SimpleRandomDungeonParametres_BigDungeon
+  m_Name: SmallDungeonRoomParameters
   m_EditorClassIdentifier: 
-  iterations: 40
-  pathLength: 25
-  isRandomEachIteration: 1
+  iterations: 20
+  floorPositionsCount: 10
+  isRandomEachIteration: 0
+  roomType: 1
+  spawners: []
