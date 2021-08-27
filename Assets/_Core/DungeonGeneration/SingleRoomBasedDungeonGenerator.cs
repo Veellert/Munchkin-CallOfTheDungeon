@@ -41,5 +41,13 @@ public class SingleRoomBasedDungeonGenerator : DungeonGeneratorTemplate
             _currentVisualizePositions.UnionWith(floorPositions);
         }
         VisualizeDungeon();
+
+        _dungeonRoomParameters.InitDungeonSpawners(_currentVisualizePositions);
+    }
+
+    protected override void ClearDungeonVisualization()
+    {
+        _dungeonRoomParameters.DestroyDungeonSpawners();
+        base.ClearDungeonVisualization();
     }
 }

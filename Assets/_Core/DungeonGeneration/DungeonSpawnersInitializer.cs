@@ -8,10 +8,14 @@ public class DungeonSpawnersInitializer : MonoBehaviour
 
     private void Start()
     {
-        foreach (var spawner in _spawners)
-        {
-            spawner.Spawn();
-        }
+        InitSpawners(_spawners);
     }
 
+    public static void InitSpawners(DungeonSpawnerParameters[] spawners)
+    {
+        foreach (var spawner in spawners)
+        {
+            spawner?.Spawn();
+        }
+    }
 }

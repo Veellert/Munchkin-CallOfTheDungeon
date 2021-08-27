@@ -15,7 +15,7 @@ public abstract class DungeonGenerator : MonoBehaviour
     
     public void ClearDungeon()
     {
-        _visualizer.Clear();
+        ClearDungeonVisualization();
     }
     
     public void ReVisualizeDungeon()
@@ -24,5 +24,6 @@ public abstract class DungeonGenerator : MonoBehaviour
     }
 
     protected abstract void StartGeneration();
+    protected abstract void ClearDungeonVisualization();
     protected abstract void VisualizeDungeon();
 }

@@ -38,4 +38,9 @@ public class DungeonGeneratorTemplate : DungeonGenerator
 
         return floorPositions;
     }
+
+    protected override void ClearDungeonVisualization()
+    {
+        _visualizer.Clear();
+    }
 }
