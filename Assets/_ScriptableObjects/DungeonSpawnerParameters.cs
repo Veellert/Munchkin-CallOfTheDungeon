@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewDungeonSpawner", menuName = "Custom/DungeonGeneration/DungeonSpawnerParameters")]
-public class DungeonSpawnerParameters : ScriptableObject
+public abstract class DungeonSpawnerParameters : ScriptableObject
 {
-    public eDungeonSpawnerType spawnerType;
+    public abstract eDungeonSpawnerType SpawnerType { get; }
     public Vector2Int spawnPosition;
-    public GameObject spawnTarget;
+
+    public abstract void Spawn();
+
+    public void SetSpawnPosition(int x, int y) => spawnPosition = new Vector2Int(x, y);
+    public void SetSpawnPosition(Vector2Int position) => spawnPosition = position;
 }
 
 public enum eDungeonSpawnerType

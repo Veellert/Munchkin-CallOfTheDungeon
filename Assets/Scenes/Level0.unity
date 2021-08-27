@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawners:
-  - {fileID: 11400000, guid: 84489667e5b1e9e4b8de5017ee83e6c6, type: 2}
+  - {fileID: 11400000, guid: 91109fb6f681384448960c899e1f3ebe, type: 2}
 --- !u!1001 &719667984
 PrefabInstance:
   m_ObjectHideFlags: 0

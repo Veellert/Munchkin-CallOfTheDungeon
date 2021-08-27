@@ -10,10 +10,7 @@ public class DungeonSpawnersInitializer : MonoBehaviour
     {
         foreach (var spawner in _spawners)
         {
-            if (spawner.spawnerType == eDungeonSpawnerType.PlayerSpawner)
-            {
-                Instantiate(spawner.spawnTarget, (Vector3Int)spawner.spawnPosition, Quaternion.identity);
-            }
+            spawner.Spawn();
         }
     }
 
