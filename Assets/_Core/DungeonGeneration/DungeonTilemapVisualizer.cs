@@ -25,7 +25,7 @@ public class DungeonTilemapVisualizer : MonoBehaviour
         _floorTilemap.ClearAllTiles();
         _wallTilemap.ClearAllTiles();
     }
-
+    
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
     {
         foreach (var position in positions)
