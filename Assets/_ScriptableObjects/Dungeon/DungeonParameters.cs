@@ -13,7 +13,7 @@ public abstract class DungeonParameters : ScriptableObject
 
     public void StartGeneration(Vector2Int currentPosition)
     {
-        Generate(currentPosition);
+        Generate(currentPosition); 
     }
     
     public void VisualizeDungeon(DungeonTilemapVisualizer visualizer)
@@ -21,6 +21,7 @@ public abstract class DungeonParameters : ScriptableObject
         if (_preparedPositions == null)
             return;
 
+        ClearDungeon(visualizer);
         Visualize();
 
         visualizer.VisualizeFloorTiles(_preparedPositions);
