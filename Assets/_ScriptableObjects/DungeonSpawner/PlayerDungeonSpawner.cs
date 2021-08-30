@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewPlayerDungeonSpawner", menuName = "Custom/DungeonSpawners/PlayerDungeonSpawner")]
+[CreateAssetMenu(fileName = "NewPlayerDungeonSpawner", menuName = "Custom/DungeonGeneration/Spawner/PlayerSpawner")]
 public class PlayerDungeonSpawner : DungeonSpawnerParameters
 {
     public override eDungeonSpawnerType SpawnerType => eDungeonSpawnerType.PlayerSpawner;

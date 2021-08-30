@@ -2,28 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DungeonGenerator : MonoBehaviour
+public class DungeonGenerator : MonoBehaviour
 {
-    [SerializeField] protected DungeonTilemapVisualizer _visualizer = null;
-    [SerializeField] protected Vector2Int _startPosition = Vector2Int.zero;
+    [SerializeField] private DungeonTilemapVisualizer _visualizer;
+    [SerializeField] private Vector2Int _startPosition;
+    [SerializeField] private DungeonParameters _parameters;
 
     public void GenerateDungeon()
     {
         ClearDungeon();
-        StartGeneration();
+        _parameters.StartGeneration(_startPosition);
+        VisualizeDungeon();
     }
     
     public void ClearDungeon()
     {
-        ClearDungeonVisualization();
+        _parameters.ClearDungeon(_visualizer);
     }
     
-    public void ReVisualizeDungeon()
+    public void VisualizeDungeon()
     {
-        VisualizeDungeon();
+        _parameters.VisualizeDungeon(_visualizer);
     }
-
-    protected abstract void StartGeneration();
-    protected abstract void ClearDungeonVisualization();
-    protected abstract void VisualizeDungeon();
 }

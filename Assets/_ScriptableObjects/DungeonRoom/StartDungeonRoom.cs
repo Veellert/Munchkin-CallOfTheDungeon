@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewStartDungeonRoom", menuName = "Custom/DungeonGeneration/StartDungeonRoom")]
+[CreateAssetMenu(fileName = "NewStartDungeonRoom", menuName = "Custom/DungeonGeneration/Room/StartRoom")]
 public class StartDungeonRoom : DungeonRoomParameters
 {
     public PlayerDungeonSpawner playerSpawner;

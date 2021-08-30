@@ -20,7 +20,7 @@ public class DungeonGeneratorEditor : Editor
         }
         if(GUILayout.Button("Отрисовать подземелье"))
         {
-            _generator.ReVisualizeDungeon();
+            _generator.VisualizeDungeon();
         }
         if(GUILayout.Button("Сгенерировать подземелье"))
         {
