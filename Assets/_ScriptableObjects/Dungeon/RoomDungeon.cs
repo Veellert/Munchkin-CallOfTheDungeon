@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewRoomDungeon", menuName = "Custom/DungeonGeneration/Dungeon/RoomBased")]
-public class RoomBasedDungeonGenerator : DungeonParameters
+public class RoomDungeon : DungeonParameters
 {
     public int _roomsCount = 1;
     [Range(2, 5)] public int _roomOffset = 2;

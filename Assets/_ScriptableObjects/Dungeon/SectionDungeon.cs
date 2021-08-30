@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewSectionDungeon", menuName = "Custom/DungeonGeneration/Dungeon/SectionBased")]
-public class SectionBasedDungeonGenerator : DungeonParameters
+public class SectionDungeon : DungeonParameters
 {
     public int _minRoomWidth = 4;
     public int _minRoomHeight = 4;
@@ -14,7 +14,11 @@ public class SectionBasedDungeonGenerator : DungeonParameters
     public bool _isRandomShapeRooms = false;
     [Range(0, 10)] public int _offset = 1;
 
-    public DungeonRoomParameters _dungeonRoomParameters;
+    public StartDungeonRoom _startDungeonRoom;
+    [SerializeField] [HideInInspector] private HashSet<Vector2Int> _startRoomPreparedPositions = new HashSet<Vector2Int>();
+
+    public BasicDungeonRoom _basicDungeonRoom;
+    [SerializeField] [HideInInspector] private HashSet<Vector2Int> _basicRoomPreparedPositions = new HashSet<Vector2Int>();
 
     protected override void Generate(Vector2Int startPosition)
     {
@@ -38,24 +42,30 @@ public class SectionBasedDungeonGenerator : DungeonParameters
 
     protected override void Clear()
     {
-        _dungeonRoomParameters.DestroyDungeonSpawners();
+        _startDungeonRoom.DestroyDungeonSpawners();
+        _basicDungeonRoom.DestroyDungeonSpawners();
     }
 
     protected override void Visualize()
     {
-        _dungeonRoomParameters.InitDungeonSpawners(_preparedPositions);
+        _startDungeonRoom.InitDungeonSpawners(_startRoomPreparedPositions);
+        _basicDungeonRoom.InitDungeonSpawners(_basicRoomPreparedPositions);
     }
 
     private HashSet<Vector2Int> CreateRandomShapeRooms(List<BoundsInt> roomsList)
     {
         var floorPositions = new HashSet<Vector2Int>();
+        _startRoomPreparedPositions.Clear();
+        _basicRoomPreparedPositions.Clear();
 
         for (int i = 0; i < roomsList.Count; i++)
         {
             var roomsBounds = roomsList[i];
             var roomCenter = new Vector2Int(Mathf.RoundToInt(roomsBounds.center.x), Mathf.RoundToInt(roomsBounds.center.y));
 
-            var roomFloorPositions = DungeonRoomGenerator.CreateFloor(_dungeonRoomParameters, roomCenter);
+            var roomFloorPositions = DungeonRoomGenerator.CreateFloor(_basicDungeonRoom, roomCenter);
+            if(i == 0)
+            roomFloorPositions = DungeonRoomGenerator.CreateFloor(_startDungeonRoom, roomCenter);
 
             foreach (var position in roomFloorPositions)
             {
@@ -65,6 +75,38 @@ public class SectionBasedDungeonGenerator : DungeonParameters
                     floorPositions.Add(position);
                 }
             }
+
+            if (i == 0)
+                _startRoomPreparedPositions.UnionWith(floorPositions);
+            else
+                _basicRoomPreparedPositions.UnionWith(floorPositions);
+        }
+
+        return floorPositions;
+    }
+
+    private HashSet<Vector2Int> CreateSimpleRooms(List<BoundsInt> roomsList)
+    {
+        var floorPositions = new HashSet<Vector2Int>();
+        _startRoomPreparedPositions.Clear();
+        _basicRoomPreparedPositions.Clear();
+
+        int index = 0;
+        foreach (var room in roomsList)
+        {
+            for (int col = _offset; col < room.size.x - _offset; col++)
+                for (int row = _offset; row < room.size.y - _offset; row++)
+                {
+                    var position = (Vector2Int)room.min + new Vector2Int(col, row);
+                    floorPositions.Add(position);
+                }
+
+            if (index == 0)
+                _startRoomPreparedPositions.UnionWith(floorPositions);
+            else
+                _basicRoomPreparedPositions.UnionWith(floorPositions);
+
+            index++;
         }
 
         return floorPositions;
@@ -134,20 +176,5 @@ public class SectionBasedDungeonGenerator : DungeonParameters
             }
         }
         return closestPoint;
-    }
-
-    private HashSet<Vector2Int> CreateSimpleRooms(List<BoundsInt> roomsList)
-    {
-        var floorPositions = new HashSet<Vector2Int>();
-
-        foreach (var room in roomsList)
-            for (int col = _offset; col < room.size.x - _offset; col++)
-                for (int row = _offset; row < room.size.y - _offset; row++)
-                {
-                    var position = (Vector2Int)room.min + new Vector2Int(col, row);
-                    floorPositions.Add(position);
-                }
-
-        return floorPositions;
     }
 }

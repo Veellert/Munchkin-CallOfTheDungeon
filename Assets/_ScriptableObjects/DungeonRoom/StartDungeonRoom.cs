@@ -15,9 +15,9 @@ public class StartDungeonRoom : DungeonRoomParameters
         playerSpawner.Destroy();
     }
 
-    public override void InitDungeonSpawners(HashSet<Vector2Int> floorPositions)
+    public override void InitDungeonSpawners(HashSet<Vector2Int> spawnPositions)
     {
-        playerSpawner.SetSpawnPosition(floorPositions.ElementAt(Random.Range(0, floorPositions.Count)));
+        playerSpawner.SetSpawnPosition(spawnPositions.ElementAt(Random.Range(0, spawnPositions.Count)));
         var allSpawners = new DungeonSpawnerParameters[1] { playerSpawner };
         DungeonSpawnersInitializer.InitSpawners(allSpawners);
     }
