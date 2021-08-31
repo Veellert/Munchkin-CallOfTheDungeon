@@ -18,4 +18,5 @@ MonoBehaviour:
   _dungeonHeight: 70
   _isRandomShapeRooms: 1
   _offset: 2
-  _dungeonRoomParameters: {fileID: 11400000, guid: 90947067843803346a31b3da5b920a85, type: 2}
+  _startDungeonRoom: {fileID: 11400000, guid: 90947067843803346a31b3da5b920a85, type: 2}
+  _basicDungeonRoom: {fileID: 11400000, guid: 9019a77ae12ae8941b3b7571bd3279fa, type: 2}

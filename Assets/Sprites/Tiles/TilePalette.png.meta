@@ -4,46 +4,52 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 9185323719981418078
-    second: Floor_0
+    second: Dungeon_Floor_0
   - first:
       213: 3366286211708786001
-    second: Floor_1
-  - first:
-      213: 7937023434684249089
-    second: Wall_TopBottom_0
+    second: Dungeon_Floor_1
   - first:
       213: 3716455920043268738
-    second: Wall_Side_0
+    second: Dungeon_Wall_Side_0
   - first:
-      213: 6687956420773180231
-    second: Wall_TopLeft_0
+      213: 5477536444748164929
+    second: Dungeon_Wall_TopBottom_0
   - first:
-      213: 6705974385102418975
-    second: Wall_TopRight_0
+      213: 6828688581920915829
+    second: Dungeon_Corner_TopLeft_0
   - first:
       213: 4650556438001074216
-    second: Wall_BottomLeft
-  - first:
-      213: -463851110252002017
-    second: Wall_BottomRight_0
+    second: Dungeon_Corner_TopRight_0
   - first:
       213: 7923301034849515297
-    second: Wall_Full_0
+    second: Dungeon_Corner_BottomLeft_0
   - first:
       213: -5862533551390596503
-    second: Wall_Connect_Full_0
-  - first:
-      213: -8919049060104550982
-    second: Wall_Connect_Top_0
+    second: Dungeon_Corner_BottomRight_0
   - first:
       213: -9084052581046312614
-    second: Wall_Connect_Bottom_0
+    second: Dungeon_Connect_Bottom_0
   - first:
-      213: 5335744956368183035
-    second: Wall_Connect_Left_0
+      213: -8227307985343676855
+    second: Dungeon_Connect_Top_0
   - first:
-      213: 6990317340138716570
-    second: Wall_Connect_Right_0
+      213: 8075965779232896210
+    second: Dungeon_Connect_Left_0
+  - first:
+      213: 3776935378646562900
+    second: Dungeon_Connect_Right_0
+  - first:
+      213: 7474112625431803149
+    second: Dungeon_Wall_Full_0
+  - first:
+      213: 8146837960002680706
+    second: Dungeon_Connect_Full_0
+  - first:
+      213: -3016756041156230154
+    second: Dungeon_Arch_Side_0
+  - first:
+      213: -2107650915547190544
+    second: Dungeon_Arch_TopBottom_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -74,7 +80,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: -1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -108,7 +114,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -120,7 +126,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -133,11 +139,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Floor_0
+      name: Dungeon_Floor_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2304
+        x: 1
+        y: 2303
         width: 256
         height: 256
       alignment: 0
@@ -154,11 +160,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Floor_1
+      name: Dungeon_Floor_1
       rect:
         serializedVersion: 2
-        x: 256
-        y: 2304
+        x: 259
+        y: 2303
         width: 256
         height: 256
       alignment: 0
@@ -175,32 +181,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall_TopBottom_0
+      name: Dungeon_Wall_Side_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2048
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1043e4ef2c8f52e60800000000000000
-      internalID: 7937023434684249089
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wall_Side_0
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 2048
+        x: 1
+        y: 2045
         width: 256
         height: 256
       alignment: 0
@@ -217,11 +202,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall_TopLeft_0
+      name: Dungeon_Wall_TopBottom_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1792
+        x: 259
+        y: 2045
         width: 256
         height: 256
       alignment: 0
@@ -231,18 +216,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7437a7d2ee460dc50800000000000000
-      internalID: 6687956420773180231
+      spriteID: 14f6871106e140c40800000000000000
+      internalID: 5477536444748164929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall_TopRight_0
+      name: Dungeon_Corner_TopLeft_0
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1792
+        x: 1
+        y: 1787
         width: 256
         height: 256
       alignment: 0
@@ -252,18 +237,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f14f5e86c28601d50800000000000000
-      internalID: 6705974385102418975
+      spriteID: 5718927d51064ce50800000000000000
+      internalID: 6828688581920915829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall_BottomLeft
+      name: Dungeon_Corner_TopRight_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1536
+        x: 259
+        y: 1787
         width: 256
         height: 256
       alignment: 0
@@ -280,32 +265,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall_BottomRight_0
+      name: Dungeon_Corner_BottomLeft_0
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1536
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1542c07fd11099f0800000000000000
-      internalID: -463851110252002017
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wall_Full_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1280
+        x: 1
+        y: 1529
         width: 256
         height: 256
       alignment: 0
@@ -322,11 +286,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall_Connect_Full_0
+      name: Dungeon_Corner_BottomRight_0
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1280
+        x: 259
+        y: 1529
         width: 256
         height: 256
       alignment: 0
@@ -343,32 +307,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall_Connect_Top_0
+      name: Dungeon_Connect_Bottom_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ab5cf2e822c293480800000000000000
-      internalID: -8919049060104550982
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wall_Connect_Bottom_0
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 1024
+        x: 1
+        y: 1271
         width: 256
         height: 256
       alignment: 0
@@ -385,11 +328,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall_Connect_Left_0
+      name: Dungeon_Connect_Top_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 768
+        x: 259
+        y: 1271
         width: 256
         height: 256
       alignment: 0
@@ -399,18 +342,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfe586094cf5c0a40800000000000000
-      internalID: 5335744956368183035
+      spriteID: 94efadb3afab2dd80800000000000000
+      internalID: -8227307985343676855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall_Connect_Right_0
+      name: Dungeon_Connect_Left_0
       rect:
         serializedVersion: 2
-        x: 256
-        y: 768
+        x: 1
+        y: 1013
         width: 256
         height: 256
       alignment: 0
@@ -420,8 +363,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9db836a598920160800000000000000
-      internalID: 6990317340138716570
+      spriteID: 2d433618618931070800000000000000
+      internalID: 8075965779232896210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dungeon_Connect_Right_0
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 1013
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45875df37be5a6430800000000000000
+      internalID: 3776935378646562900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dungeon_Wall_Full_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 755
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d05ff1255d169b760800000000000000
+      internalID: 7474112625431803149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dungeon_Connect_Full_0
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 755
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 287b0a8f5f16f0170800000000000000
+      internalID: 8146837960002680706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dungeon_Arch_Side_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 497
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f38ed03d545226d0800000000000000
+      internalID: -3016756041156230154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dungeon_Arch_TopBottom_0
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 497
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fa684cb8ae10c2e0800000000000000
+      internalID: -2107650915547190544
       vertices: []
       indices: 
       edges: []

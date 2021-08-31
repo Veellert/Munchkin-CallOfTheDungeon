@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 492641e2bf5dd1c46808bf358d93b526, type: 3}
-  m_Name: SmallStartDungeonRoom
+  m_Script: {fileID: 11500000, guid: 506182c082b994344988dd907d233195, type: 3}
+  m_Name: LobbyPlayerDungeonSpawner
   m_EditorClassIdentifier: 
-  iterations: 10
-  floorPositionsCount: 10
-  isRandomEachIteration: 0
-  playerSpawner: {fileID: 11400000, guid: 9bf3f0e086df8754d9e8e7e08b82acb0, type: 2}
+  spawnPosition: {x: 0, y: 0}
+  playerTarget: {fileID: 8984112705814933617, guid: ce85f992fd0228e4aa17f60e22bcb0ce, type: 3}

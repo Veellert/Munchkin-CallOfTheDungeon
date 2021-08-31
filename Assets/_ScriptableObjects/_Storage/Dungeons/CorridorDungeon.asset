@@ -15,4 +15,5 @@ MonoBehaviour:
   _corridorLength: 40
   _corridorsCount: 5
   _roomPercent: 0.8
-  _dungeonRoomParameters: {fileID: 11400000, guid: 90947067843803346a31b3da5b920a85, type: 2}
+  _startDungeonRoom: {fileID: 11400000, guid: 90947067843803346a31b3da5b920a85, type: 2}
+  _basicDungeonRoom: {fileID: 11400000, guid: 9019a77ae12ae8941b3b7571bd3279fa, type: 2}

@@ -11,11 +11,24 @@ public class DungeonSpawnersInitializer : MonoBehaviour
         InitSpawners(_spawners);
     }
 
+    private void OnDestroy()
+    {
+        DestroySpawners(_spawners);
+    }
+
     public static void InitSpawners(DungeonSpawnerParameters[] spawners)
     {
         foreach (var spawner in spawners)
         {
             spawner?.Spawn();
+        }
+    }
+
+    public static void DestroySpawners(DungeonSpawnerParameters[] spawners)
+    {
+        foreach (var spawner in spawners)
+        {
+            spawner?.Destroy();
         }
     }
 }
