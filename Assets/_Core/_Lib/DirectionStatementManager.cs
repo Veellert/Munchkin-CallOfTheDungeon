@@ -10,49 +10,22 @@ public enum eDirectionStatements
     Right,
 }
 
-public class DirectionStatementManager : MonoBehaviour
+public abstract class DirectionStatementManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _frontDirectionState;
-    [SerializeField] private GameObject _backDirectionState;
-    [SerializeField] private GameObject _leftDirectionState;
-    [SerializeField] private GameObject _rightDirectionState;
-
     public eDirectionStatements CurrentDirection => (eDirectionStatements)_directionStates.FindIndex(s => s == _currentDirectionState);
 
     private GameObject _currentDirectionState;
-    private List<GameObject> _directionStates;
+    protected List<GameObject> _directionStates;
 
-    private void Start()
-    {
-        _directionStates = new List<GameObject>
-        {
-            _frontDirectionState, _backDirectionState, _leftDirectionState, _rightDirectionState,
-        };
-
-        if (_frontDirectionState)
-            ChangeDirectionState(_frontDirectionState);
-    }
-
+    public abstract void ChangeDirection(Vector2 direction);
     public void ChangeDirection(eDirectionStatements direction)
     {
         ChangeDirectionState(_directionStates[(int)direction]);
     }
-    public void ChangeDirection(Vector2 direction)
-    {
-        if (direction.y > 0)
-            ChangeDirectionState(_backDirectionState);
-        else if (direction.y < 0)
-            ChangeDirectionState(_frontDirectionState);
-
-        if (direction.x > 0)
-            ChangeDirectionState(_rightDirectionState);
-        else if (direction.x < 0)
-            ChangeDirectionState(_leftDirectionState);
-    }
 
     public GameObject GetCurrentDirectionStatement() => _currentDirectionState;
 
-    private void ChangeDirectionState(GameObject directionState)
+    protected void ChangeDirectionState(GameObject directionState)
     {
         if (_currentDirectionState != null && _currentDirectionState == directionState)
             return;
@@ -64,4 +37,3 @@ public class DirectionStatementManager : MonoBehaviour
         _currentDirectionState.SetActive(true);
     }
 }
-
