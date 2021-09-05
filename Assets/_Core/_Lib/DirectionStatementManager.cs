@@ -31,7 +31,7 @@ public abstract class DirectionStatementManager : MonoBehaviour
             return;
 
         foreach (var state in _directionStates.FindAll(s => s != directionState))
-            state.SetActive(false);
+            state?.SetActive(false);
 
         _currentDirectionState = directionState;
         _currentDirectionState.SetActive(true);
