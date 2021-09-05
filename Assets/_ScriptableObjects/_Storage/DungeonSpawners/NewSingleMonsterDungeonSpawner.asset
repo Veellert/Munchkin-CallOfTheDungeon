@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c690db0b891ece145ba5cb518e1c98cc, type: 3}
   m_Name: NewSingleMonsterDungeonSpawner
   m_EditorClassIdentifier: 
-  spawnPosition: {x: 5, y: 0}
+  spawnPosition: {x: 3, y: 0}
   monsterTarget: {fileID: 11400000, guid: 696b6f098efc9454185b5f15f2f6265d, type: 2}

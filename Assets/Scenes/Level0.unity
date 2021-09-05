@@ -282,6 +282,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2062366664, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062366664, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 362298787
+      objectReference: {fileID: 0}
     - target: {fileID: 2062366665, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
       propertyPath: m_Size.x
       value: 19
@@ -557,6 +565,14 @@ PrefabInstance:
     - target: {fileID: 2062366665, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
       propertyPath: m_Tiles.Array.data[5].second.m_TileObjectToInstantiateIndex
       value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784136437741320018, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784136437741320018, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 362298787
       objectReference: {fileID: 0}
     - target: {fileID: 5784136437741320019, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
       propertyPath: m_Size.x
@@ -11877,6 +11893,14 @@ PrefabInstance:
     - target: {fileID: 5784136437755766671, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784136438087331912, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784136438087331912, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 362298787
       objectReference: {fileID: 0}
     - target: {fileID: 5784136438087331913, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
       propertyPath: m_Size.x
