@@ -17,7 +17,7 @@ public class PlayerMovmentController : MonoBehaviour
     [Header("Running Speed")]
     [SerializeField] private float _movementSpeed = 6;
 
-    private string _currentAnimation;
+    private AnimationManager _animation = new AnimationManager();
     private Vector2 _movementDirection;
 
     private void Update()
@@ -42,33 +42,12 @@ public class PlayerMovmentController : MonoBehaviour
     private void CheckDirection()
     {
         _directionManager.ChangeDirection(_movementDirection);
-        TryStartAnimation(ANIMATION_IDLE, _movementDirection == Vector2.zero);
+        _animation.Play(_directionManager, AnimationManager._IDLE, _animator, _movementDirection == Vector2.zero);
     }
 
     private void TryRun()
     {
         _rigBody.velocity = _movementDirection * _movementSpeed;
-        TryStartAnimation(ANIMATION_RUNNING, _movementDirection != Vector2.zero);
+        _animation.Play(_directionManager, AnimationManager._RUNNING, _animator, _movementDirection != Vector2.zero);
     }
-
-    #region Animations
-
-    private readonly string[] ANIMATION_IDLE = { "Idle_F", "Idle_B", "Idle_LS", "Idle_RS" };
-    private readonly string[] ANIMATION_RUNNING = { "Running_F", "Running_B", "Running_LS", "Running_RS" };
-
-    private void TryStartAnimation(string[] animations, bool condition = true)
-    {
-        if (condition && _directionManager.GetCurrentDirectionStatement() != null)
-        {
-            string animation = animations[(int)_directionManager.CurrentDirection];
-
-            if (_currentAnimation == animation)
-                return;
-
-            _animator.Play(animation);
-            _currentAnimation = animation;
-        }
-    }
-
-    #endregion
 }
