@@ -4,29 +4,26 @@ using UnityEngine;
 
 public class MonsterIdleMovement : MonoBehaviour
 {
-    [SerializeField]
-    private Animator _animator;
-    [SerializeField]
-    private DirectionStatementManager _directionManager;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private DirectionStatementManager _directionManager;
 
-    [SerializeField]
-    private CircleCollider2D _movementZone;
-    [SerializeField]
-    private float _movementSpeed;
-    [SerializeField]
-    private float _startWaitTime;
-    [SerializeField]
-    private float _startRemovePointTime;
+    [SerializeField] private CircleCollider2D _movementZone;
+    [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _startWaitTime;
+    [SerializeField] private float _startRemovePointTime;
 
-    private AnimationManager _animation = new AnimationManager();
+    private AnimationCaller _animation;
+
+    private Vector2 _movementDirection = Vector2.zero;
+
     private Transform _movePoint;
     private Vector2 _startPoint;
     private float _waitTime;
     private float _removePointTime;
-    private Vector2 _movementDirection = Vector2.zero;
 
     private void Start()
     {
+        _animation = new AnimationCaller(_animator);
         _startPoint = transform.position + (Vector3)_movementZone.offset/4;
 
         InitPoint();
@@ -71,14 +68,14 @@ public class MonsterIdleMovement : MonoBehaviour
     private void CheckDirection()
     {
         _directionManager.ChangeDirection(_movementDirection);
-        _animation.Play(_directionManager, AnimationManager._IDLE, _animator, _movementDirection.x == 0);
+        _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.IDLE, _movementDirection.x == 0);
     }
 
     private void TryRun()
     {
         transform.position = Vector2.MoveTowards
             (transform.position, _movePoint.position, _movementSpeed * Time.deltaTime);
-        _animation.Play(_directionManager, AnimationManager._RUNNING, _animator, _movementDirection.x != 0);
+        _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.RUNNING, _movementDirection.x != 0);
     }
 
     private void InitPoint()

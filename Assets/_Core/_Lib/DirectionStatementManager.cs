@@ -4,36 +4,57 @@ using UnityEngine;
 
 public enum eDirectionStatements
 {
-    Front,
-    Back,
     Left,
     Right,
 }
 
-public abstract class DirectionStatementManager : MonoBehaviour
+public class DirectionStatementManager : MonoBehaviour
 {
-    public eDirectionStatements CurrentDirection => (eDirectionStatements)_directionStates.FindIndex(s => s == _currentDirectionState);
+    [SerializeField] private GameObject _leftDirection;
+    [SerializeField] private GameObject _rightDirection;
 
-    private GameObject _currentDirectionState;
-    protected List<GameObject> _directionStates;
-
-    public abstract void ChangeDirection(Vector2 direction);
-    public void ChangeDirection(eDirectionStatements direction)
+    [HideInInspector] public eDirectionStatements eCurrentDirection
     {
-        ChangeDirectionState(_directionStates[(int)direction]);
+        get
+        {
+            return _leftDirection?.name == CurrentDirection?.name ? eDirectionStatements.Left : eDirectionStatements.Right;
+        }
+    }
+    [HideInInspector] public GameObject CurrentDirection { get; private set; }
+
+    private void Start()
+    {
+        if (_rightDirection)
+            ChangeDirectionState(_rightDirection);
     }
 
-    public GameObject GetCurrentDirectionStatement() => _currentDirectionState;
-
-    protected void ChangeDirectionState(GameObject directionState)
+    public void ChangeDirection(Vector2 direction)
     {
-        if (_currentDirectionState != null && _currentDirectionState == directionState)
+        if (direction.x > 0)
+            ChangeDirectionState(_rightDirection);
+        else if (direction.x < 0)
+            ChangeDirectionState(_leftDirection);
+    }
+
+    public void ChangeDirection(eDirectionStatements direction)
+    {
+        if(direction == eDirectionStatements.Left)
+            ChangeDirectionState(_leftDirection);
+        else
+            ChangeDirectionState(_rightDirection);
+    }
+
+    private void ChangeDirectionState(GameObject directionState)
+    {
+        if (CurrentDirection && directionState && CurrentDirection == directionState)
             return;
 
-        foreach (var state in _directionStates.FindAll(s => s != directionState))
-            state?.SetActive(false);
+        if (directionState.name == _leftDirection.name)
+            _rightDirection?.SetActive(false);
+        else
+            _leftDirection?.SetActive(false);
 
-        _currentDirectionState = directionState;
-        _currentDirectionState.SetActive(true);
+        CurrentDirection = directionState;
+        CurrentDirection?.SetActive(true);
     }
 }

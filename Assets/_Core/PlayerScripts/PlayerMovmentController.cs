@@ -17,8 +17,13 @@ public class PlayerMovmentController : MonoBehaviour
     [Header("Running Speed")]
     [SerializeField] private float _movementSpeed = 6;
 
-    private AnimationManager _animation = new AnimationManager();
+    private AnimationCaller _animation;
     private Vector2 _movementDirection;
+
+    private void Start()
+    {
+        _animation = new AnimationCaller(_animator);
+    }
 
     private void Update()
     {
@@ -42,12 +47,12 @@ public class PlayerMovmentController : MonoBehaviour
     private void CheckDirection()
     {
         _directionManager.ChangeDirection(_movementDirection);
-        _animation.Play(_directionManager, AnimationManager._IDLE, _animator, _movementDirection == Vector2.zero);
+        _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.IDLE, _movementDirection == Vector2.zero);
     }
 
     private void TryRun()
     {
         _rigBody.velocity = _movementDirection * _movementSpeed;
-        _animation.Play(_directionManager, AnimationManager._RUNNING, _animator, _movementDirection != Vector2.zero);
+        _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.RUNNING, _movementDirection != Vector2.zero);
     }
 }
