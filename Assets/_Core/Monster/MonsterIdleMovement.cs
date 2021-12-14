@@ -2,19 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class TileHalf
+{
+    public static float Size => 0.5f;
+
+    public static float GetTileHalf(int tileHalfCount) => Size * tileHalfCount;
+    
+    public static float GetCells(float tileHalfCount) => Size * tileHalfCount;
+
+    public float Value { get; set; }
+
+    public TileHalf()
+    {
+        Value = GetTileHalf(1);
+    }
+    
+    public TileHalf(int tileHalfCount)
+    {
+        Value = GetTileHalf(tileHalfCount);
+    }
+    
+    public TileHalf(float tileHalfCount)
+    {
+        Value = GetCells(tileHalfCount);
+    }
+
+    public static implicit operator float(TileHalf v) => v.Value;
+}
+
 public class MonsterIdleMovement : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private DirectionStatementManager _directionManager;
 
-    [SerializeField] private CircleCollider2D _movementZone;
+    [SerializeField] private float _movementRadius;
     [SerializeField] private float _movementSpeed;
     [SerializeField] private float _startWaitTime;
     [SerializeField] private float _startRemovePointTime;
 
-    private AnimationCaller _animation;
+    [SerializeField] private float _detectionRadius;
 
+    private AnimationCaller _animation;
     private Vector2 _movementDirection = Vector2.zero;
+
+    private Transform _chaseTarget;
+    private bool _isChasing => Vector2.Distance(transform.position, _chaseTarget.position) <= new TileHalf(_detectionRadius);
 
     private Transform _movePoint;
     private Vector2 _startPoint;
@@ -24,44 +56,63 @@ public class MonsterIdleMovement : MonoBehaviour
     private void Start()
     {
         _animation = new AnimationCaller(_animator);
-        _startPoint = transform.position + (Vector3)_movementZone.offset/4;
+        _startPoint = transform.position;
 
+        _chaseTarget = GameObject.FindGameObjectWithTag("Player")?.transform;
+        
         InitPoint();
     }
 
     private void Update()
     {
-        SetDirection();
+        if (_isChasing)
+            SetDirection(_chaseTarget);
+        else
+            SetDirection(_movePoint);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, new TileHalf(_movementRadius));
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, new TileHalf(_detectionRadius));
     }
 
     private void FixedUpdate()
     {
         CheckDirection();
-        TryRun();
 
-        _removePointTime += Time.deltaTime;
-        if (Vector2.Distance(transform.position, _movePoint.position) < 0.2f)
+        if (_isChasing)
+            TryRun(_chaseTarget);
+        else
         {
-            if (_waitTime <= 0)
+            TryRun(_movePoint);
+
+            _removePointTime += Time.deltaTime;
+            if (Vector2.Distance(transform.position, _movePoint.position) < 0.2f)
             {
+                if (_waitTime <= 0)
+                {
+                    InitPoint();
+                }
+                else
+                {
+                    _waitTime -= Time.deltaTime;
+                }
+            }
+            else if (_removePointTime >= _startRemovePointTime)
                 InitPoint();
-            }
-            else
-            {
-                _waitTime -= Time.deltaTime;
-            }
         }
-        else if(_removePointTime >= _startRemovePointTime)
-            InitPoint();
     }
 
-    private void SetDirection()
+    private void SetDirection(Transform target)
     {
-        if (transform.position.x > _movePoint.position.x)
+        if (transform.position.x > target.position.x)
             _movementDirection.x = -1;
-        else if (transform.position.x < _movePoint.position.x)
+        else if (transform.position.x < target.position.x)
             _movementDirection.x = 1;
-        else if (transform.position.x == _movePoint.position.x)
+        else if (transform.position.x == target.position.x)
             _movementDirection.x = 0;
     }
 
@@ -71,11 +122,23 @@ public class MonsterIdleMovement : MonoBehaviour
         _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.IDLE, _movementDirection.x == 0);
     }
 
-    private void TryRun()
+    private void TryRun(Transform target)
     {
-        transform.position = Vector2.MoveTowards
-            (transform.position, _movePoint.position, _movementSpeed * Time.deltaTime);
-        _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.RUNNING, _movementDirection.x != 0);
+        if (_isChasing)
+        {
+            if(Vector2.Distance(transform.position, _chaseTarget.position) > new TileHalf(1.3f))
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target.position, (_movementSpeed + 1) * Time.deltaTime);
+                _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.RUNNING, _movementDirection.x != 0);
+            }
+            else
+                _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.IDLE);
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.position, _movementSpeed * Time.deltaTime);
+            _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.RUNNING, _movementDirection.x != 0);
+        }
     }
 
     private void InitPoint()
@@ -85,12 +148,12 @@ public class MonsterIdleMovement : MonoBehaviour
 
         if (!_movePoint)
             _movePoint = new GameObject().transform;
-        _movePoint.position = GetRandomPoint(_movementZone.radius);
+        _movePoint.position = GetRandomPoint(_movementRadius);
     }
 
     private Vector2 GetRandomPoint(float radius)
     {
-        radius /= 4;
+        radius = new TileHalf(radius);
         float x = Random.Range(_startPoint.x - radius, _startPoint.x + radius);
         float y = Random.Range(_startPoint.y - radius, _startPoint.y + radius);
 
