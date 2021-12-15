@@ -2,38 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileHalf
-{
-    public static float Size => 0.5f;
-
-    public static float GetTileHalf(int tileHalfCount) => Size * tileHalfCount;
-    
-    public static float GetCells(float tileHalfCount) => Size * tileHalfCount;
-
-    public float Value { get; set; }
-
-    public TileHalf()
-    {
-        Value = GetTileHalf(1);
-    }
-    
-    public TileHalf(int tileHalfCount)
-    {
-        Value = GetTileHalf(tileHalfCount);
-    }
-    
-    public TileHalf(float tileHalfCount)
-    {
-        Value = GetCells(tileHalfCount);
-    }
-
-    public static implicit operator float(TileHalf v) => v.Value;
-}
-
+[RequireComponent(typeof(DirectionStatementManager))]
 public class MonsterIdleMovement : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private DirectionStatementManager _directionManager;
 
     [SerializeField] private float _movementRadius;
     [SerializeField] private float _movementSpeed;
@@ -43,10 +15,12 @@ public class MonsterIdleMovement : MonoBehaviour
     [SerializeField] private float _detectionRadius;
 
     private AnimationCaller _animation;
-    private Vector2 _movementDirection = Vector2.zero;
+    private DirectionStatementManager _directionManager;
 
     private Transform _chaseTarget;
     private bool _isChasing => Vector2.Distance(transform.position, _chaseTarget.position) <= new TileHalf(_detectionRadius);
+
+    private Vector2 _movementDirection = Vector2.zero;
 
     private Transform _movePoint;
     private Vector2 _startPoint;
@@ -55,6 +29,7 @@ public class MonsterIdleMovement : MonoBehaviour
 
     private void Start()
     {
+        _directionManager = GetComponent<DirectionStatementManager>();
         _animation = new AnimationCaller(_animator);
         _startPoint = transform.position;
 
@@ -119,7 +94,7 @@ public class MonsterIdleMovement : MonoBehaviour
     private void CheckDirection()
     {
         _directionManager.ChangeDirection(_movementDirection);
-        _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.IDLE, _movementDirection.x == 0);
+        _animation.Play(_directionManager, eAnimation.IDLE, _movementDirection.x == 0);
     }
 
     private void TryRun(Transform target)
@@ -129,15 +104,15 @@ public class MonsterIdleMovement : MonoBehaviour
             if(Vector2.Distance(transform.position, _chaseTarget.position) > new TileHalf(1.3f))
             {
                 transform.position = Vector2.MoveTowards(transform.position, target.position, (_movementSpeed + 1) * Time.deltaTime);
-                _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.RUNNING, _movementDirection.x != 0);
+                _animation.Play(_directionManager, eAnimation.RUNNING, _movementDirection.x != 0);
             }
             else
-                _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.IDLE);
+                _animation.Play(_directionManager, eAnimation.IDLE);
         }
         else
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, _movementSpeed * Time.deltaTime);
-            _animation.Play(_directionManager, AnimationCaller.AnimationObject.eAnimation.RUNNING, _movementDirection.x != 0);
+            _animation.Play(_directionManager, eAnimation.RUNNING, _movementDirection.x != 0);
         }
     }
 

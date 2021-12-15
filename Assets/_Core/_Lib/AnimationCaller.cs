@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum eAnimation
+{
+    IDLE,
+    RUNNING,
+}
+
 public class AnimationCaller
 {
     #region Animations
@@ -50,15 +56,9 @@ public class AnimationCaller
         {
             return Animation.GetHashCode() ^ Side.GetHashCode();
         }
-
-        public enum eAnimation
-        {
-            IDLE,
-            RUNNING,
-        }
     }
 
-    private static AnimationObject GetAnimation(AnimationObject.eAnimation animation, eDirectionStatements side)
+    private static AnimationObject GetAnimation(eAnimation animation, eDirectionStatements side)
     {
         return ANIMATIONS.Find(s => s.Animation == animation && s.Side == side);
     }
@@ -67,10 +67,10 @@ public class AnimationCaller
 
     private static readonly List<AnimationObject> ANIMATIONS = new List<AnimationObject>()
     {
-        new AnimationObject(AnimationObject.eAnimation.IDLE, 0),
-        new AnimationObject(AnimationObject.eAnimation.IDLE, 1),
-        new AnimationObject(AnimationObject.eAnimation.RUNNING, 0),
-        new AnimationObject(AnimationObject.eAnimation.RUNNING, 1),
+        new AnimationObject(eAnimation.IDLE, 0),
+        new AnimationObject(eAnimation.IDLE, 1),
+        new AnimationObject(eAnimation.RUNNING, 0),
+        new AnimationObject(eAnimation.RUNNING, 1),
     };
 
     private AnimationObject _currentAnimation;
@@ -81,7 +81,7 @@ public class AnimationCaller
         CurrentAnimator = animator;
     }
 
-    public void Play(DirectionStatementManager direction, AnimationObject.eAnimation animation, bool condition = true)
+    public void Play(DirectionStatementManager direction, eAnimation animation, bool condition = true)
     {
         if(condition && direction?.CurrentDirection)
         {

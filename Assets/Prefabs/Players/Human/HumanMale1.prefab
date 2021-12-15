@@ -1013,6 +1013,8 @@ MonoBehaviour:
   _animator: {fileID: 8689114978041102103}
   _directionManager: {fileID: 2238489987327048614}
   _movementSpeed: 5
+  _dodgeForce: 6
+  _dodgeCooldown: 2
 --- !u!70 &7495964523169768834
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
