@@ -94,7 +94,7 @@ public class MonsterIdleMovement : MonoBehaviour
     private void CheckDirection()
     {
         _directionManager.ChangeDirection(_movementDirection);
-        _animation.Play(_directionManager, eAnimation.IDLE, _movementDirection.x == 0);
+        _animation.Play(eAnimation.IDLE, _movementDirection.x == 0);
     }
 
     private void TryRun(Transform target)
@@ -104,15 +104,15 @@ public class MonsterIdleMovement : MonoBehaviour
             if(Vector2.Distance(transform.position, _chaseTarget.position) > new TileHalf(1.3f))
             {
                 transform.position = Vector2.MoveTowards(transform.position, target.position, (_movementSpeed + 1) * Time.deltaTime);
-                _animation.Play(_directionManager, eAnimation.RUNNING, _movementDirection.x != 0);
+                _animation.Play(eAnimation.RUNNING, _movementDirection.x != 0);
             }
             else
-                _animation.Play(_directionManager, eAnimation.IDLE);
+                _animation.Play(eAnimation.IDLE);
         }
         else
         {
             transform.position = Vector2.MoveTowards(transform.position, target.position, _movementSpeed * Time.deltaTime);
-            _animation.Play(_directionManager, eAnimation.RUNNING, _movementDirection.x != 0);
+            _animation.Play(eAnimation.RUNNING, _movementDirection.x != 0);
         }
     }
 

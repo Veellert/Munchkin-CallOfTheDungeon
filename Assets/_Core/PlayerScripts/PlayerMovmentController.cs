@@ -24,8 +24,15 @@ public class PlayerMovmentController : MonoBehaviour
     private Vector2 _lastMovementDirection;
     private float _currentDodgeCooldown;
 
-    private bool _isDodge;
+    private float _dodgeSpeed;
     private bool _isDodgeCooldown => _currentDodgeCooldown != 0;
+
+    private eState _state = eState.Default;
+    private enum eState
+    {
+        Default,
+        Dodge,
+    }
 
     private void Start()
     {
@@ -35,10 +42,18 @@ public class PlayerMovmentController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SetDirectionInput();
-        CheckDirection();
-        TryRun();
-        TryDodge();
+        switch (_state)
+        {
+            case eState.Default:
+                SetDirectionInput();
+                CheckDirection();
+                TryRun();
+                break;
+            case eState.Dodge:
+                TryDodge();
+                break;
+        }
+        
     }
 
     private void SetDirectionInput()
@@ -50,36 +65,41 @@ public class PlayerMovmentController : MonoBehaviour
         if (_movementDirection != Vector2.zero)
             _lastMovementDirection = _movementDirection;
 
+        CheckDodgeCooldown();
         if (Input.GetKey(KeyCode.Space) && !_isDodgeCooldown)
-            _isDodge = true;
+        {
+            _currentDodgeCooldown = _dodgeCooldown;
+            _dodgeSpeed = _dodgeForce;
+            _state = eState.Dodge;
+        }
     }
 
     private void CheckDirection()
     {
         _directionManager.ChangeDirection(_movementDirection);
-        _animation.Play(_directionManager, eAnimation.IDLE, _movementDirection == Vector2.zero);
+        _animation.Play(eAnimation.IDLE, _movementDirection == Vector2.zero);
     }
 
     private void TryRun()
     {
-        if (_isDodge)
-            return;
-
         Move(_movementDirection * _movementSpeed);
-        _animation.Play(_directionManager, eAnimation.RUNNING, _movementDirection != Vector2.zero);
+        _animation.Play(eAnimation.RUNNING, _movementDirection != Vector2.zero);
     }
 
     private void TryDodge()
     {
         CheckDodgeCooldown();
 
-        if (!_isDodge || _lastMovementDirection == Vector2.zero)
-            return;
+        if (_lastMovementDirection == Vector2.zero)
+            _lastMovementDirection = Vector2.right;
 
-        Move(_lastMovementDirection * _movementSpeed * _dodgeForce);
-        _animation.Play(_directionManager, eAnimation.IDLE);
-        _currentDodgeCooldown = _dodgeCooldown;
-        _isDodge = false;
+        Move(_lastMovementDirection * _dodgeSpeed);
+        _dodgeSpeed -= _dodgeForce * Time.deltaTime;
+
+        _animation.Play(eAnimation.DODGE);
+
+        if (_dodgeSpeed < 1)
+            _state = eState.Default;
     }
 
     private void CheckDodgeCooldown()

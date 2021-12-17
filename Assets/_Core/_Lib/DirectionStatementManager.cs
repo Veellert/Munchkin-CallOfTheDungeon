@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum eDirectionStatements
+public enum eDirectionStatement
 {
     Left,
     Right,
@@ -10,51 +10,48 @@ public enum eDirectionStatements
 
 public class DirectionStatementManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _leftDirection;
-    [SerializeField] private GameObject _rightDirection;
+    [SerializeField] private GameObject _model;
 
-    [HideInInspector] public eDirectionStatements eCurrentDirection
-    {
-        get
-        {
-            return _leftDirection?.name == CurrentDirection?.name ? eDirectionStatements.Left : eDirectionStatements.Right;
-        }
-    }
-    [HideInInspector] public GameObject CurrentDirection { get; private set; }
+    public eDirectionStatement CurrentDirection { get; private set; }
+
+    private Vector2 _scale;
+    private Vector2 _scaleN;
 
     private void Start()
     {
-        if (_rightDirection)
-            ChangeDirectionState(_rightDirection);
+        if (!_model)
+            return;
+
+        var scale = _model.transform.localScale;
+        _scale = new Vector2(scale.x, scale.y);
+        _scaleN = new Vector2(-scale.x, scale.y);
+
+        ChangeDirectionState(eDirectionStatement.Right);
     }
 
     public void ChangeDirection(Vector2 direction)
     {
         if (direction.x > 0)
-            ChangeDirectionState(_rightDirection);
+            ChangeDirectionState(eDirectionStatement.Right);
         else if (direction.x < 0)
-            ChangeDirectionState(_leftDirection);
+            ChangeDirectionState(eDirectionStatement.Left);
     }
 
-    public void ChangeDirection(eDirectionStatements direction)
+    public void ChangeDirection(eDirectionStatement direction)
     {
-        if(direction == eDirectionStatements.Left)
-            ChangeDirectionState(_leftDirection);
-        else
-            ChangeDirectionState(_rightDirection);
+        ChangeDirectionState(direction);
     }
 
-    private void ChangeDirectionState(GameObject directionState)
+    private void ChangeDirectionState(eDirectionStatement direction)
     {
-        if (CurrentDirection && directionState && CurrentDirection == directionState)
+        if (CurrentDirection == direction || !_model)
             return;
 
-        if (directionState.name == _leftDirection.name)
-            _rightDirection?.SetActive(false);
+        if (direction == eDirectionStatement.Left)
+            _model.transform.localScale = _scaleN;
         else
-            _leftDirection?.SetActive(false);
+            _model.transform.localScale = _scale;
 
-        CurrentDirection = directionState;
-        CurrentDirection?.SetActive(true);
+        CurrentDirection = direction;
     }
 }
