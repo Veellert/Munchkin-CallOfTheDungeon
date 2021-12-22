@@ -6,16 +6,16 @@ using UnityEngine;
 public class PlayerDungeonSpawner : DungeonSpawnerParameters
 {
     public override eDungeonSpawnerType SpawnerType => eDungeonSpawnerType.PlayerSpawner;
-    public GameObject playerTarget;
-    private GameObject currentTarget;
+    public Player playerTarget;
+    private Player _currentTarget;
 
     public override void Spawn()
     {
-        currentTarget = Instantiate(playerTarget, (Vector3Int)spawnPosition, Quaternion.identity);
-        currentTarget.name = "Player";
+        _currentTarget = Instantiate(playerTarget, (Vector3Int)spawnPosition, Quaternion.identity);
     }
+
     public override void Destroy()
     {
-        DestroyImmediate(currentTarget);
+        DestroyImmediate(_currentTarget);
     }
 }

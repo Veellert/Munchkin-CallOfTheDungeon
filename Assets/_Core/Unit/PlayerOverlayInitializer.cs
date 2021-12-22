@@ -8,6 +8,7 @@ public class PlayerOverlayInitializer : MonoBehaviour
 
     private void Start()
     {
-        if (_overlay) Instantiate(_overlay, gameObject.transform);
+        if (_overlay)
+            Instantiate(_overlay, gameObject.transform);
     }
 }

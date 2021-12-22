@@ -17,5 +17,5 @@ public abstract class DungeonSpawnerParameters : ScriptableObject
 public enum eDungeonSpawnerType
 {
     PlayerSpawner,
-    SingleMonsterSpawner,
+    SingleMotionMonsterSpawner,
 }

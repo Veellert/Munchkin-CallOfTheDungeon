@@ -6,11 +6,9 @@ public class TileHalf
 {
     public static float Size => 0.5f;
 
-    public static float GetTileHalf(int tileHalfCount) => Size * tileHalfCount;
+    public static float GetTileHalf(float tileHalfCount) => Size * tileHalfCount;
 
-    public static float GetCells(float tileHalfCount) => Size * tileHalfCount;
-
-    public float Value { get; set; }
+    public float Value { get; private set; }
 
     public TileHalf()
     {
@@ -24,7 +22,7 @@ public class TileHalf
 
     public TileHalf(float tileHalfCount)
     {
-        Value = GetCells(tileHalfCount);
+        Value = GetTileHalf(tileHalfCount);
     }
 
     public static implicit operator float(TileHalf v) => v.Value;

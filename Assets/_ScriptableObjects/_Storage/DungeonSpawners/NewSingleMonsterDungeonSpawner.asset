@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: NewSingleMonsterDungeonSpawner
   m_EditorClassIdentifier: 
   spawnPosition: {x: 3, y: 0}
-  monsterTarget: {fileID: 11400000, guid: 696b6f098efc9454185b5f15f2f6265d, type: 2}
+  monsterTarget: {fileID: 6686434490140518426, guid: 5f41671cda67bca4dbf2ae1a11eb136d, type: 3}

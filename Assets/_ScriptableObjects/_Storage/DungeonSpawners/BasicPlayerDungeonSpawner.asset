@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BasicPlayerDungeonSpawner
   m_EditorClassIdentifier: 
   spawnPosition: {x: 0, y: 0}
-  playerTarget: {fileID: 8984112705814933617, guid: ce85f992fd0228e4aa17f60e22bcb0ce, type: 3}
+  playerTarget: {fileID: 527038400890300899, guid: b970ceac0b4319047aa04364d3cbe27d, type: 3}
