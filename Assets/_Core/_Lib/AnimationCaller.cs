@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,22 +10,31 @@ public enum eAnimation
     DODGE,
 }
 
-public class AnimationCaller
+[RequireComponent(typeof(Animator))]
+public class AnimationCaller : MonoBehaviour
 {
-    private Animator CurrentAnimator { get; set; }
+    [SerializeField] private Animator _currentAnimator;
     private eAnimation _currentAnimation;
+    private Action _finishAction;
 
-    public AnimationCaller(Animator animator)
+    private void Start()
     {
-        CurrentAnimator = animator;
+        if (_currentAnimator == null)
+            Debug.Log("Что-то не так");
     }
 
-    public void Play(eAnimation animation, bool condition = true)
+    public void Play(eAnimation animation, Action finishAction, bool condition = true)
     {
         if (!condition || _currentAnimation == animation)
             return;
+        _finishAction = finishAction;
 
         _currentAnimation = animation;
-        CurrentAnimator.Play(animation.ToString());
+        _currentAnimator.Play(animation.ToString());
+    }
+
+    private void OnAnimationFinish()
+    {
+        _finishAction?.Invoke();
     }
 }

@@ -99,7 +99,7 @@ public class MotionMonster : UnitObject
             RunHandle(_chaseTarget.position, speed);
         }
         else
-            _animation.Play(eAnimation.IDLE);
+            _animation.Play(eAnimation.IDLE, null);
     }
 
     private void StayOnPoint()

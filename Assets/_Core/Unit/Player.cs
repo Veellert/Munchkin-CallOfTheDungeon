@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,12 @@ public class Player : UnitObject
     {
         Default,
         Dodge,
+        Attack,
     }
 
     private UnitAttrib _dodgeForce;
     private UnitAttrib _dodgeCooldown;
+    private UnitAttrib _attackCooldown;
 
     #region Instance
 
@@ -34,21 +37,28 @@ public class Player : UnitObject
         name = Attrib.Name;
         _dodgeForce = Attrib.DodgeForce.Value;
         _dodgeCooldown = Attrib.DodgeCooldown.Value;
+        _attackCooldown = Attrib.AttackCooldown.Value;
     }
 
     private void FixedUpdate()
     {
         CheckDodgeCooldown();
+        CheckAttackCooldown();
         switch (_state)
         {
             case eState.Default:
                 SetDirection(GetInputDirection());
                 InputHandle();
                 RunHandle();
+                AttackHandle();
                 break;
 
             case eState.Dodge:
                 TryDodge();
+                break;
+
+            case eState.Attack:
+                AttackHandle();
                 break;
         }
 
@@ -63,10 +73,22 @@ public class Player : UnitObject
         CheckDirection();
     }
 
-    protected override void RunHandle()
+    protected override void RunHandle(Action finishAction = null)
     {
         Move(_movementDirection* Attrib.Speed);
         base.RunHandle();
+    }
+    
+    protected override void AttackHandle(Action finishAction = null)
+    {
+        if (Input.GetMouseButton(0) && _attackCooldown.IsValueEmpty())
+        {
+            var attackDirection = (GetMousePosition() - transform.position).normalized;
+            _state = eState.Attack;
+            SetDirection(Vector2.zero);
+            _attackCooldown.FillToMax();
+            base.AttackHandle(() => { _state = eState.Default; });
+        }
     }
 
     private void InputHandle()
@@ -79,6 +101,19 @@ public class Player : UnitObject
         }
     }
 
+    private Vector3 GetMousePosition()
+    {
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+        return mousePosition;
+    }
+
+    private void CheckAttackCooldown()
+    {
+        if (_attackCooldown > 0)
+            _attackCooldown -= Time.deltaTime;
+    }
+
     private void TryDodge()
     {
         if (_lastMovementDirection == Vector2.zero)
@@ -87,7 +122,7 @@ public class Player : UnitObject
         Move(_lastMovementDirection * _dodgeForce);
         _dodgeForce -= _dodgeForce.MaxValue * Time.deltaTime;
 
-        _animation.Play(eAnimation.DODGE);
+        _animation.Play(eAnimation.DODGE, () => { Debug.Log(Attrib.Name + "Додж"); });
 
         if (_dodgeForce < 1)
             _state = eState.Default;
@@ -97,8 +132,6 @@ public class Player : UnitObject
     {
         if (_dodgeCooldown > 0)
             _dodgeCooldown -= Time.deltaTime;
-        if (_dodgeCooldown < 0)
-            _dodgeCooldown = 0;
     }
 
     private Vector2 GetInputDirection()

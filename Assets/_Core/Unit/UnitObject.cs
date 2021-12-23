@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,20 +17,25 @@ public abstract class UnitObject : MonoBehaviour
     {
         _rigBody = GetComponent<Rigidbody2D>();
         _directionManager = GetComponent<DirectionStatementManager>();
-        _animation = new AnimationCaller(GetComponent<Animator>());
+        _animation = GetComponent<AnimationCaller>();
     }
 
     protected void Move(Vector2 direction) => _rigBody.velocity = direction;
 
-    protected void CheckDirection()
+    protected void CheckDirection(Action finishAction = null)
     {
         _directionManager.ChangeDirection(_movementDirection);
-        _animation.Play(eAnimation.IDLE, _movementDirection == Vector2.zero);
+        _animation.Play(eAnimation.IDLE, finishAction, _movementDirection == Vector2.zero);
     }
 
-    protected virtual void RunHandle()
+    protected virtual void AttackHandle(Action finishAction = null)
     {
-        _animation.Play(eAnimation.RUNNING, _movementDirection != Vector2.zero);
+        _animation.Play(eAnimation.RUNNING, finishAction);
+    }
+    
+    protected virtual void RunHandle(Action finishAction = null)
+    {
+        _animation.Play(eAnimation.RUNNING, finishAction, _movementDirection != Vector2.zero);
     }
 
     protected abstract void SetDirection(Vector2 direction);
