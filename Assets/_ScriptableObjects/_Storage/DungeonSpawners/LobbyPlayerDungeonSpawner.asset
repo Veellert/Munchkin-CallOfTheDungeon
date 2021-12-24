@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LobbyPlayerDungeonSpawner
   m_EditorClassIdentifier: 
   spawnPosition: {x: 0, y: 0}
-  playerTarget: {fileID: 527038400890300899, guid: b970ceac0b4319047aa04364d3cbe27d, type: 3}
+  playerTarget: {fileID: 2231915583802237273, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}

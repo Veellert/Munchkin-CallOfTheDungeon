@@ -8,22 +8,48 @@ public enum eAnimation
     IDLE,
     RUNNING,
     DODGE,
+    ATTACK,
+    DIE,
 }
 
 [RequireComponent(typeof(Animator))]
 public class AnimationCaller : MonoBehaviour
 {
-    [SerializeField] private Animator _currentAnimator;
+    private Animator _currentAnimator;
     private eAnimation _currentAnimation;
     private Action _finishAction;
 
-    private void Start()
+    private void Awake()
     {
-        if (_currentAnimator == null)
-            Debug.Log("Что-то не так");
+        _currentAnimator = GetComponent<Animator>();
     }
 
-    public void Play(eAnimation animation, Action finishAction, bool condition = true)
+    public void PlayDIE(Action finishAction = null)
+    {
+        Play(eAnimation.DIE, finishAction);
+    }
+    
+    public void PlayATTACK(Action finishAction = null)
+    {
+        Play(eAnimation.ATTACK, finishAction);
+    }
+    
+    public void PlayDODGE(Action finishAction = null)
+    {
+        Play(eAnimation.DODGE, finishAction);
+    }
+    
+    public void PlayIDLE(Vector2 direction, Action finishAction = null)
+    {
+        Play(eAnimation.IDLE, finishAction, direction == Vector2.zero);
+    }
+    
+    public void PlayRUNNING(Vector2 direction, Action finishAction = null)
+    {
+        Play(eAnimation.RUNNING, finishAction, direction != Vector2.zero);
+    }
+
+    private void Play(eAnimation animation, Action finishAction, bool condition = true)
     {
         if (!condition || _currentAnimation == animation)
             return;

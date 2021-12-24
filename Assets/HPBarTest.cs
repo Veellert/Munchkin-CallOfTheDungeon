@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class HPBarTest : MonoBehaviour
 {
-    private BaseUnitAttrib _unitAttrib;
+    [SerializeField] private IDamageable _target;
     private UnitAttrib _timer = 3;
-
-    private void Start()
-    {
-        _unitAttrib = GetComponent<MotionMonsterAttrib>();
-    }
 
     private void FixedUpdate()
     {
@@ -24,13 +19,13 @@ public class HPBarTest : MonoBehaviour
 
     private void Damage()
     {
-        _unitAttrib.HP -= 10;
+        _target.HP -= 10;
         _timer.FillToMax();
     }
 
     private void TryHeal()
     {
-        if (_unitAttrib.HP.IsValueEmpty())
-            _unitAttrib.HP.FillToMax();
+        if (_target.HP.IsValueEmpty())
+            _target.HP.FillToMax();
     }
 }

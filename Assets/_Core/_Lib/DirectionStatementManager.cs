@@ -4,54 +4,39 @@ using UnityEngine;
 
 public enum eDirectionStatement
 {
-    Left,
     Right,
+    Left,
 }
 
 public class DirectionStatementManager : MonoBehaviour
 {
     [SerializeField] private GameObject _model;
-
-    public eDirectionStatement CurrentDirection { get; private set; }
+    [SerializeField] private eDirectionStatement _currentDirection;
 
     private Vector2 _scale;
     private Vector2 _scaleN;
 
     private void Start()
     {
-        if (!_model)
-            return;
-
         var scale = _model.transform.localScale;
         _scale = new Vector2(scale.x, scale.y);
         _scaleN = new Vector2(-scale.x, scale.y);
-
-        ChangeDirectionState(eDirectionStatement.Right);
     }
 
     public void ChangeDirection(Vector2 direction)
     {
-        if (direction.x > 0)
-            ChangeDirectionState(eDirectionStatement.Right);
-        else if (direction.x < 0)
+        if (direction.x < 0)
             ChangeDirectionState(eDirectionStatement.Left);
-    }
-
-    public void ChangeDirection(eDirectionStatement direction)
-    {
-        ChangeDirectionState(direction);
+        else if(direction.x > 0)
+            ChangeDirectionState(eDirectionStatement.Right);
     }
 
     private void ChangeDirectionState(eDirectionStatement direction)
     {
-        if (CurrentDirection == direction || !_model)
+        if (_currentDirection == direction)
             return;
 
-        if (direction == eDirectionStatement.Left)
-            _model.transform.localScale = _scaleN;
-        else
-            _model.transform.localScale = _scale;
-
-        CurrentDirection = direction;
+        _currentDirection = direction;
+        _model.transform.localScale = _currentDirection == eDirectionStatement.Left ? _scaleN : _scale;
     }
 }

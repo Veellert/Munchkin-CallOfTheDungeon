@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c690db0b891ece145ba5cb518e1c98cc, type: 3}
-  m_Name: NewSingleMonsterDungeonSpawner
+  m_Script: {fileID: 11500000, guid: 230506b32f918fb45881443e46b0de48, type: 3}
+  m_Name: L1SingleMonsterDungeonSpawner
   m_EditorClassIdentifier: 
   spawnPosition: {x: 3, y: 0}
-  monsterTarget: {fileID: 6686434490140518426, guid: 5f41671cda67bca4dbf2ae1a11eb136d, type: 3}
+  monsterTarget: {fileID: 4959706279183797304, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}

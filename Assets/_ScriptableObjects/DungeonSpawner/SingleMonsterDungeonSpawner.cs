@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewSingleMotionMonsterDungeonSpawner", menuName = "Custom/DungeonGeneration/Spawner/SingleMotionMonsterSpawner")]
-public class SingleMotionMonsterDungeonSpawner : DungeonSpawnerParameters
+[CreateAssetMenu(fileName = "NewSingleMonsterDungeonSpawner", menuName = "Custom/DungeonGeneration/Spawner/SingleMonsterSpawner")]
+public class SingleMonsterDungeonSpawner : DungeonSpawnerParameters
 {
     public override eDungeonSpawnerType SpawnerType => eDungeonSpawnerType.SingleMotionMonsterSpawner;
-    public MotionMonster monsterTarget;
-    private MotionMonster _currentTarget;
+    public Monster monsterTarget;
+    private Monster _currentTarget;
 
     public override void Spawn()
     {

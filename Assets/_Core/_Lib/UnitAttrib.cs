@@ -19,7 +19,7 @@ public class UnitAttrib
     {
         Value = MaxValue = OriginalValue = value;
     }
-    
+
     public UnitAttrib(float value, float maxValue)
     {
         Value = value;
@@ -40,7 +40,7 @@ public class UnitAttrib
     {
         return Value = MaxValue;
     }
-    
+
     public float FillEmpty()
     {
         return Value = 0;

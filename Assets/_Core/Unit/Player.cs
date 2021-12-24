@@ -1,12 +1,37 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAttrib))]
-public class Player : UnitObject
+[RequireComponent(typeof(AnimationCaller), typeof(Rigidbody2D), typeof(DirectionStatementManager))]
+public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
 {
-    [HideInInspector] public PlayerAttrib Attrib;
+    public static Player Instance { get; private set; }
+
+    private Rigidbody2D _rigBody;
+    private DirectionStatementManager _directionManager;
+    private AnimationCaller _animation;
+
+    #region Attrib
+
+    [SerializeField] private string _unitName = "Безымянный игрок";
+    public string UnitName { get => _unitName; set => _unitName = value; }
+    [SerializeField] private UnitAttrib _speed = new UnitAttrib(5, 10);
+    public UnitAttrib Speed { get => _speed; set => _speed = value; }
+
+    [SerializeField] private UnitAttrib _dodgeForce = new UnitAttrib(6, 10);
+    public UnitAttrib DodgeForce { get => _dodgeForce; set => _dodgeForce = value; }
+    [SerializeField] private UnitAttrib _dodgeCooldown = new UnitAttrib(2, 5);
+    public UnitAttrib DodgeCooldown { get => _dodgeCooldown; set => _dodgeCooldown = value; }
+
+    [SerializeField] private UnitAttrib _damage = new UnitAttrib(8, 100);
+    public UnitAttrib Damage { get => _damage; set => _damage = value; }
+    [SerializeField] private UnitAttrib _attackCooldown = 0.5f;
+    public UnitAttrib AttackCooldown { get => _attackCooldown; set => _attackCooldown = value; }
+
+    [SerializeField] private UnitAttrib _hp = 100;
+    public UnitAttrib HP { get => _hp; set => _hp = value; }
+
+    #endregion
 
     private eState _state = eState.Default;
     private enum eState
@@ -14,30 +39,26 @@ public class Player : UnitObject
         Default,
         Dodge,
         Attack,
+        DuringAttack,
+        Die,
     }
 
-    private UnitAttrib _dodgeForce;
-    private UnitAttrib _dodgeCooldown;
-    private UnitAttrib _attackCooldown;
+    private Vector2 _movementDirection;
+    private Vector2 _lastMovementDirection;
 
-    #region Instance
+    private UnitAttrib _dodgeImpulse;
+    public bool IsDead => _state == eState.Die;
 
-    public static Player Instance { get; private set; }
-    private void Awake()
+    private void Start()
     {
         Instance = this;
-        Attrib = GetComponent<PlayerAttrib>();
-    }
 
-    #endregion
+        _rigBody = GetComponent<Rigidbody2D>();
+        _directionManager = GetComponent<DirectionStatementManager>();
+        _animation = GetComponent<AnimationCaller>();
 
-    protected override void Start()
-    {
-        base.Start();
-        name = Attrib.Name;
-        _dodgeForce = Attrib.DodgeForce.Value;
-        _dodgeCooldown = Attrib.DodgeCooldown.Value;
-        _attackCooldown = Attrib.AttackCooldown.Value;
+        name = UnitName;
+        _dodgeImpulse = DodgeForce;
     }
 
     private void FixedUpdate()
@@ -48,90 +69,141 @@ public class Player : UnitObject
         {
             case eState.Default:
                 SetDirection(GetInputDirection());
-                InputHandle();
-                RunHandle();
-                AttackHandle();
+                RunHandler();
+                DodgeInput();
+                AttackInput();
                 break;
 
             case eState.Dodge:
-                TryDodge();
+                DodgeHandler();
                 break;
 
             case eState.Attack:
-                AttackHandle();
+                AttackHandler();
+                break;
+
+            case eState.DuringAttack:
+                SetDirection(GetInputDirection(), false);
+                DodgeInput();
                 break;
         }
-
     }
 
-    protected override void SetDirection(Vector2 direction)
+    public void Die()
+    {
+        _state = eState.Die;
+        _rigBody.velocity = Vector2.zero;
+        GetComponent<Collider2D>().isTrigger = true;
+        _animation.PlayDIE();
+    }
+    
+    public void GetDamage(float damageAmount)
+    {
+        HP -= damageAmount;
+        if (HP.IsValueEmpty())
+            Die();
+    }
+
+    public void Heal(float healAmount)
+    {
+        HP += healAmount;
+    }
+
+    public void AttackInput()
+    {
+        if (Input.GetMouseButtonUp(0) && AttackCooldown.IsValueEmpty())
+        {
+            if (_state != eState.Attack)
+                _state = eState.Attack;
+
+            Move(Vector2.zero);
+            AttackCooldown.FillToMax();
+        }
+    }
+
+    public void AttackHandler()
+    {
+        // Должен быть у оружия
+        var attackOffset = new TileHalf();
+        var attackRange = new TileHalf(0.7f);
+
+        var mouseDirection = (GetMousePosition() - transform.position).normalized;
+        var attackPosition = transform.position + mouseDirection * attackOffset;
+        SetDirection(mouseDirection);
+
+        // Visualize Gizmos
+        _pos = attackPosition;
+        _rad = attackRange;
+
+        _state = eState.DuringAttack;
+
+        _animation.PlayATTACK(() =>
+        {
+            if (_state != eState.Dodge)
+            {
+                Monster.GetClosestMonster(attackPosition, attackRange)?.GetDamage(Damage);
+
+                _state = eState.Default;
+            }
+        });
+    }
+
+    public void CheckAttackCooldown()
+    {
+        if (!AttackCooldown.IsValueEmpty())
+            AttackCooldown -= Time.deltaTime;
+    }
+
+    private void CheckDodgeCooldown()
+    {
+        if (!DodgeCooldown.IsValueEmpty())
+            DodgeCooldown -= Time.deltaTime;
+    }
+
+    private void DodgeInput()
+    {
+        if (Input.GetKey(KeyCode.Space) && DodgeCooldown.IsValueEmpty())
+        {
+            _state = eState.Dodge;
+
+            _dodgeImpulse.FillToMax();
+            DodgeCooldown.FillToMax();
+
+            if (_lastMovementDirection == Vector2.zero)
+                 _lastMovementDirection = Vector2.right;
+        }
+    }
+
+    private void DodgeHandler()
+    {
+        Move(_lastMovementDirection * _dodgeImpulse);
+        _dodgeImpulse -= _dodgeImpulse.MaxValue * Time.deltaTime;
+
+        _animation.PlayDODGE(() => { _state = eState.Default; });
+    }
+
+    private void RunHandler()
+    {
+        Move(_movementDirection * Speed);
+        _animation.PlayRUNNING(_movementDirection);
+    }
+    
+    private void Move(Vector2 direction) => _rigBody.velocity = direction;
+
+    private void SetDirection(Vector2 direction, bool needAnimation = true)
     {
         _movementDirection = direction;
         if (_movementDirection != Vector2.zero)
             _lastMovementDirection = _movementDirection;
 
-        CheckDirection();
+        CheckDirection(needAnimation);
     }
 
-    protected override void RunHandle(Action finishAction = null)
+    private void CheckDirection(bool needAnimation)
     {
-        Move(_movementDirection* Attrib.Speed);
-        base.RunHandle();
-    }
-    
-    protected override void AttackHandle(Action finishAction = null)
-    {
-        if (Input.GetMouseButton(0) && _attackCooldown.IsValueEmpty())
-        {
-            var attackDirection = (GetMousePosition() - transform.position).normalized;
-            _state = eState.Attack;
-            SetDirection(Vector2.zero);
-            _attackCooldown.FillToMax();
-            base.AttackHandle(() => { _state = eState.Default; });
-        }
-    }
-
-    private void InputHandle()
-    {
-        if (Input.GetKey(KeyCode.Space) && _dodgeCooldown.IsValueEmpty())
-        {
-            _dodgeCooldown.FillToMax();
-            _dodgeForce.FillToMax();
-            _state = eState.Dodge;
-        }
-    }
-
-    private Vector3 GetMousePosition()
-    {
-        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
-        return mousePosition;
-    }
-
-    private void CheckAttackCooldown()
-    {
-        if (_attackCooldown > 0)
-            _attackCooldown -= Time.deltaTime;
-    }
-
-    private void TryDodge()
-    {
-        if (_lastMovementDirection == Vector2.zero)
-            _lastMovementDirection = Vector2.right;
-
-        Move(_lastMovementDirection * _dodgeForce);
-        _dodgeForce -= _dodgeForce.MaxValue * Time.deltaTime;
-
-        _animation.Play(eAnimation.DODGE, () => { Debug.Log(Attrib.Name + "Додж"); });
-
-        if (_dodgeForce < 1)
-            _state = eState.Default;
-    }
-
-    private void CheckDodgeCooldown()
-    {
-        if (_dodgeCooldown > 0)
-            _dodgeCooldown -= Time.deltaTime;
+        _directionManager.ChangeDirection(_movementDirection);
+        if(needAnimation)
+            _animation.PlayIDLE(_movementDirection);
     }
 
     private Vector2 GetInputDirection()
@@ -141,4 +213,23 @@ public class Player : UnitObject
 
         return new Vector2(xInput, yInput).normalized;
     }
+
+    private Vector3 GetMousePosition()
+    {
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+        return mousePosition;
+    }
+
+    #region Gizmos
+
+    Vector2 _pos = Vector2.zero;
+    float _rad;
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(_pos, _rad);
+    }
+
+    #endregion
 }
