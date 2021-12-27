@@ -1,20 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 [RequireComponent(typeof(AnimationCaller), typeof(DirectionStatementManager))]
 public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 {
     private static List<Monster> monsterList;
     public static void RemoveMonsterFromStack(Monster monster)
     {
-        monsterList.Remove(monster);
+        if(monster)
+            monsterList.Remove(monster);
     }
     public static void AddMonsterToStack(Monster monster)
     {
         if (monsterList == null)
             monsterList = new List<Monster>();
-        monsterList.Add(monster);
+        if(monster)
+            monsterList.Add(monster);
     }
     public static Monster GetClosestMonster(Vector2 position, float range)
     {
@@ -34,6 +38,10 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
         return closestMonster;
     }
+    public static Monster GetBoss(Type bossType)
+    {
+        return monsterList.Find(s => s.GetType() == bossType);
+    }
 
     protected DirectionStatementManager _directionManager;
     protected AnimationCaller _animation;
@@ -47,8 +55,6 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
     [SerializeField] private int _level = 1;
     public int Level { get => _level; set => _level = value; }
-    [SerializeField] private bool _isBoss = false;
-    public bool IsBoss { get => _isBoss; set => _isBoss = value; }
     [SerializeField] private UnitAttrib _chaseRadius = new UnitAttrib(4, 10);
     public UnitAttrib ChaseRadius { get => _chaseRadius; set => _chaseRadius = value; }
     [SerializeField] private UnitAttrib _btwTargetDistance = 1.3f;
@@ -70,6 +76,7 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         Default,
         Chase,
         Attack,
+        SpecialAttack,
         Die,
     }
 
@@ -94,7 +101,7 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         RemoveMonsterFromStack(this);
     }
 
-    public void Die()
+    public virtual void Die()
     {
         _state = eState.Die;
         _animation.PlayDIE();
@@ -102,14 +109,14 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         RemoveMonsterFromStack(this);
     }
 
-    public void GetDamage(float damageAmount)
+    public virtual void GetDamage(float damageAmount)
     {
         HP -= damageAmount;
         if (HP.IsValueEmpty())
             Die();
     }
 
-    public void Heal(float healAmount)
+    public virtual void Heal(float healAmount)
     {
         HP += healAmount;
     }
@@ -125,17 +132,16 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         }
     }
 
-    public virtual void AttackHandler()
+    public virtual void AttackHandler(float attackRange)
     {
         if (!AttackCooldown.IsValueEmpty())
             return;
 
-        // Должен быть у оружия
-        var attackOffset = new TileHalf();
-        var attackRange = new TileHalf(0.7f);
-
         var attackDirection = (_chaseTarget.position - transform.position).normalized;
-        var attackPosition = transform.position + attackDirection * attackOffset;
+        var attackPosition = transform.position + attackDirection * new TileHalf(BtwTargetDistance);
+
+        _ap = attackPosition;
+        _ar = attackRange;
 
         _animation.PlayATTACK(() =>
         {
@@ -154,6 +160,8 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
     protected virtual void ChaseHandler()
     {
+        TryChase();
+
         if (Vector2.Distance(transform.position, _chaseTarget.position) > new TileHalf(BtwTargetDistance))
             MoveTo(_chaseTarget.position, 1);
         else
@@ -163,7 +171,7 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         }
     }
 
-    protected void TryChase()
+    protected virtual void TryChase()
     {
         if (_chaseTarget == null)
             _chaseTarget = Player.Instance.transform;
@@ -171,6 +179,7 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
         if (Vector2.Distance(transform.position, _chaseTarget.position) <= new TileHalf(ChaseRadius) && !target.IsDead)
         {
+            SetDirection(_chaseTarget.position);
             if(_state != eState.Chase)
                 _state = eState.Chase;
         }
@@ -210,12 +219,17 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
     #region Gizmos
 
+    Vector2 _ap;
+    float _ar;
     protected virtual void OnDrawGizmos()
     {
+        Gizmos.DrawWireSphere(_ap, _ar);
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, new TileHalf(ChaseRadius));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, new TileHalf(BtwTargetDistance));
     }
 
     #endregion
-
 }

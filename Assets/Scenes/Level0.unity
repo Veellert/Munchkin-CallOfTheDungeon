@@ -275,6 +275,7 @@ MonoBehaviour:
   _spawners:
   - {fileID: 11400000, guid: 5f92b9f9901675f42a40b54fc1a48a9e, type: 2}
   - {fileID: 11400000, guid: b5822ae910509d749a12d917703f3a77, type: 2}
+  - {fileID: 11400000, guid: b6796c57c69ef994ca5e22ad248f6784, type: 2}
 --- !u!1001 &719667984
 PrefabInstance:
   m_ObjectHideFlags: 0

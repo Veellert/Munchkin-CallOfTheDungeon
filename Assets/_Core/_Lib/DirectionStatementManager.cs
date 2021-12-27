@@ -23,6 +23,8 @@ public class DirectionStatementManager : MonoBehaviour
         _scaleN = new Vector2(-scale.x, scale.y);
     }
 
+    public eDirectionStatement GetCurrentDirection() => _currentDirection;
+
     public void ChangeDirection(Vector2 direction)
     {
         if (direction.x < 0)

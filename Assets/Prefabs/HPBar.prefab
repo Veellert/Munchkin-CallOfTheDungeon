@@ -209,10 +209,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0214cc5978a18409a2355d027ac4b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _target: {fileID: 0}
   _indicator: {fileID: 3355167624441664335}
   _indicatorSprite: {fileID: 3367207477205098449}
-  _unitAttrib: {fileID: 0}
-  _indicatorColor: {r: 1, g: 0, b: 0, a: 0}
+  _indicatorColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8936998999189721408
 GameObject:
   m_ObjectHideFlags: 0

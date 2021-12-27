@@ -542,27 +542,21 @@ MonoBehaviour:
   _speed:
     _value: 5
     _maxValue: 10
-    _originalValue: 10
   _dodgeForce:
     _value: 6
     _maxValue: 10
-    _originalValue: 10
   _dodgeCooldown:
     _value: 2
     _maxValue: 2
-    _originalValue: 2
   _damage:
     _value: 8
     _maxValue: 100
-    _originalValue: 100
   _attackCooldown:
     _value: 0.5
     _maxValue: 0.5
-    _originalValue: 0.5
   _hp:
     _value: 100
     _maxValue: 100
-    _originalValue: 100
 --- !u!1 &5573365687522573919
 GameObject:
   m_ObjectHideFlags: 0

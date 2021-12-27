@@ -8,58 +8,64 @@ public class UnitAttrib
 {
     [SerializeField] private float _value;
     public float Value { get => _value; private set => _value = value; }
-
     [SerializeField] private float _maxValue;
     public float MaxValue { get => _maxValue; private set => _maxValue = value; }
 
-    [SerializeField] private float _originalValue;
-    public float OriginalValue { get => _originalValue; private set => _originalValue = value; }
+    public float OriginalValue { get ; private set; }
+    public float OriginalMaxValue { get ; private set; }
+
+    [HideInInspector] public event EventHandler OnValueChanged;
 
     public UnitAttrib(float value)
     {
-        Value = MaxValue = OriginalValue = value;
+        Value = MaxValue = OriginalValue = OriginalMaxValue = value;
     }
 
     public UnitAttrib(float value, float maxValue)
     {
-        Value = value;
-        MaxValue = OriginalValue = maxValue;
+        Value = OriginalValue = value;
+        MaxValue = OriginalMaxValue = maxValue;
     }
 
-    public float IncreaseValue(float value = 1)
+    public void IncreaseValue(float value = 1)
     {
-        return Value = Value + value > MaxValue ? FillToMax() : Value + value;
+        Value = Value + value > MaxValue ? MaxValue : Value + value;
+
+        OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public float DecreaseValue(float value = 1)
+    public void DecreaseValue(float value = 1)
     {
-        return Value = Value - value < 0 ? 0 : Value - value;
+        Value = Value - value < 0 ? 0 : Value - value;
+
+        OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public float FillToMax()
+    public void FillToMax()
     {
-        return Value = MaxValue;
+        Value = MaxValue;
+
+        OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public float FillEmpty()
+    public void FillEmpty()
     {
-        return Value = 0;
+        Value = 0;
+
+        OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public float SetMax(float maxValue)
+    public void SetMax(float maxValue)
     {
-        return MaxValue = maxValue;
+        MaxValue = maxValue;
     }
 
-    public float ResetAttribute(float originalValue = 0)
+    public void ResetAttribute()
     {
-        if (originalValue != 0)
-            OriginalValue = originalValue;
+        MaxValue = OriginalMaxValue;
+        Value = OriginalValue;
 
-        MaxValue = OriginalValue;
-        FillToMax();
-
-        return Value;
+        OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public bool IsValueEmpty() => Value <= 0;

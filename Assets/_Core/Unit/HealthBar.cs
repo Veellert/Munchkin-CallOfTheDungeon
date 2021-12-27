@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,27 +12,28 @@ public class HealthBar : MonoBehaviour
 
     private IDamageable _attrib;
     private float _hpPercent => _attrib.HP.Value / _attrib.HP.MaxValue;
-    private float _lastValue;
 
     private void Awake()
     {
-        _indicatorSprite.color = _indicatorColor;
-        _attrib = _target.GetComponent<IDamageable>();
+        if(_indicatorSprite != null && _indicatorColor != null)
+            _indicatorSprite.color = _indicatorColor;
+
+        if(_target != null)
+        {
+            _attrib = _target.GetComponent<IDamageable>();
+            _attrib.HP.OnValueChanged += UpdateIndicator;
+        }
     }
 
-    private void FixedUpdate()
+    private void UpdateIndicator(object sender, EventArgs e)
     {
         if (_indicator == null || _target == null)
             return;
 
-        if (_hpPercent != _lastValue)
-        {
-            _lastValue = _hpPercent;
-            _indicator.localScale = new Vector2(_lastValue, _indicator.localScale.y);
-        }
-
+        _indicator.localScale = new Vector2(_hpPercent, _indicator.localScale.y);
         if (_attrib.IsDead)
         {
+            _indicator.gameObject.SetActive(false);
             gameObject.SetActive(false);
             _target = null;
         }

@@ -41,13 +41,11 @@ public class MobileMonster : Monster, IIdleMovable
                 break;
 
             case eState.Chase:
-                TryChase();
-                SetDirection(_chaseTarget.position);
                 ChaseHandler();
                 break;
 
             case eState.Attack:
-                AttackHandler();
+                AttackHandler(new TileHalf(0.7f));
                 break;
         }
     }

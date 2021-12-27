@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ public interface IDamager
     UnitAttrib AttackCooldown { get; set; }
 
     void AttackInput();
-    void AttackHandler();
+    void AttackHandler(float attackRange);
     void CheckAttackCooldown();
 }
 
@@ -31,6 +32,13 @@ public interface IIdleMovable
     void StayOnPoint();
     void RemovePoint();
     void InitPoint();
+}
+
+public interface IBoss<T> where T : Enum
+{
+    T CurrentBossPhase { get; set; }
+
+    void ChangeBossFormTo(T bossForm);
 }
 
 public interface IUnit

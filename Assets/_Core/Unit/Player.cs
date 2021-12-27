@@ -58,7 +58,7 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         _animation = GetComponent<AnimationCaller>();
 
         name = UnitName;
-        _dodgeImpulse = DodgeForce;
+        _dodgeImpulse = new UnitAttrib(DodgeForce);
     }
 
     private void FixedUpdate()
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
                 break;
 
             case eState.Attack:
-                AttackHandler();
+                AttackHandler(new TileHalf(0.7f));
                 break;
 
             case eState.DuringAttack:
@@ -121,14 +121,10 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         }
     }
 
-    public void AttackHandler()
+    public void AttackHandler(float attackRange)
     {
-        // Должен быть у оружия
-        var attackOffset = new TileHalf();
-        var attackRange = new TileHalf(0.7f);
-
         var mouseDirection = (GetMousePosition() - transform.position).normalized;
-        var attackPosition = transform.position + mouseDirection * attackOffset;
+        var attackPosition = transform.position + mouseDirection * new TileHalf();
         SetDirection(mouseDirection);
 
         // Visualize Gizmos
