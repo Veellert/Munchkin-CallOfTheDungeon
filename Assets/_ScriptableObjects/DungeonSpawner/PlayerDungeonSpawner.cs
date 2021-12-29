@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewPlayerDungeonSpawner", menuName = "Custom/DungeonGeneration/Spawner/PlayerSpawner")]
+[CreateAssetMenu(fileName = "NewPlayerSpawner", menuName = "Custom/DungeonGeneration/Spawner/PlayerSpawner")]
 public class PlayerDungeonSpawner : DungeonSpawnerParameters
 {
     public override eDungeonSpawnerType SpawnerType => eDungeonSpawnerType.PlayerSpawner;
@@ -11,7 +11,7 @@ public class PlayerDungeonSpawner : DungeonSpawnerParameters
 
     public override void Spawn()
     {
-        _currentTarget = Instantiate(playerTarget, (Vector3Int)spawnPosition, Quaternion.identity);
+        _currentTarget = Instantiate(playerTarget, (Vector3)spawnPosition, Quaternion.identity);
     }
 
     public override void Destroy()

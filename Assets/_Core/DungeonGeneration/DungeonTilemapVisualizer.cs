@@ -29,13 +29,11 @@ public class DungeonTilemapVisualizer : MonoBehaviour
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
     {
         foreach (var position in positions)
-        {
             PaintSingleTile(position, tilemap, tile);
-        }
     }
 
-    private void PaintSingleTile(Vector2Int position, Tilemap tilemap, TileBase tile)
+    private void PaintSingleTile(Vector2 position, Tilemap tilemap, TileBase tile)
     {
-        tilemap.SetTile(tilemap.WorldToCell((Vector3Int)position), tile);
+        tilemap.SetTile(tilemap.WorldToCell(position), tile);
     }
 }

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public static class Direction2D
 {
-    public static List<Vector2Int> StandartDirectionsList => new List<Vector2Int>
+    public static List<Vector2> StandartDirectionsList => new List<Vector2>
     {
-        Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left,
+        Vector2.up, Vector2.right, Vector2.down, Vector2.left,
     };
 
-    public static List<Vector2Int> FullDirectionsList => new List<Vector2Int>
+    public static List<Vector2> FullDirectionsList => new List<Vector2>
     {
-        Vector2Int.up, new Vector2Int(1, 1),
-        Vector2Int.right, new Vector2Int(1, -1),
-        Vector2Int.down, new Vector2Int(-1, -1),
-        Vector2Int.left, new Vector2Int(-1, 1),
+        Vector2.up, new Vector2(1, 1),
+        Vector2.right, new Vector2(1, -1),
+        Vector2.down, new Vector2(-1, -1),
+        Vector2.left, new Vector2(-1, 1),
     };
 
     public static Vector2 GetDirectionTo(Vector2 position, Vector2 targetPosition)
@@ -35,5 +35,5 @@ public static class Direction2D
         return new Vector2(x, y);
     }
 
-    public static Vector2Int GetRandomStandartDirection() => StandartDirectionsList[Random.Range(0, StandartDirectionsList.Count)];
+    public static Vector2 GetRandomStandartDirection() => StandartDirectionsList[Random.Range(0, StandartDirectionsList.Count)];
 }

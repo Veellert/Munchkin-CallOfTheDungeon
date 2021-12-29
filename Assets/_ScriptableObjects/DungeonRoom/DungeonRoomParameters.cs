@@ -9,7 +9,7 @@ public abstract class DungeonRoomParameters : ScriptableObject
     public bool isRandomEachIteration = true;
 
     public abstract eDungeonRoomType RoomType { get; }
-    public abstract void InitDungeonSpawners(HashSet<Vector2Int> _currentVisualizePositions);
+    public abstract void InitDungeonSpawners(HashSet<Vector2> _currentVisualizePositions);
     public abstract void DestroyDungeonSpawners();
 }
 

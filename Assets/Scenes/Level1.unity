@@ -189,6 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 714299446}
   - component: {fileID: 714299445}
+  - component: {fileID: 714299447}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -203,7 +204,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714299444}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbbf4dd0787cb7a449022c3b9517a92c, type: 3}
   m_Name: 
@@ -228,6 +229,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &714299447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714299444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c584160695ff61429fd26e5d5620fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visualizer: {fileID: 1706704152}
+  _roomReferenceList:
+  - _parameters: {fileID: 11400000, guid: 9019a77ae12ae8941b3b7571bd3279fa, type: 2}
+    _minWidth: 10
+    _minHeight: 10
+    _maxWidth: 20
+    _maxHeight: 20
+  - _parameters: {fileID: 11400000, guid: 9019a77ae12ae8941b3b7571bd3279fa, type: 2}
+    _minWidth: 10
+    _minHeight: 10
+    _maxWidth: 30
+    _maxHeight: 30
+  - _parameters: {fileID: 11400000, guid: 81dae9fed0dd0f5448958d59869a37d2, type: 2}
+    _minWidth: 20
+    _minHeight: 20
+    _maxWidth: 40
+    _maxHeight: 40
+  - _parameters: {fileID: 11400000, guid: 81dae9fed0dd0f5448958d59869a37d2, type: 2}
+    _minWidth: 30
+    _minHeight: 30
+    _maxWidth: 60
+    _maxHeight: 60
+  _roomsCount: 8
+  _roomOffset: 2
 --- !u!1 &869313911
 GameObject:
   m_ObjectHideFlags: 0

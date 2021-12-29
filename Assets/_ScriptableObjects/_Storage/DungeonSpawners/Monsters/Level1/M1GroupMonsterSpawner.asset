@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 230506b32f918fb45881443e46b0de48, type: 3}
-  m_Name: L1BossSpawner
+  m_Script: {fileID: 11500000, guid: 4b061db25083f60489e4fa0d7cce22e0, type: 3}
+  m_Name: M1GroupMonsterSpawner
   m_EditorClassIdentifier: 
-  spawnPosition: {x: 4, y: -4}
-  monsterTarget: {fileID: 2640431374391964591, guid: 81ba73e2033506044a19f56546062883, type: 3}
+  spawnPosition: {x: -3, y: -3}
+  monsterTargetList:
+  - monsterTarget: {fileID: 4959706279183797304, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
+    monstersCount: 3

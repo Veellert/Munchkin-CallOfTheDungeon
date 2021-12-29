@@ -5,17 +5,18 @@ using UnityEngine;
 public abstract class DungeonSpawnerParameters : ScriptableObject
 {
     public abstract eDungeonSpawnerType SpawnerType { get; }
-    public Vector2Int spawnPosition;
+    public Vector2 spawnPosition;
 
     public abstract void Spawn();
     public abstract void Destroy();
 
-    public void SetSpawnPosition(int x, int y) => spawnPosition = new Vector2Int(x, y);
-    public void SetSpawnPosition(Vector2Int position) => spawnPosition = position;
+    public void SetSpawnPosition(int x, int y) => spawnPosition = new Vector2(x, y);
+    public void SetSpawnPosition(Vector2 position) => spawnPosition = position;
 }
 
 public enum eDungeonSpawnerType
 {
     PlayerSpawner,
-    SingleMotionMonsterSpawner,
+    SingleMonsterSpawner,
+    GroupMonsterSpawner,
 }
