@@ -51,7 +51,14 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
 
     private void Start()
     {
+        if(Instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+
         Instance = this;
+        DontDestroyOnLoad(gameObject);
 
         _rigBody = GetComponent<Rigidbody2D>();
         _directionManager = GetComponent<DirectionStatementManager>();

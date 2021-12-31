@@ -123,6 +123,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &461727963
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039384, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145696488535039385, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+      propertyPath: m_Name
+      value: HumanMale1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
 --- !u!1001 &687320847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136,7 +193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5784136437755766671, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5784136437755766671, guid: b239d4f3200b75e4188ffea65a9d5d50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -301,7 +358,7 @@ Transform:
   m_Children:
   - {fileID: 925648516}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1510496748
 MonoBehaviour:
@@ -320,6 +377,27 @@ MonoBehaviour:
   _roomsCount: 10
   _roomOffset: 4
   _roomReferenceList:
-  - {fileID: 11400000, guid: 9019a77ae12ae8941b3b7571bd3279fa, type: 2}
-  - {fileID: 11400000, guid: 81dae9fed0dd0f5448958d59869a37d2, type: 2}
-  - {fileID: 11400000, guid: 9019a77ae12ae8941b3b7571bd3279fa, type: 2}
+  - iterations: 10
+    floorPositionsCount: 10
+    isRandomEachIteration: 0
+    spawnerList:
+    - monsters:
+      - target: {fileID: 4959706279183797304, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
+        count: 1
+  - iterations: 10
+    floorPositionsCount: 20
+    isRandomEachIteration: 1
+    spawnerList:
+    - monsters:
+      - target: {fileID: 4959706279183797304, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
+        count: 3
+  - iterations: 20
+    floorPositionsCount: 30
+    isRandomEachIteration: 1
+    spawnerList:
+    - monsters:
+      - target: {fileID: 4959706279183797304, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
+        count: 3
+    - monsters:
+      - target: {fileID: 4959706279183797304, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
+        count: 2

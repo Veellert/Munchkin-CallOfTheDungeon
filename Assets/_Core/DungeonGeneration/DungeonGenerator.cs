@@ -3,10 +3,64 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
+public class DungeonRoomGeneration
+{
+    public int iterations = 10;
+    public int floorPositionsCount = 10;
+    public bool isRandomEachIteration = true;
+    public List<DungeonSpawner> spawnerList = new List<DungeonSpawner>();
+
+    public void InitDungeonSpawners(HashSet<Vector2Int> spawnPositions)
+    {
+        if (spawnerList.Count == 0)
+            return;
+
+        foreach (var spawner in spawnerList)
+        {
+            if (spawner.monsters.Count == 0)
+                continue;
+
+            var randIndex = Random.Range(0, spawnPositions.Count);
+            spawner.SpawnerPosition = spawnPositions.ElementAt(randIndex);
+
+            while (!Direction2D.ExistEmptySpace(spawnPositions, spawner.SpawnerPosition, true))
+            {
+                randIndex = Random.Range(0, spawnPositions.Count);
+                spawner.SpawnerPosition = spawnPositions.ElementAt(randIndex);
+            }
+
+            foreach (var monster in spawner.monsters)
+                monster?.Spawn(spawner.SpawnerPosition);
+        }
+    }
+}
+
+[System.Serializable]
+public class DungeonSpawner
+{
+    public List<SpawnMonsterInfo> monsters = new List<SpawnMonsterInfo>();
+    public Vector2Int SpawnerPosition { get; set; }
+}
+
+[System.Serializable]
+public class SpawnMonsterInfo
+{
+    public Monster target;
+    public int count = 1;
+
+    public void Spawn(Vector2Int spawnerPosition)
+    {
+        for (int i = 0; i < count; i++)
+            GameObject.Instantiate(target, (Vector2)spawnerPosition, Quaternion.identity);
+    }
+}
+
 public class DungeonRoom
 {
-    public DungeonRoomParameters Parameters { get; private set; }
+    public DungeonRoomGeneration Parameters { get; private set; }
     public HashSet<Vector2Int> FloorPositions { get; set; }
+
     public Vector2Int SpawnPosition { get; private set; }
     public bool IsPositionInited { get; private set; }
 
@@ -45,7 +99,7 @@ public class DungeonRoom
 
     public List<Vector2Int> _floorPositionList => FloorPositions.ToList();
 
-    public DungeonRoom(DungeonRoomParameters reference)
+    public DungeonRoom(DungeonRoomGeneration reference)
     {
         Parameters = reference;
     }
@@ -110,7 +164,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] [Min(1)] private int _roomsCount = 1;
     [SerializeField] [Range(1, 10)] private int _roomOffset = 1;
 
-    [SerializeField] private List<DungeonRoomParameters> _roomReferenceList;
+    [SerializeField] private List<DungeonRoomGeneration> _roomReferenceList;
 
     private List<DungeonRoom> _preparedRooms;
 
@@ -136,13 +190,21 @@ public class DungeonGenerator : MonoBehaviour
         GenerateDungeonFloor();
         GenerateDungeonWalls();
 
-        VisualizeTiles();
+        InitializeDungeonSpawners();
+
+        VisualizeDungeonTiles();
     }
 
-    private void VisualizeTiles()
+    private void VisualizeDungeonTiles()
     {
         _visualizer.VisualizeFloorTiles(_floorPositions);
         _visualizer.VisualizeWallTiles(_wallPositions);
+    }
+
+    private void InitializeDungeonSpawners()
+    {
+        foreach (var room in _preparedRooms)
+            room.Parameters.InitDungeonSpawners(room.FloorPositions);
     }
 
     private void GenerateDungeonWalls()

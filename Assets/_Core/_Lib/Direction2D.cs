@@ -17,6 +17,27 @@ public static class Direction2D
         Vector2.left, new Vector2(-1, 1),
     };
 
+    public static bool ExistEmptySpace(IEnumerable<Vector2Int> allPos, Vector2Int center, bool isFullDirList = false)
+    {
+        bool result;
+
+        var posList = new List<Vector2Int>();
+        posList.AddRange(allPos);
+
+        var emptyPos = new List<Vector2Int>();
+
+        if(isFullDirList)
+            FullDirectionsList.ForEach(s => emptyPos.Add(Vector2Int.RoundToInt(s) + center));
+        else
+            StandartDirectionsList.ForEach(s => emptyPos.Add(Vector2Int.RoundToInt(s) + center));
+
+        result = posList.Contains(emptyPos[0]);
+        for (int i = 1; i < emptyPos.Count; i++)
+            result &= posList.Contains(emptyPos[i]);
+
+        return result;
+    }
+    
     public static Vector2 GetDirectionTo(Vector2 position, Vector2 targetPosition)
     {
         float x = 0;
