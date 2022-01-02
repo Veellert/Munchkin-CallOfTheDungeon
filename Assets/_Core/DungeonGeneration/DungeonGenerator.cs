@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum eDungeonRoomType
+{
+    DefaultRoom,
+    StartRoom,
+    FinishRoom,
+}
+
 [System.Serializable]
 public class DungeonRoomGeneration
 {
@@ -21,18 +28,25 @@ public class DungeonRoomGeneration
             if (spawner.monsters.Count == 0)
                 continue;
 
-            var randIndex = Random.Range(0, spawnPositions.Count);
-            spawner.SpawnerPosition = spawnPositions.ElementAt(randIndex);
-
-            while (!Direction2D.ExistEmptySpace(spawnPositions, spawner.SpawnerPosition, true))
-            {
-                randIndex = Random.Range(0, spawnPositions.Count);
-                spawner.SpawnerPosition = spawnPositions.ElementAt(randIndex);
-            }
+            spawner.SpawnerPosition = GetRandomEmptyPosition(spawnPositions);
 
             foreach (var monster in spawner.monsters)
                 monster?.Spawn(spawner.SpawnerPosition);
         }
+    }
+
+    public Vector2Int GetRandomEmptyPosition(HashSet<Vector2Int> spawnPositions)
+    {
+        var randIndex = Random.Range(0, spawnPositions.Count);
+        var position = spawnPositions.ElementAt(randIndex);
+
+        while (!Direction2D.ExistEmptySpace(spawnPositions, position, true))
+        {
+            randIndex = Random.Range(0, spawnPositions.Count);
+            position = spawnPositions.ElementAt(randIndex);
+        }
+
+        return position;
     }
 }
 
@@ -60,6 +74,8 @@ public class DungeonRoom
 {
     public DungeonRoomGeneration Parameters { get; private set; }
     public HashSet<Vector2Int> FloorPositions { get; set; }
+
+    public eDungeonRoomType RoomType { get; set; }
 
     public Vector2Int SpawnPosition { get; private set; }
     public bool IsPositionInited { get; private set; }
@@ -102,6 +118,7 @@ public class DungeonRoom
     public DungeonRoom(DungeonRoomGeneration reference)
     {
         Parameters = reference;
+        RoomType = eDungeonRoomType.DefaultRoom;
     }
 
     public void SetPosition(int x, int y)
@@ -199,12 +216,22 @@ public class DungeonGenerator : MonoBehaviour
     {
         _visualizer.VisualizeFloorTiles(_floorPositions);
         _visualizer.VisualizeWallTiles(_wallPositions);
+
+        var pos = _preparedRooms.Find(s => s.RoomType == eDungeonRoomType.FinishRoom).SpawnPosition;
+        var leaderPositions = new List<Vector2Int>() { pos, pos + Vector2Int.left, pos + Vector2Int.right };
+
+        _visualizer.VisualizeLeaderTiles(leaderPositions);
     }
 
     private void InitializeDungeonSpawners()
     {
         foreach (var room in _preparedRooms)
-            room.Parameters.InitDungeonSpawners(room.FloorPositions);
+        {
+            if (room.RoomType == eDungeonRoomType.DefaultRoom)
+                room.Parameters.InitDungeonSpawners(room.FloorPositions);
+            else if (room.RoomType == eDungeonRoomType.StartRoom)
+                Player.Instance.transform.position = (Vector2)room.Parameters.GetRandomEmptyPosition(room.FloorPositions);
+        }
     }
 
     private void GenerateDungeonWalls()
@@ -351,6 +378,12 @@ public class DungeonGenerator : MonoBehaviour
         {
             int rndIndex = Random.Range(0, _roomReferenceList.Count);
             var preparedRoom = new DungeonRoom(_roomReferenceList[rndIndex]);
+
+            if (i == 0)
+                preparedRoom.RoomType = eDungeonRoomType.StartRoom;
+            else if (i == _roomsCount - 1)
+                preparedRoom.RoomType = eDungeonRoomType.FinishRoom;
+
             preparedRooms.Add(preparedRoom);
         }
 

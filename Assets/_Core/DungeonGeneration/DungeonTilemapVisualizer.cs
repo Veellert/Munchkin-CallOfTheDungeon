@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,6 +11,9 @@ public class DungeonTilemapVisualizer : MonoBehaviour
     [SerializeField] private Tilemap _wallTilemap;
     [SerializeField] private TileBase _wallTile;
 
+    [SerializeField] private Tilemap _leaderTilemap;
+    [SerializeField] private TileBase _leaderTile;
+
     public void VisualizeFloorTiles(IEnumerable<Vector2Int> positions)
     {
         PaintTiles(positions, _floorTilemap, _floorTile);
@@ -18,6 +22,11 @@ public class DungeonTilemapVisualizer : MonoBehaviour
     public void VisualizeWallTiles(IEnumerable<Vector2Int> positions)
     {
         PaintTiles(positions, _wallTilemap, _wallTile);
+    }
+
+    public void VisualizeLeaderTiles(IEnumerable<Vector2Int> positions)
+    {
+        PaintTiles(positions, _leaderTilemap, _leaderTile);
     }
 
     public void Clear()

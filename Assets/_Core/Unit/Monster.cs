@@ -10,7 +10,7 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     private static List<Monster> monsterList;
     public static void RemoveMonsterFromStack(Monster monster)
     {
-        if(monster)
+        if(monster && monsterList.Exists(s => s.GetHashCode() == monster.GetHashCode()))
             monsterList.Remove(monster);
     }
     public static void AddMonsterToStack(Monster monster)
@@ -19,6 +19,13 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
             monsterList = new List<Monster>();
         if(monster)
             monsterList.Add(monster);
+    }
+    public static List<Monster> GetMonsters()
+    {
+        if (monsterList == null)
+            monsterList = new List<Monster>();
+
+        return monsterList;
     }
     public static Monster GetClosestMonster(Vector2 position, float range)
     {

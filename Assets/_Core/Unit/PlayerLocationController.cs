@@ -22,6 +22,8 @@ public class PlayerLocationController : MonoBehaviour
         {
             case eLocations.Lobby: SceneLoader.Lobby(); break;
             case eLocations.Level1: SceneLoader.FirstLevel(); break;
+            case eLocations.Boss1: SceneLoader.FirstBoss(); break;
+            default: SceneLoader.Lobby(); break;
         }
     }
 }
@@ -30,4 +32,5 @@ public enum eLocations
 {
     Lobby,
     Level1,
+    Boss1,
 }

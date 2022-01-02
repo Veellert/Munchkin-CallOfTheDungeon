@@ -47,3 +47,5 @@ MonoBehaviour:
   _floorTile: {fileID: 11400000, guid: 73a19cb9bd6941749a4622a090bdd6e6, type: 2}
   _wallTilemap: {fileID: 0}
   _wallTile: {fileID: 11400000, guid: 0983487c9e281d14daf89151eaec86ff, type: 2}
+  _leaderTilemap: {fileID: 0}
+  _leaderTile: {fileID: 11400000, guid: 18c56ab31c018bd40a7934db66631c37, type: 2}

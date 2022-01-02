@@ -10,8 +10,11 @@ public static class SceneLoader
         MainMenu,
         Level0,
         Level1,
+        Level1Boss1,
     }
 
+    public static void FirstBoss() => LoadScene(eScenes.Level1Boss1);
+    
     public static void FirstLevel() => LoadScene(eScenes.Level1);
 
     public static void Lobby() => LoadScene(eScenes.Level0);
