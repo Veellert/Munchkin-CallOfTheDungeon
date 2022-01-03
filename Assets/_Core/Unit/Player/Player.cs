@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AnimationCaller), typeof(Rigidbody2D), typeof(DirectionStatementManager))]
 public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
 {
-    public static Player Instance { get; private set; }
+    public static Player Instance { get; set; }
 
     private Rigidbody2D _rigBody;
     private DirectionStatementManager _directionManager;
@@ -30,6 +30,7 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
 
     [SerializeField] private UnitAttrib _hp = 100;
     public UnitAttrib HP { get => _hp; set => _hp = value; }
+    public bool IsDead => HP.IsValueEmpty();
 
     #endregion
 
@@ -47,18 +48,21 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
     private Vector2 _lastMovementDirection;
 
     private UnitAttrib _dodgeImpulse;
-    public bool IsDead => _state == eState.Die;
 
     private void Start()
     {
-        if(Instance != null)
+        #region PreLoad
+
+        if (Instance != null)
         {
-            Destroy(this);
+            DestroyImmediate(this);
             return;
         }
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        #endregion
 
         _rigBody = GetComponent<Rigidbody2D>();
         _directionManager = GetComponent<DirectionStatementManager>();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DungeonArchTrigger : MonoBehaviour
+public class DungeonLeaderTrigger : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {

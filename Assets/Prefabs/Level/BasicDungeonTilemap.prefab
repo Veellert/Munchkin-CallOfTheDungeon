@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2062366663}
   - component: {fileID: 1676427814682555929}
   m_Layer: 0
-  m_Name: Arch
+  m_Name: Leader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

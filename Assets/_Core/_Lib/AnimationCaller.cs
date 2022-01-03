@@ -49,6 +49,11 @@ public class AnimationCaller : MonoBehaviour
         Play(eAnimation.RUNNING, finishAction, direction != Vector2.zero);
     }
 
+    public void Disabled()
+    {
+        _currentAnimator.Play("Disabled");
+    }
+    
     private void Play(eAnimation animation, Action finishAction, bool condition = true)
     {
         if (!condition || _currentAnimation == animation)

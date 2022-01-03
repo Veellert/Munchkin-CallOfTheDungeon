@@ -7,18 +7,31 @@ using UnityEngine;
 [RequireComponent(typeof(AnimationCaller), typeof(DirectionStatementManager))]
 public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 {
+    #region Static
+
     private static List<Monster> monsterList;
     public static void RemoveMonsterFromStack(Monster monster)
     {
-        if(monster && monsterList.Exists(s => s.GetHashCode() == monster.GetHashCode()))
+        if (monster && monsterList != null)
+        {
             monsterList.Remove(monster);
+            MonstersCount--;
+        }
     }
     public static void AddMonsterToStack(Monster monster)
     {
         if (monsterList == null)
             monsterList = new List<Monster>();
-        if(monster)
+        if (MonstersCount == null)
+            MonstersCount = monsterList.Count;
+        if (monster)
+        {
             monsterList.Add(monster);
+
+            if (monsterList.Count > MonstersCount.MaxValue)
+                MonstersCount.SetMax(monsterList.Count);
+            MonstersCount++;
+        }
     }
     public static List<Monster> GetMonsters()
     {
@@ -50,6 +63,10 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         return monsterList.Find(s => s.GetType() == bossType);
     }
 
+    public static UnitAttrib MonstersCount { get; set; }
+
+    #endregion
+
     protected DirectionStatementManager _directionManager;
     protected AnimationCaller _animation;
 
@@ -74,12 +91,14 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
     [SerializeField] private UnitAttrib _hp = 100;
     public UnitAttrib HP { get => _hp; set => _hp = value; }
+    public bool IsDead => HP.IsValueEmpty();
 
     #endregion
 
     protected eState _state = eState.Default;
     protected enum eState
     {
+        Disabled,
         Default,
         Chase,
         Attack,
@@ -87,7 +106,6 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         Die,
     }
 
-    public bool IsDead => _state == eState.Die;
     protected Vector2 _movementDirection;
     protected Transform _chaseTarget;
 
@@ -98,9 +116,33 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
         name = UnitName;
 
-        _chaseTarget = Player.Instance.transform;
+        if(Player.Instance)
+            _chaseTarget = Player.Instance.transform;
 
         AddMonsterToStack(this);
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        if (Player.Instance)
+            _chaseTarget = Player.Instance.transform;
+
+        if (_chaseTarget == null)
+            return;
+
+        if (Vector2.Distance(transform.position, _chaseTarget.position) > new TileHalf(20))
+        {
+            if(_state != eState.Disabled)
+            {
+                _state = eState.Disabled;
+                _animation.Disabled();
+            }
+        }
+        else
+        {
+            if(_state == eState.Disabled)
+                _state = eState.Default;
+        }
     }
 
     private void OnDestroy()
@@ -180,21 +222,25 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
     protected virtual void TryChase()
     {
+        if (!Player.Instance)
+            return;
+
         if (_chaseTarget == null)
             _chaseTarget = Player.Instance.transform;
-        var target = _chaseTarget.GetComponent<IDamageable>();
 
-        if (Vector2.Distance(transform.position, _chaseTarget.position) <= new TileHalf(ChaseRadius) && !target.IsDead)
-        {
-            SetDirection(_chaseTarget.position);
-            if(_state != eState.Chase)
-                _state = eState.Chase;
-        }
-        else
-        {
-            if(_state == eState.Chase || _state == eState.Attack)
-                _state = eState.Default;
-        }
+        if (Vector2.Distance(transform.position, _chaseTarget.position) <= new TileHalf(ChaseRadius))
+            if(!_chaseTarget.GetComponent<IDamageable>().IsDead)
+            {
+                SetDirection(_chaseTarget.position);
+
+                if(_state != eState.Chase)
+                    _state = eState.Chase;
+
+                return;
+            }
+
+        if(_state == eState.Chase || _state == eState.Attack)
+            _state = eState.Default;
     }
 
     protected void MoveTo(Vector2 targetPosition, float extraSpeed = 0)

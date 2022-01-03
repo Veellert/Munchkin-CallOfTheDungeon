@@ -46,8 +46,10 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
             _state = eState.Default;
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         CheckAttackCooldown();
         switch (_state)
         {

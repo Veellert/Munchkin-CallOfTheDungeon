@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class Lobby : MonoBehaviour
 {
-    public void CancelButtonClick() => SceneLoader.MainMenu();
+    [SerializeField] private Vector2 _playerPosition;
+    [SerializeField] private Player _player;
 
-    public void StartButtonClick() => SceneLoader.FirstLevel();
+    private void Start()
+    {
+        if (Player.Instance && Player.Instance.IsDead)
+        {
+            Destroy(Player.Instance.gameObject);
+            Player.Instance = null;
+        }
+
+        if (!Player.Instance)
+            Instantiate(_player, _playerPosition, Quaternion.identity);
+        else
+            Player.Instance.transform.position = _playerPosition;
+    }
 }

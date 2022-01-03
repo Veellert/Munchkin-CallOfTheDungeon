@@ -22,8 +22,10 @@ public class SmileyFaceBossMinion : Monster
         _skinner.ChangeFullSkin(_boss.CurrentBossPhase);
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         CheckAttackCooldown();
         switch (_state)
         {

@@ -15,28 +15,30 @@ public class MobileMonster : Monster, IIdleMovable
 
     #endregion
 
-    private Transform _movePoint;
+    private Vector2 _movePoint;
     private Vector2 _startPoint;
 
     protected override void Start()
     {
         base.Start();
 
-        _movePoint = new GameObject("movePoint_" + name + GetHashCode()).transform;
         _startPoint = transform.position;
+        _movePoint = _startPoint;
 
         InitPoint();
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         CheckAttackCooldown();
         switch (_state)
         {
             case eState.Default:
                 TryChase();
-                SetDirection(_movePoint.position);
-                MoveTo(_movePoint.position);
+                SetDirection(_movePoint);
+                MoveTo(_movePoint);
                 StayOnPoint();
                 break;
 
@@ -52,7 +54,7 @@ public class MobileMonster : Monster, IIdleMovable
 
     public void StayOnPoint()
     {
-        if (Vector2.Distance(transform.position, _movePoint.position) < 0.2f)
+        if (Vector2.Distance(transform.position, _movePoint) < 0.2f)
         {
             if(!IsInvoking("InitPoint"))
                 Invoke("InitPoint", StayPointTime);
@@ -66,7 +68,7 @@ public class MobileMonster : Monster, IIdleMovable
 
     public void InitPoint()
     {
-        _movePoint.position = GetRandomPointPosition();
+        _movePoint = GetRandomPointPosition();
     }
 
     public void RemovePoint()

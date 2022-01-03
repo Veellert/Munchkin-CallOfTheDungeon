@@ -158,8 +158,8 @@ MonoBehaviour:
     _maxValue: 10
   _level: 1
   _chaseRadius:
-    _value: 7
-    _maxValue: 10
+    _value: 15
+    _maxValue: 20
   _btwTargetDistance:
     _value: 3
     _maxValue: 1.3

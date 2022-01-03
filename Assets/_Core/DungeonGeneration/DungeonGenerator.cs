@@ -210,16 +210,22 @@ public class DungeonGenerator : MonoBehaviour
         InitializeDungeonSpawners();
 
         VisualizeDungeonTiles();
+
+        _preparedRooms = null;
+        _floorPositions = null;
+        _wallPositions = null;
     }
 
     private void VisualizeDungeonTiles()
     {
+        var pos = _preparedRooms.Find(s => s.RoomType == eDungeonRoomType.FinishRoom).SpawnPosition;
+        var leaderPositions = new List<Vector2Int>() { pos + Vector2Int.left, pos + Vector2Int.right };
+
+        _wallPositions.UnionWith(leaderPositions);
+        leaderPositions.Add(pos);
+
         _visualizer.VisualizeFloorTiles(_floorPositions);
         _visualizer.VisualizeWallTiles(_wallPositions);
-
-        var pos = _preparedRooms.Find(s => s.RoomType == eDungeonRoomType.FinishRoom).SpawnPosition;
-        var leaderPositions = new List<Vector2Int>() { pos, pos + Vector2Int.left, pos + Vector2Int.right };
-
         _visualizer.VisualizeLeaderTiles(leaderPositions);
     }
 
