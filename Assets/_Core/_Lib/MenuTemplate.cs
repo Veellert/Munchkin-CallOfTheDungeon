@@ -1,19 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Шаблон логики для разных всплывающих меню
+/// </summary>
 public class MenuTemplate : MonoBehaviour
 {
-    [SerializeField] private Button[] _activeButtons;
+    [SerializeField] protected Button[] _activeButtons;
+    [SerializeField] protected bool _activeOnLoad;
 
-    private void Start()
+    protected virtual void Start()
     {
         foreach (var button in _activeButtons)
-        {
             button.onClick.AddListener(InverseActive);
-        }
 
-        InverseActive();
+        if(!_activeOnLoad)
+            InverseActive();
     }
 
+    /// <summary>
+    /// Меняет видимость меню на противоположную
+    /// </summary>
     private void InverseActive() => gameObject.SetActive(!gameObject.activeSelf);
 }

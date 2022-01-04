@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///  ласс используемый дл€ аттрибутов у персонажей и не только
+/// </summary>
+/// <remarks>
+/// ’ранит в себе текущее, максимальное и изначальное числовое значение
+/// </remarks>
 [Serializable]
 public class UnitAttrib
 {
@@ -27,6 +33,10 @@ public class UnitAttrib
         MaxValue = OriginalMaxValue = maxValue;
     }
 
+    /// <summary>
+    /// ”величивает значение на значение параметра
+    /// </summary>
+    /// <param name="value">„исло на которое увеличить</param>
     public void IncreaseValue(float value = 1)
     {
         Value = Value + value > MaxValue ? MaxValue : Value + value;
@@ -34,6 +44,10 @@ public class UnitAttrib
         OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// ”меньшает значение на значение параметра
+    /// </summary>
+    /// <param name="value">„исло на которое уменьшить</param>
     public void DecreaseValue(float value = 1)
     {
         Value = Value - value < 0 ? 0 : Value - value;
@@ -41,6 +55,9 @@ public class UnitAttrib
         OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// «аполн€ет текущее значение до максимального
+    /// </summary>
     public void FillToMax()
     {
         Value = MaxValue;
@@ -48,6 +65,9 @@ public class UnitAttrib
         OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// ќчищает текущее значение
+    /// </summary>
     public void FillEmpty()
     {
         Value = 0;
@@ -55,11 +75,18 @@ public class UnitAttrib
         OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Ќазначает макимальное значение на значение параметра
+    /// </summary>
+    /// <param name="maxValue">«начение на которое надо изменить</param>
     public void SetMax(float maxValue)
     {
         MaxValue = maxValue;
     }
 
+    /// <summary>
+    /// —брасывает текущие значени€ до изначальных
+    /// </summary>
     public void ResetAttribute()
     {
         MaxValue = OriginalMaxValue;
@@ -68,6 +95,9 @@ public class UnitAttrib
         OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// ѕровер€ет пустое ли текущее значение
+    /// </summary>
     public bool IsValueEmpty() => Value <= 0;
 
     #region Operators

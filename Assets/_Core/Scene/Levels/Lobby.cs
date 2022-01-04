@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Компонент отвечающий за логику лобби
+/// </summary>
 public class Lobby : MonoBehaviour
 {
     [SerializeField] private Vector2 _playerPosition;
@@ -14,7 +17,6 @@ public class Lobby : MonoBehaviour
             Destroy(Player.Instance.gameObject);
             Player.Instance = null;
         }
-
         if (!Player.Instance)
             Instantiate(_player, _playerPosition, Quaternion.identity);
         else

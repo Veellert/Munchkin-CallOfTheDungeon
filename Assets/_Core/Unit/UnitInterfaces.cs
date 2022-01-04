@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Имеет здоровье
+/// </summary>
 public interface IDamageable
 {
     UnitAttrib HP { get; set; }
@@ -13,6 +16,9 @@ public interface IDamageable
     void Heal(float healAmount);
 }
 
+/// <summary>
+/// Может атаковать
+/// </summary>
 public interface IDamager
 {
     UnitAttrib Damage { get; set; }
@@ -23,6 +29,9 @@ public interface IDamager
     void CheckAttackCooldown();
 }
 
+/// <summary>
+/// Может ходить в спокойном состоянии вокруг
+/// </summary>
 public interface IIdleMovable
 {
     UnitAttrib IdleMovmentRadius { get; set; }
@@ -34,13 +43,19 @@ public interface IIdleMovable
     void InitPoint();
 }
 
+/// <summary>
+/// Фазы босса
+/// </summary>
 public interface IBoss<T> where T : Enum
 {
     T CurrentBossPhase { get; set; }
 
-    void ChangeBossFormTo(T bossForm);
+    void ChangeBossPhaseTo(T bossForm);
 }
 
+/// <summary>
+/// Является юнитом
+/// </summary>
 public interface IUnit
 {
     string UnitName { get; set; }

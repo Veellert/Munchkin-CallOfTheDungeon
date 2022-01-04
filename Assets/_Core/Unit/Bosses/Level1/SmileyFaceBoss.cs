@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Фазы босса <see cref="SmileyFaceBoss"/>
+/// </summary>
 public enum ePhaseSmileyFace
 {
     Default,
     Angry,
 }
 
+/// <summary>
+/// Компонент отвечающий за логику 1 босса 1 уровня "Смайлик"
+/// </summary>
 [RequireComponent(typeof(SkinChanger))]
 public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
 {
@@ -35,6 +41,9 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
         HP.OnValueChanged += CheckBossHP;
     }
 
+    /// <summary>
+    /// Событие на проверку здоровья босса
+    /// </summary>
     private void CheckBossHP(object sender, System.EventArgs e)
     {
         _isBossHalfHP = HP.Value <= HP.MaxValue / 2;
@@ -72,14 +81,20 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
         }
     }
 
+    /// <summary>
+    /// Смерть босса
+    /// </summary>
     public override void Die()
     {
         if(CurrentBossPhase == ePhaseSmileyFace.Angry)
             base.Die();
         else
-            ChangeBossFormTo(ePhaseSmileyFace.Angry);
+            ChangeBossPhaseTo(ePhaseSmileyFace.Angry);
     }
 
+    /// <summary>
+    /// Обработчик атаки
+    /// </summary>
     private void AttackHandler()
     {
         var attackRange = new TileHalf();
@@ -90,6 +105,9 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
         base.AttackHandler(attackRange);
     }
 
+    /// <summary>
+    /// Проверка на особую атаку
+    /// </summary>
     private void InputSpecialAttack()
     {
         SetDirection(transform.position);
@@ -98,12 +116,18 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
         _state = eState.SpecialAttack;
     }
 
+    /// <summary>
+    /// Обработчик особой атаки
+    /// </summary>
     private void SpecialAttackHandler()
     {
         if (!IsInvoking("SpawnMinion"))
             Invoke("SpawnMinion", SpawnMinionDelay);
     }
 
+    /// <summary>
+    /// Спавн миниона босса
+    /// </summary>
     private void SpawnMinion()
     {
         var spawnDirection = (_chaseTarget.position - transform.position).normalized;
@@ -112,12 +136,16 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
         _minion.Spawn(spawnPoint);
     }
 
-    public void ChangeBossFormTo(ePhaseSmileyFace bossForm)
+    /// <summary>
+    /// Изеняет фазу босса на нужную
+    /// </summary>
+    /// <param name="bossPhase">Фаза босса</param>
+    public void ChangeBossPhaseTo(ePhaseSmileyFace bossPhase)
     {
-        if (CurrentBossPhase == bossForm)
+        if (CurrentBossPhase == bossPhase)
             return;
 
-        CurrentBossPhase = bossForm;
+        CurrentBossPhase = bossPhase;
         _skinner.ChangeFullSkin(CurrentBossPhase);
 
         HP.FillToMax();

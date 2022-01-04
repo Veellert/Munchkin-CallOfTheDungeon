@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Компонент отвечающий за логику движущегося монстра
+/// </summary>
 public class MobileMonster : Monster, IIdleMovable
 {
     #region Attrib
@@ -52,6 +55,9 @@ public class MobileMonster : Monster, IIdleMovable
         }
     }
 
+    /// <summary>
+    /// Остановка на точке
+    /// </summary>
     public void StayOnPoint()
     {
         if (Vector2.Distance(transform.position, _movePoint) < 0.2f)
@@ -66,17 +72,26 @@ public class MobileMonster : Monster, IIdleMovable
         }
     }
 
+    /// <summary>
+    /// Инициализация точки
+    /// </summary>
     public void InitPoint()
     {
         _movePoint = GetRandomPointPosition();
     }
 
+    /// <summary>
+    /// Удаляет точку
+    /// </summary>
     public void RemovePoint()
     {
         if (!IsInvoking("InitPoint"))
             InitPoint();
     }
 
+    /// <summary>
+    /// Получает рандомную координату для точки
+    /// </summary>
     private Vector2 GetRandomPointPosition()
     {
         var radius = new TileHalf(IdleMovmentRadius);

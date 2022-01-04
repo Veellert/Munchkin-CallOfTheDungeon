@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Компонент отвечающий за камеру преследующую игрока
+/// </summary>
 [RequireComponent(typeof(Camera))]
 public class PlayerCameraMovment : MonoBehaviour
 {

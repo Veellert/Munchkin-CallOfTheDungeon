@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Компонент отвечающий за логику монстра
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 [RequireComponent(typeof(AnimationCaller), typeof(DirectionStatementManager))]
 public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
@@ -10,6 +13,10 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     #region Static
 
     private static List<Monster> monsterList;
+
+    /// <summary>
+    /// Удаляет монстра из списка
+    /// </summary>
     public static void RemoveMonsterFromStack(Monster monster)
     {
         if (monster && monsterList != null)
@@ -18,6 +25,10 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
             MonstersCount--;
         }
     }
+
+    /// <summary>
+    /// Добавляет монстра в список
+    /// </summary>
     public static void AddMonsterToStack(Monster monster)
     {
         if (monsterList == null)
@@ -33,6 +44,10 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
             MonstersCount++;
         }
     }
+
+    /// <summary>
+    /// Возвращает всех монстров списка
+    /// </summary>
     public static List<Monster> GetMonsters()
     {
         if (monsterList == null)
@@ -40,6 +55,12 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
         return monsterList;
     }
+
+    /// <summary>
+    /// Возвращает самого близкого монстра к точке
+    /// </summary>
+    /// <param name="position">Точка</param>
+    /// <param name="ParamName">Радиус</param>
     public static Monster GetClosestMonster(Vector2 position, float range)
     {
         Monster closestMonster = null;
@@ -58,6 +79,11 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
         return closestMonster;
     }
+
+    /// <summary>
+    /// Получает босса по его типу
+    /// </summary>
+    /// <param name="bossType">Тип босса (typeof)</param>
     public static Monster GetBoss(Type bossType)
     {
         return monsterList.Find(s => s.GetType() == bossType);
@@ -96,6 +122,9 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     #endregion
 
     protected eState _state = eState.Default;
+    /// <summary>
+    /// Состояние монстра
+    /// </summary>
     protected enum eState
     {
         Disabled,
@@ -150,6 +179,9 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         RemoveMonsterFromStack(this);
     }
 
+    /// <summary>
+    /// Смерть монстра
+    /// </summary>
     public virtual void Die()
     {
         _state = eState.Die;
@@ -158,6 +190,9 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         RemoveMonsterFromStack(this);
     }
 
+    /// <summary>
+    /// Получить урон
+    /// </summary>
     public virtual void GetDamage(float damageAmount)
     {
         HP -= damageAmount;
@@ -165,11 +200,17 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
             Die();
     }
 
+    /// <summary>
+    /// Восстановить здоровье
+    /// </summary>
     public virtual void Heal(float healAmount)
     {
         HP += healAmount;
     }
 
+    /// <summary>
+    /// Проверка на атаку
+    /// </summary>
     public virtual void AttackInput()
     {
         if (AttackCooldown.IsValueEmpty())
@@ -181,6 +222,9 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         }
     }
 
+    /// <summary>
+    /// Обработчик атаки
+    /// </summary>
     public virtual void AttackHandler(float attackRange)
     {
         if (!AttackCooldown.IsValueEmpty())
@@ -201,12 +245,18 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         });
     }
 
+    /// <summary>
+    /// Проверка на кулдаун атаки
+    /// </summary>
     public virtual void CheckAttackCooldown()
     {
         if (AttackCooldown > 0)
             AttackCooldown -= Time.deltaTime;
     }
 
+    /// <summary>
+    /// Обработчик преследования
+    /// </summary>
     protected virtual void ChaseHandler()
     {
         TryChase();
@@ -220,6 +270,9 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         }
     }
 
+    /// <summary>
+    /// Попытка преследования
+    /// </summary>
     protected virtual void TryChase()
     {
         if (!Player.Instance)
@@ -243,13 +296,24 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
             _state = eState.Default;
     }
 
+    /// <summary>
+    /// Движение к цели
+    /// </summary>
+    /// <param name="targetPosition">Цель</param>
+    /// <param name="extraSpeed">Прибавка к скорости</param>
     protected void MoveTo(Vector2 targetPosition, float extraSpeed = 0)
     {
         float totalSpeed = (Speed.Value + extraSpeed) * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, totalSpeed);
         _animation.PlayRUNNING(_movementDirection);
     }
-    
+
+    /// <summary>
+    /// Движение к цели
+    /// </summary>
+    /// <param name="targetPosition">Цель</param>
+    /// <param name="finishFunction">Функция по окончании движения</param>
+    /// <param name="extraSpeed">Прибавка к скорости</param>
     protected void MoveTo(Vector2 targetPosition, System.Action finishFunction, float extraSpeed = 0)
     {
         float totalSpeed = (Speed.Value + extraSpeed) * Time.deltaTime;
@@ -257,6 +321,10 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         _animation.PlayRUNNING(_movementDirection, finishFunction);
     }
 
+    /// <summary>
+    /// Устанавливает направление
+    /// </summary>
+    /// <param name="direction">Направление</param>
     protected void SetDirection(Vector2 direction)
     {
         _movementDirection = Direction2D.GetDirectionTo(transform.position, direction);
@@ -264,6 +332,9 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         CheckDirection();
     }
 
+    /// <summary>
+    /// Проверяет направление
+    /// </summary>
     protected void CheckDirection()
     {
         _directionManager.ChangeDirection(_movementDirection);

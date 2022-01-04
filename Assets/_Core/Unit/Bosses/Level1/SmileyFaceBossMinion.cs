@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Компонент отвечающий а логику миниона 1 босса 1 уровня
+/// </summary>
 [RequireComponent(typeof(SkinChanger))]
 public class SmileyFaceBossMinion : Monster
 {
     private SmileyFaceBoss _boss;
     private SkinChanger _skinner;
 
+    /// <summary>
+    /// Спавн миниона
+    /// </summary>
+    /// <param name="spawnPoint">Точка спавна</param>
     public void Spawn(Vector2 spawnPoint)
     {
         Instantiate(this, spawnPoint, Quaternion.identity);
@@ -44,6 +51,9 @@ public class SmileyFaceBossMinion : Monster
         }
     }
 
+    /// <summary>
+    /// Попытка преследования игрока
+    /// </summary>
     protected override void TryChase()
     {
         if (_chaseTarget == null)

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Компонент отвечающий за логику локацию с 1 боссом 1 уровня
+/// </summary>
 public class SmileyFaceBossStage : MonoBehaviour
 {
     [SerializeField] private Vector2 _playerPosition;

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Компонент отвечающий за логику игрока
+/// </summary>
 [RequireComponent(typeof(AnimationCaller), typeof(Rigidbody2D), typeof(DirectionStatementManager))]
 public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
 {
@@ -35,6 +38,10 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
     #endregion
 
     private eState _state = eState.Default;
+
+    /// <summary>
+    /// Состояние игрока
+    /// </summary>
     private enum eState
     {
         Default,
@@ -100,6 +107,9 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         }
     }
 
+    /// <summary>
+    /// Смерт игрока
+    /// </summary>
     public void Die()
     {
         _state = eState.Die;
@@ -107,7 +117,10 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         GetComponent<Collider2D>().isTrigger = true;
         _animation.PlayDIE();
     }
-    
+
+    /// <summary>
+    /// Получение урона
+    /// </summary>
     public void GetDamage(float damageAmount)
     {
         HP -= damageAmount;
@@ -115,11 +128,17 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
             Die();
     }
 
+    /// <summary>
+    /// Восстановление здоровья
+    /// </summary>
     public void Heal(float healAmount)
     {
         HP += healAmount;
     }
 
+    /// <summary>
+    /// Проверка на атаку
+    /// </summary>
     public void AttackInput()
     {
         if (Input.GetMouseButtonUp(0) && AttackCooldown.IsValueEmpty())
@@ -132,6 +151,9 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         }
     }
 
+    /// <summary>
+    /// Обработка атаки
+    /// </summary>
     public void AttackHandler(float attackRange)
     {
         var mouseDirection = (GetMousePosition() - transform.position).normalized;
@@ -155,18 +177,27 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         });
     }
 
+    /// <summary>
+    /// Проверка кулдауна атаки
+    /// </summary>
     public void CheckAttackCooldown()
     {
         if (!AttackCooldown.IsValueEmpty())
             AttackCooldown -= Time.deltaTime;
     }
 
+    /// <summary>
+    /// Проверка кулдауна рывка (кувырка)
+    /// </summary>
     private void CheckDodgeCooldown()
     {
         if (!DodgeCooldown.IsValueEmpty())
             DodgeCooldown -= Time.deltaTime;
     }
 
+    /// <summary>
+    /// Проверка на рывок (кувырок)
+    /// </summary>
     private void DodgeInput()
     {
         if (Input.GetKey(KeyCode.Space) && DodgeCooldown.IsValueEmpty())
@@ -181,6 +212,9 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         }
     }
 
+    /// <summary>
+    /// Обработка рывка (кувырка)
+    /// </summary>
     private void DodgeHandler()
     {
         Move(_lastMovementDirection * _dodgeImpulse);
@@ -189,14 +223,26 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         _animation.PlayDODGE(() => { _state = eState.Default; });
     }
 
+    /// <summary>
+    /// Обработка бега
+    /// </summary>
     private void RunHandler()
     {
         Move(_movementDirection * Speed);
         _animation.PlayRUNNING(_movementDirection);
     }
-    
+
+    /// <summary>
+    /// Движение по направлению
+    /// </summary>
+    /// <param name="direction">Направление</param>
     private void Move(Vector2 direction) => _rigBody.velocity = direction;
 
+    /// <summary>
+    /// Устанавливает направление
+    /// </summary>
+    /// <param name="direction">Направление</param>
+    /// <param name="needAnimation">Нужна ли анимация</param>
     private void SetDirection(Vector2 direction, bool needAnimation = true)
     {
         _movementDirection = direction;
@@ -206,6 +252,10 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         CheckDirection(needAnimation);
     }
 
+    /// <summary>
+    /// Проверяет направление
+    /// </summary>
+    /// <param name="needAnimation">Нужна ли анимация</param>
     private void CheckDirection(bool needAnimation)
     {
         _directionManager.ChangeDirection(_movementDirection);
@@ -213,6 +263,9 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
             _animation.PlayIDLE(_movementDirection);
     }
 
+    /// <summary>
+    /// Проверка движения
+    /// </summary>
     private Vector2 GetInputDirection()
     {
         float xInput = Input.GetAxisRaw("Horizontal");
@@ -221,6 +274,9 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         return new Vector2(xInput, yInput).normalized;
     }
 
+    /// <summary>
+    /// Получает позицию курсора
+    /// </summary>
     private Vector3 GetMousePosition()
     {
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Типы комнат для подземелья
+/// </summary>
 public enum eDungeonRoomType
 {
     DefaultRoom,
@@ -10,6 +13,9 @@ public enum eDungeonRoomType
     FinishRoom,
 }
 
+/// <summary>
+/// Класс хранящий в себе настройки генерации комнаты подземелья
+/// </summary>
 [System.Serializable]
 public class DungeonRoomGeneration
 {
@@ -18,6 +24,10 @@ public class DungeonRoomGeneration
     public bool isRandomEachIteration = true;
     public List<DungeonSpawner> spawnerList = new List<DungeonSpawner>();
 
+    /// <summary>
+    /// Расставляет спавнеры на позиции и спавнит монстров
+    /// </summary>
+    /// <param name="spawnPositions">Список точек для спавна</param>
     public void InitDungeonSpawners(HashSet<Vector2Int> spawnPositions)
     {
         if (spawnerList.Count == 0)
@@ -35,6 +45,10 @@ public class DungeonRoomGeneration
         }
     }
 
+    /// <summary>
+    /// Получает рандомную свободную точку из списка 
+    /// </summary>
+    /// <param name="spawnPositions">Список точек для спавна</param>
     public Vector2Int GetRandomEmptyPosition(HashSet<Vector2Int> spawnPositions)
     {
         var randIndex = Random.Range(0, spawnPositions.Count);
@@ -50,6 +64,9 @@ public class DungeonRoomGeneration
     }
 }
 
+/// <summary>
+/// Класс хранящий в себе настройки спавнеров
+/// </summary>
 [System.Serializable]
 public class DungeonSpawner
 {
@@ -57,12 +74,19 @@ public class DungeonSpawner
     public Vector2Int SpawnerPosition { get; set; }
 }
 
+/// <summary>
+/// Класс хранящий в себе информацию о монстрах в спавнере
+/// </summary>
 [System.Serializable]
 public class SpawnMonsterInfo
 {
     public Monster target;
     public int count = 1;
 
+    /// <summary>
+    /// Спавнит монстра на определенной точке
+    /// </summary>
+    /// <param name="spawnerPosition">Точка для спавна</param>
     public void Spawn(Vector2Int spawnerPosition)
     {
         for (int i = 0; i < count; i++)
@@ -70,6 +94,9 @@ public class SpawnMonsterInfo
     }
 }
 
+/// <summary>
+/// Класс хранящий в себе настройки комнаты подземелья
+/// </summary>
 public class DungeonRoom
 {
     public DungeonRoomGeneration Parameters { get; private set; }
@@ -108,6 +135,7 @@ public class DungeonRoom
     public Vector2Int _max;
     public Vector2Int _min;
 
+    // Углы
     public Vector2Int _tL => new Vector2Int(_min.x, _max.y);
     public Vector2Int _tR => _max;
     public Vector2Int _bL => _min;
@@ -121,17 +149,31 @@ public class DungeonRoom
         RoomType = eDungeonRoomType.DefaultRoom;
     }
 
+    /// <summary>
+    /// Устанавливает точку для спавна
+    /// </summary>
+    /// <param name="x">Координата X</param>
+    /// <param name="y">Координата Y</param>
     public void SetPosition(int x, int y)
     {
         SpawnPosition = new Vector2Int(x, y);
         IsPositionInited = true;
     }
+    /// <summary>
+    /// Устанавливает точку для спавна
+    /// </summary>
+    /// <param name="position">Точка для спавна</param>
     public void SetPosition(Vector2Int position)
     {
         SpawnPosition = position;
         IsPositionInited = true;
     }
 
+    /// <summary>
+    /// Перекрывает ли комната другую комнату
+    /// </summary>
+    /// <param name="room">Комната которую надо проверить</param>
+    /// <param name="offset">Отступ</param>
     public bool RoomOverlaped(DungeonRoom room, int offset)
     {
         foreach (var pos in _floorPositionList)
@@ -173,6 +215,9 @@ public class DungeonRoom
     }
 }
 
+/// <summary>
+/// Компонент отвечающий за процедурную генерацию подземелья
+/// </summary>
 public class DungeonGenerator : MonoBehaviour
 {
     [SerializeField] private DungeonTilemapVisualizer _visualizer;
@@ -216,6 +261,9 @@ public class DungeonGenerator : MonoBehaviour
         _wallPositions = null;
     }
 
+    /// <summary>
+    /// Визуализирует подземелье
+    /// </summary>
     private void VisualizeDungeonTiles()
     {
         var pos = _preparedRooms.Find(s => s.RoomType == eDungeonRoomType.FinishRoom).SpawnPosition;
@@ -229,6 +277,9 @@ public class DungeonGenerator : MonoBehaviour
         _visualizer.VisualizeLeaderTiles(leaderPositions);
     }
 
+    /// <summary>
+    /// Инициализирует спавнеры
+    /// </summary>
     private void InitializeDungeonSpawners()
     {
         foreach (var room in _preparedRooms)
@@ -240,6 +291,9 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Генерирует стены подземелья
+    /// </summary>
     private void GenerateDungeonWalls()
     {
         _wallPositions = new HashSet<Vector2Int>();
@@ -253,6 +307,9 @@ public class DungeonGenerator : MonoBehaviour
             }
     }
 
+    /// <summary>
+    /// Генерирует пол подземелья
+    /// </summary>
     private void GenerateDungeonFloor()
     {
         _floorPositions = new HashSet<Vector2Int>();
@@ -266,6 +323,11 @@ public class DungeonGenerator : MonoBehaviour
         _floorPositions.UnionWith(corridorList);
     }
 
+    /// <summary>
+    /// Создает коридор между центрами двух комнат
+    /// </summary>
+    /// <param name="currnetCenter">Текущий центр комнаты</param>
+    /// <param name="destinationCenter">Центр нужной комнаты</param>
     private HashSet<Vector2Int> CreateCorridor(Vector2Int currnetCenter, Vector2Int destinationCenter)
     {
         var corridorPositions = new HashSet<Vector2Int>();
@@ -296,6 +358,11 @@ public class DungeonGenerator : MonoBehaviour
         return corridorPositions;
     }
 
+    /// <summary>
+    /// Ищет ближайший центр до текущего центра
+    /// </summary>
+    /// <param name="currnetRoomCenter">Текущий центр комнаты</param>
+    /// <param name="roomCenters">Список всех центров комнат</param>
     private Vector2Int FindClosestCenter(Vector2Int currnetRoomCenter, List<Vector2Int> roomCenters)
     {
         var closestPoint = Vector2Int.zero;
@@ -314,6 +381,9 @@ public class DungeonGenerator : MonoBehaviour
         return closestPoint;
     }
 
+    /// <summary>
+    /// Получает список точек для пола коридоров
+    /// </summary>
     private HashSet<Vector2Int> GetCorridorsFloorPositions()
     {
         var totalPositions = new HashSet<Vector2Int>();
@@ -338,6 +408,11 @@ public class DungeonGenerator : MonoBehaviour
         return totalPositions;
     }
 
+    /// <summary>
+    /// Получает список точек для пола комнаты
+    /// </summary>
+    /// <param name="room">Комната для спавна</param>
+    /// <param name="spawnPosition">Точка спавна комнаты</param>
     private HashSet<Vector2Int> GetRoomsFloorPositions(DungeonRoom room, Vector2Int spawnPosition)
     {
         var roomFloorPositions = new HashSet<Vector2Int>();
@@ -364,6 +439,12 @@ public class DungeonGenerator : MonoBehaviour
         return roomFloorPositions;
     }
 
+    /// <summary>
+    /// Спавнит комнату
+    /// </summary>
+    /// <param name="room">Комната для спавна</param>
+    /// <param name="maxX">Максимальная ширина комнаты</param>
+    /// <param name="maxY">Максимальная высота комнаты</param>
     private DungeonRoom TrySpawnRoom(DungeonRoom room, int maxX, int maxY)
     {
         var x = Random.Range(0, maxX);
@@ -375,10 +456,14 @@ public class DungeonGenerator : MonoBehaviour
         return room;
     }
 
+    /// <summary>
+    /// Генерирует подземелье
+    /// </summary>
     private List<DungeonRoom> BuildDungeonRooms()
     {
         var offset = new Vector2Int(_roomOffset, _roomOffset);
 
+        // Подготавливаем комнаты для генерации
         var preparedRooms = new List<DungeonRoom>();
         for (int i = 0; i < _roomsCount; i++)
         {
@@ -393,6 +478,7 @@ public class DungeonGenerator : MonoBehaviour
             preparedRooms.Add(preparedRoom);
         }
 
+        // Спавним комнаты
         var initedRooms = new List<DungeonRoom>();
         foreach (var prepRoom in preparedRooms)
         {

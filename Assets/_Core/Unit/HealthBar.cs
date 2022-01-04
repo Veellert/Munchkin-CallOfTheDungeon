@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Компонент отвечающий за логику полосы здоровья
+/// </summary>
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Transform _target;
@@ -11,7 +14,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Color _indicatorColor;
 
     private IDamageable _attrib;
-    private float _hpPercent => _attrib.HP.Value / _attrib.HP.MaxValue;
+    private float HpPercent => _attrib.HP.Value / _attrib.HP.MaxValue;
 
     private void Awake()
     {
@@ -25,12 +28,15 @@ public class HealthBar : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Обновляет индикатор
+    /// </summary>
     private void UpdateIndicator(object sender, EventArgs e)
     {
         if (_indicator == null || _target == null)
             return;
 
-        _indicator.localScale = new Vector2(_hpPercent, _indicator.localScale.y);
+        _indicator.localScale = new Vector2(HpPercent, _indicator.localScale.y);
         if (_attrib.IsDead)
         {
             Invoke("Destroy", 10);
@@ -38,6 +44,9 @@ public class HealthBar : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Разрушение объекта
+    /// </summary>
     private void Destroy()
     {
         Destroy(_target.gameObject);

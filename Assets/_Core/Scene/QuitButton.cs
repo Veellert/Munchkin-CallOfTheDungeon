@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Компонент для кнопки выхода
+/// </summary>
 [RequireComponent(typeof(Button))]
 public class QuitButton : MonoBehaviour
 {

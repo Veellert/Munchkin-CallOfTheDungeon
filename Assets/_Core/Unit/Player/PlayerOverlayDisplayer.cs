@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Компонент отображающий оверлей игрока
+/// </summary>
 public class PlayerOverlayDisplayer : MonoBehaviour
 {
     [SerializeField] private Text _monsterCounterText;
@@ -36,17 +39,26 @@ public class PlayerOverlayDisplayer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Событие при изминении здоровья игрока
+    /// </summary>
     private void HP_OnValueChanged(object sender, System.EventArgs e)
     {
         if (Player.Instance.IsDead)
             _lobbyButton.interactable = true;
     }
 
+    /// <summary>
+    /// Событие при изминении кол-ва монстров на карте
+    /// </summary>
     private void Count_OnValueChanged(object sender, System.EventArgs e)
     {
         DisplayMonsterCounterText();
     }
 
+    /// <summary>
+    /// Отображает текст с кол-вом монстров на карте
+    /// </summary>
     private void DisplayMonsterCounterText()
     {
         _monsterCounterText.text = "Осталось монстров на карте: " + Monster.MonstersCount.Value;
