@@ -233,6 +233,9 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         var attackDirection = (_chaseTarget.position - transform.position).normalized;
         var attackPosition = transform.position + attackDirection * new TileHalf(BtwTargetDistance);
 
+        if (Vector2.Distance(Player.Instance.transform.position, transform.position) < new TileHalf(BtwTargetDistance))
+            attackPosition = Player.Instance.transform.position;
+
         _ap = attackPosition;
         _ar = attackRange;
 

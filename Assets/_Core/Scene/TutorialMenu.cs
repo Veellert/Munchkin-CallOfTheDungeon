@@ -16,6 +16,14 @@ public class TutorialMenu : MenuTemplate
             _activeOnLoad = false;
 
         base.Start();
-        _isFirstOpen = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isFirstOpen)
+            return;
+
+        if (gameObject.activeSelf)
+            _isFirstOpen = true;
     }
 }

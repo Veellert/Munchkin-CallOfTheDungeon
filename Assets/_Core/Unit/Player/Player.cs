@@ -141,7 +141,7 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
     /// </summary>
     public void AttackInput()
     {
-        if (Input.GetMouseButtonUp(0) && AttackCooldown.IsValueEmpty())
+        if (Input.GetMouseButton(0) && AttackCooldown.IsValueEmpty())
         {
             if (_state != eState.Attack)
                 _state = eState.Attack;
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
     /// </summary>
     public void AttackHandler(float attackRange)
     {
-        var mouseDirection = (GetMousePosition() - transform.position).normalized;
+        var mouseDirection = (Direction2D.GetMousePosition() - transform.position).normalized;
         var attackPosition = transform.position + mouseDirection * new TileHalf();
         SetDirection(mouseDirection);
 
@@ -274,16 +274,6 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         return new Vector2(xInput, yInput).normalized;
     }
 
-    /// <summary>
-    /// Получает позицию курсора
-    /// </summary>
-    private Vector3 GetMousePosition()
-    {
-        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
-        return mousePosition;
-    }
-
     #region Gizmos
 
     Vector2 _pos = Vector2.zero;
@@ -291,7 +281,8 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(_pos, _rad);
+        //Gizmos.DrawWireSphere(_pos, _rad);
+        Gizmos.DrawWireSphere(_pos, new TileHalf(0.7f));
     }
 
     #endregion

@@ -12,6 +12,8 @@ public class MainMenu : MonoBehaviour
     {
         if (Player.Instance)
             Destroy(Player.Instance.gameObject);
+        if (PlayerCrosshair.Instance)
+            PlayerCrosshair.Disable();
     }
 
     /// <summary>

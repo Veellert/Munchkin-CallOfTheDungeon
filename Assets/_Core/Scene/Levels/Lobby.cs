@@ -9,17 +9,34 @@ public class Lobby : MonoBehaviour
 {
     [SerializeField] private Vector2 _playerPosition;
     [SerializeField] private Player _player;
+    [Space]
+    [SerializeField] private PlayerCrosshair _crosshair;
+    [SerializeField] private TutorialMenu _tutorMenu;
 
-    private void Start()
+    private bool _isTutorClosed;
+
+    private void FixedUpdate()
     {
-        if (Player.Instance && Player.Instance.IsDead)
+        if (_isTutorClosed)
+            return;
+
+        if (!_tutorMenu.gameObject.activeSelf)
         {
-            Destroy(Player.Instance.gameObject);
-            Player.Instance = null;
+            if (Player.Instance && Player.Instance.IsDead)
+            {
+                Destroy(Player.Instance.gameObject);
+                Player.Instance = null;
+            }
+
+            if (!Player.Instance)
+                Instantiate(_player, _playerPosition, Quaternion.identity);
+            else
+                Player.Instance.transform.position = _playerPosition;
+
+            if (!PlayerCrosshair.Instance)
+                PlayerCrosshair.Activate(_crosshair);
+
+            _isTutorClosed = true;
         }
-        if (!Player.Instance)
-            Instantiate(_player, _playerPosition, Quaternion.identity);
-        else
-            Player.Instance.transform.position = _playerPosition;
     }
 }

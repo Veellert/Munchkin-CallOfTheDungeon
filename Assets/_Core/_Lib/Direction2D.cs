@@ -33,6 +33,16 @@ public static class Direction2D
     };
 
     /// <summary>
+    /// Получает позицию курсора
+    /// </summary>
+    public static Vector3 GetMousePosition()
+    {
+        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+        return mousePosition;
+    }
+
+    /// <summary>
     /// Существует ли пустое пространство вокруг точки
     /// </summary>
     /// <param name="allPos">Коллекция со всеми доступными точками для проверки</param>
