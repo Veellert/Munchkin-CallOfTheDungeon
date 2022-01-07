@@ -11,4 +11,9 @@ public class SettingsMenu : MenuTemplate
     /// Сохранение настроек по кнопке
     /// </summary>
     public void SettingsMenuApplyButtonClick() => Debug.Log("Настройки сохранены");
+
+    /// <summary>
+    /// Смена разрешения по кнопке
+    /// </summary>
+    public void SettingsMenuChangeFullScreenButtonClick() => Screen.fullScreen = !Screen.fullScreen;
 }

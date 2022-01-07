@@ -138,6 +138,12 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     protected Vector2 _movementDirection;
     protected Transform _chaseTarget;
 
+    private void Awake()
+    {
+        monsterList = new List<Monster>();
+        MonstersCount = monsterList.Count;
+    }
+
     protected virtual void Start()
     {
         _directionManager = GetComponent<DirectionStatementManager>();
