@@ -60,4 +60,7 @@ public interface IUnit
 {
     string UnitName { get; set; }
     UnitAttrib Speed { get; set; }
+
+    float HitboxDistance { get; set; }
+    Vector2 HitboxOffset { get; set; }
 }

@@ -17,6 +17,8 @@ public enum ePhaseSmileyFace
 [RequireComponent(typeof(SkinChanger))]
 public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
 {
+    public static UnitAttrib minionCount = new UnitAttrib(0, 5);
+
     [SerializeField] private SmileyFaceBossMinion _minion;
 
     #region Attrib
@@ -121,7 +123,7 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
     /// </summary>
     private void SpecialAttackHandler()
     {
-        if (!IsInvoking("SpawnMinion"))
+        if (!IsInvoking("SpawnMinion") && minionCount.Value < minionCount.MaxValue)
             Invoke("SpawnMinion", SpawnMinionDelay);
     }
 
@@ -130,10 +132,14 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
     /// </summary>
     private void SpawnMinion()
     {
+        if (IsDead)
+            return;
+
         var spawnDirection = (_chaseTarget.position - transform.position).normalized;
         var spawnPoint = transform.position + spawnDirection * new TileHalf(BtwTargetDistance);
 
-        _minion.Spawn(spawnPoint);
+        minionCount++;
+        SmileyFaceBossMinion.Spawn(spawnPoint, _minion, this);
     }
 
     /// <summary>
@@ -151,7 +157,7 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
         HP.FillToMax();
         Speed++;
         Damage += 5;
-        SpawnMinionDelay = 6;
+        SpawnMinionDelay -= 2;
         _canSpecialAttack = true;
     }
 }

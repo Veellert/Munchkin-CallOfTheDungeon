@@ -20,6 +20,10 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
     public string UnitName { get => _unitName; set => _unitName = value; }
     [SerializeField] private UnitAttrib _speed = new UnitAttrib(5, 10);
     public UnitAttrib Speed { get => _speed; set => _speed = value; }
+    [SerializeField] private float _hitboxDistance = 0.5f;
+    public float HitboxDistance { get => _hitboxDistance; set => _hitboxDistance = value; }
+    [SerializeField] private Vector2 _hitboxOffset = Vector2.zero;
+    public Vector2 HitboxOffset { get => _hitboxOffset; set => _hitboxOffset = value; }
 
     [SerializeField] private UnitAttrib _dodgeForce = new UnitAttrib(6, 10);
     public UnitAttrib DodgeForce { get => _dodgeForce; set => _dodgeForce = value; }
@@ -283,6 +287,8 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
     {
         //Gizmos.DrawWireSphere(_pos, _rad);
         Gizmos.DrawWireSphere(_pos, new TileHalf(0.7f));
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + (Vector3)HitboxOffset, new TileHalf(HitboxDistance));
     }
 
     #endregion

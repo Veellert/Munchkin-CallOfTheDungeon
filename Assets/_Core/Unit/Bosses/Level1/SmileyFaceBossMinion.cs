@@ -8,26 +8,20 @@ using UnityEngine;
 [RequireComponent(typeof(SkinChanger))]
 public class SmileyFaceBossMinion : Monster
 {
-    private SmileyFaceBoss _boss;
-    private SkinChanger _skinner;
-
     /// <summary>
     /// Спавн миниона
     /// </summary>
     /// <param name="spawnPoint">Точка спавна</param>
-    public void Spawn(Vector2 spawnPoint)
+    public static void Spawn(Vector2 spawnPoint, SmileyFaceBossMinion minion, SmileyFaceBoss boss)
     {
-        Instantiate(this, spawnPoint, Quaternion.identity);
+        var monster = Instantiate(minion, spawnPoint, Quaternion.identity);
+        monster._boss = boss;
+        monster._skinner = monster.GetComponent<SkinChanger>();
+        monster._skinner.ChangeFullSkin(monster._boss.CurrentBossPhase);
     }
 
-    protected override void Start()
-    {
-        base.Start();
-
-        _skinner = GetComponent<SkinChanger>();
-        _boss = (SmileyFaceBoss)GetBoss(typeof(SmileyFaceBoss));
-        _skinner.ChangeFullSkin(_boss.CurrentBossPhase);
-    }
+    private SmileyFaceBoss _boss;
+    private SkinChanger _skinner;
 
     protected override void FixedUpdate()
     {
@@ -49,6 +43,16 @@ public class SmileyFaceBossMinion : Monster
                 AttackHandler(new TileHalf());
                 break;
         }
+    }
+
+    /// <summary>
+    /// Смерть миниона
+    /// </summary>
+    public override void Die()
+    {
+        base.Die();
+
+        SmileyFaceBoss.minionCount--;
     }
 
     /// <summary>

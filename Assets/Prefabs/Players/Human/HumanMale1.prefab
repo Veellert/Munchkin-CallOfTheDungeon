@@ -444,6 +444,8 @@ MonoBehaviour:
   _speed:
     _value: 5
     _maxValue: 10
+  _hitboxDistance: 0.6
+  _hitboxOffset: {x: 0.01, y: 0.15}
   _dodgeForce:
     _value: 6
     _maxValue: 10

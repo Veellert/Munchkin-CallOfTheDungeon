@@ -12,7 +12,7 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 {
     #region Static
 
-    private static List<Monster> monsterList;
+    private static List<Monster> monsterList = new List<Monster>();
 
     /// <summary>
     /// Удаляет монстра из списка
@@ -66,13 +66,13 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         Monster closestMonster = null;
 
         if (monsterList != null)
-            foreach (var monster in monsterList.FindAll(s => Vector2.Distance(position, s.transform.position) < range))
+            foreach (var monster in monsterList.FindAll(s => Vector2.Distance(position, s.transform.position + (Vector3)s.HitboxOffset) < range + new TileHalf(s.HitboxDistance)))
             {
                 if (closestMonster == null)
                     closestMonster = monster;
                 else
                 {
-                    if (Vector2.Distance(position, monster.transform.position) < Vector2.Distance(position, closestMonster.transform.position))
+                    if (Vector2.Distance(position, monster.transform.position + (Vector3)monster.HitboxOffset) < Vector2.Distance(position, closestMonster.transform.position + (Vector3)closestMonster.HitboxOffset))
                         closestMonster = monster;
                 }
             }
@@ -102,6 +102,10 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     public string UnitName { get => _unitName; set => _unitName = value; }
     [SerializeField] private UnitAttrib _speed = new UnitAttrib(1, 10);
     public UnitAttrib Speed { get => _speed; set => _speed = value; }
+    [SerializeField] private float _hitboxDistance = 0.5f;
+    public float HitboxDistance { get => _hitboxDistance; set => _hitboxDistance = value; }
+    [SerializeField] private Vector2 _hitboxOffset = Vector2.zero;
+    public Vector2 HitboxOffset { get => _hitboxOffset; set => _hitboxOffset = value; }
 
     [SerializeField] private int _level = 1;
     public int Level { get => _level; set => _level = value; }
@@ -140,8 +144,8 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
     private void Awake()
     {
-        monsterList = new List<Monster>();
-        MonstersCount = monsterList.Count;
+        if(MonstersCount == null)
+            MonstersCount = monsterList.Count;
     }
 
     protected virtual void Start()
@@ -194,6 +198,16 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         _animation.PlayDIE();
         GetComponent<Collider2D>().isTrigger = true;
         RemoveMonsterFromStack(this);
+        Invoke("Destroy", 10);
+    }
+
+
+    /// <summary>
+    /// Разрушение объекта
+    /// </summary>
+    private void Destroy()
+    {
+        Destroy(gameObject);
     }
 
     /// <summary>
@@ -247,7 +261,7 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
         _animation.PlayATTACK(() =>
         {
-            if (Vector2.Distance(attackPosition, _chaseTarget.position) < attackRange)
+            if (Vector2.Distance(attackPosition, _chaseTarget.position + (Vector3)Player.Instance.HitboxOffset) < attackRange + new TileHalf(Player.Instance.HitboxDistance))
                 _chaseTarget.GetComponent<IDamageable>().GetDamage(Damage);
 
             TryChase();
@@ -356,10 +370,11 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     float _ar;
     protected virtual void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(_ap, _ar);
+        //Gizmos.DrawWireSphere(_ap, _ar);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, new TileHalf(ChaseRadius));
+        Gizmos.DrawWireSphere(transform.position + (Vector3)HitboxOffset, new TileHalf(HitboxDistance));
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, new TileHalf(BtwTargetDistance));
     }

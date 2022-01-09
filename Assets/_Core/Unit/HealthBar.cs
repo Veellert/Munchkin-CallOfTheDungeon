@@ -38,17 +38,8 @@ public class HealthBar : MonoBehaviour
 
         _indicator.localScale = new Vector2(HpPercent, _indicator.localScale.y);
         if (_attrib.IsDead)
-        {
-            Invoke("Destroy", 10);
             gameObject.SetActive(false);
-        }
-    }
-
-    /// <summary>
-    /// Разрушение объекта
-    /// </summary>
-    private void Destroy()
-    {
-        Destroy(_target.gameObject);
+        else
+            gameObject.SetActive(true);
     }
 }

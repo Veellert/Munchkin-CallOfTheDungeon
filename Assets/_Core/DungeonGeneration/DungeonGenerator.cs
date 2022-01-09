@@ -272,6 +272,9 @@ public class DungeonGenerator : MonoBehaviour
         _wallPositions.UnionWith(leaderPositions);
         leaderPositions.Add(pos);
 
+        // CHEAT
+        CheatHandler.SetFinishPosition(pos);
+
         _visualizer.VisualizeFloorTiles(_floorPositions);
         _visualizer.VisualizeWallTiles(_wallPositions);
         _visualizer.VisualizeLeaderTiles(leaderPositions);

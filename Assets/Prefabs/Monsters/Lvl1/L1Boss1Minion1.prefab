@@ -156,6 +156,8 @@ MonoBehaviour:
   _speed:
     _value: 1
     _maxValue: 10
+  _hitboxDistance: 0.4
+  _hitboxOffset: {x: -0.007, y: -0.07}
   _level: 1
   _chaseRadius:
     _value: 0
