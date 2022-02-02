@@ -169,24 +169,22 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         if (_chaseTarget == null)
             return;
 
-        if (Vector2.Distance(transform.position, _chaseTarget.position) > new TileHalf(20))
-        {
-            if(_state != eState.Disabled)
+        if(!IsDead)
+        { 
+            if (Vector2.Distance(transform.position, _chaseTarget.position) > new TileHalf(20))
             {
-                _state = eState.Disabled;
-                _animation.Disabled();
+                if(_state != eState.Disabled)
+                {
+                    _state = eState.Disabled;
+                    _animation.Disabled();
+                }
+            }
+            else
+            {
+                if(_state == eState.Disabled)
+                    _state = eState.Default;
             }
         }
-        else
-        {
-            if(_state == eState.Disabled)
-                _state = eState.Default;
-        }
-    }
-
-    private void OnDestroy()
-    {
-        RemoveMonsterFromStack(this);
     }
 
     /// <summary>
