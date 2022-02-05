@@ -272,6 +272,7 @@ public class DungeonGenerator : MonoBehaviour
         _wallPositions.UnionWith(leaderPositions);
         leaderPositions.Add(pos);
 
+        MinimapController.Instance.SetIndicator(pos, eMinimapIndicator.Finish);
         // CHEAT
         CheatHandler.SetFinishPosition(pos);
 
