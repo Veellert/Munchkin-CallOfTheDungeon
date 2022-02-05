@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2062366664}
   - component: {fileID: 2062366663}
   - component: {fileID: 1676427814682555929}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 5784136437741320017}
   - component: {fileID: 5784136437741320019}
   - component: {fileID: 5784136437741320018}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5784136437755766671}
   - component: {fileID: 5784136437755766670}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BasicDungeonTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 5784136438087331913}
   - component: {fileID: 5784136438087331912}
   - component: {fileID: 5784136438087331914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

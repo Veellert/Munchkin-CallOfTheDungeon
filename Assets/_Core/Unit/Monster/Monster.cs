@@ -187,6 +187,12 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         }
     }
 
+    protected void OnDestroy()
+    {
+        if(!IsDead)
+            RemoveMonsterFromStack(this);
+    }
+
     /// <summary>
     /// Смерть монстра
     /// </summary>
