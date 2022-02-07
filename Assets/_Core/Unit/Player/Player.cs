@@ -16,6 +16,8 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
 
     #region Attrib
 
+    public UnitAttrib DropCrystals = new UnitAttrib(0, false);
+
     [SerializeField] private string _unitName = "Безымянный игрок";
     public string UnitName { get => _unitName; set => _unitName = value; }
     [SerializeField] private UnitAttrib _speed = new UnitAttrib(5, 10);
@@ -41,13 +43,16 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
 
     #endregion
 
+    private bool _isDisabled;
     private eState _state = eState.Default;
+    private eState _lastState;
 
     /// <summary>
     /// Состояние игрока
     /// </summary>
     private enum eState
     {
+        Disabled,
         Default,
         Dodge,
         Attack,
@@ -89,6 +94,9 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         CheckAttackCooldown();
         switch (_state)
         {
+            case eState.Disabled:
+                break;
+                
             case eState.Default:
                 SetDirection(GetInputDirection());
                 RunHandler();
@@ -111,8 +119,20 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
         }
     }
 
+    public void SetDisableState(bool isDisable)
+    {
+        _isDisabled = isDisable;
+        if (_state != eState.Disabled)
+            _lastState = _state;
+
+        if (isDisable)
+            _state = eState.Disabled;
+        else
+            _state = _lastState;
+    }
+
     /// <summary>
-    /// Смерт игрока
+    /// Смерть игрока
     /// </summary>
     public void Die()
     {
@@ -176,7 +196,8 @@ public class Player : MonoBehaviour, IUnit, IDamager, IDamageable
             {
                 Monster.GetClosestMonster(attackPosition, attackRange)?.GetDamage(Damage);
 
-                _state = eState.Default;
+                if(!_isDisabled)
+                    _state = eState.Default;
             }
         });
     }

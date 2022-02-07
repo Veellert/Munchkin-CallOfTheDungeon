@@ -126,6 +126,8 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     #endregion
 
     protected eState _state = eState.Default;
+    protected eState _lastState;
+
     /// <summary>
     /// Состояние монстра
     /// </summary>
@@ -170,20 +172,14 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
             return;
 
         if(!IsDead)
-        { 
+        {
             if (Vector2.Distance(transform.position, _chaseTarget.position) > new TileHalf(20))
             {
-                if(_state != eState.Disabled)
-                {
-                    _state = eState.Disabled;
-                    _animation.Disabled();
-                }
+                if (_state != eState.Disabled)
+                    SetDisableState(true);
             }
             else
-            {
-                if(_state == eState.Disabled)
-                    _state = eState.Default;
-            }
+                SetDisableState(false);
         }
     }
 
@@ -191,6 +187,20 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     {
         if(!IsDead)
             RemoveMonsterFromStack(this);
+    }
+
+    public void SetDisableState(bool isDisable)
+    {
+        if (_state != eState.Disabled)
+            _lastState = _state;
+
+        if (isDisable)
+        {
+            _state = eState.Disabled;
+            _animation.Disabled();
+        }
+        else
+            _state = _lastState;
     }
 
     /// <summary>

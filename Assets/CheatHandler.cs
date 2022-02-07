@@ -26,8 +26,6 @@ public class CheatHandler : MonoBehaviour
     [SerializeField] private Button _immortalBut;
     [SerializeField] private Button _cheatOffBut;
 
-    private bool _isCheatMode;
-
     private bool _isImmortal;
     private bool _isExtraForce;
 
@@ -48,20 +46,8 @@ public class CheatHandler : MonoBehaviour
         ResetAllCheats();
     }
 
-    private void Update()
+    public void SetCheatMode(bool isCheatMode)
     {
-        if(Input.GetKeyUp(KeyCode.L))
-        {
-            if(!_isCheatMode)
-                SetCheatMode(true);
-            else
-                SetCheatMode(false);
-        }
-    }
-
-    private void SetCheatMode(bool isCheatMode)
-    {
-        _isCheatMode = isCheatMode;
         _cheatPanel.SetActive(isCheatMode);
     }
 

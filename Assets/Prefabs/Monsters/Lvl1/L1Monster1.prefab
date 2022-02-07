@@ -271,33 +271,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitName: "\u041C\u043E\u043B\u043E\u0442\u0430\u044F \u041A\u0440\u044B\u0441\u043E\u0442\u043A\u0430"
   _speed:
+    _hasMaxValue: 1
     _value: 1
     _maxValue: 10
   _hitboxDistance: 0.53
   _hitboxOffset: {x: 0.03, y: 0.12}
   _level: 1
   _chaseRadius:
+    _hasMaxValue: 1
     _value: 4
     _maxValue: 10
   _btwTargetDistance:
+    _hasMaxValue: 1
     _value: 1.3
     _maxValue: 1.3
   _damage:
+    _hasMaxValue: 1
     _value: 15
     _maxValue: 100
   _attackCooldown:
+    _hasMaxValue: 1
     _value: 1
     _maxValue: 1
   _hp:
+    _hasMaxValue: 1
     _value: 60
     _maxValue: 60
   _idleMovmentRadius:
+    _hasMaxValue: 1
     _value: 2
     _maxValue: 10
   _stayPointTime:
+    _hasMaxValue: 1
     _value: 2
     _maxValue: 5
   _removePointTime:
+    _hasMaxValue: 1
     _value: 5
     _maxValue: 5
 --- !u!1 &7228453001890651990

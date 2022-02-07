@@ -7,38 +7,27 @@ using UnityEngine;
 /// </summary>
 public class PlayerCrosshair : MonoBehaviour
 {
-    public static PlayerCrosshair Instance { get; set; }
-
     /// <summary>
     /// Отключает игровой курсор
     /// </summary>
-    public static void Disable() => Destroy(Instance.gameObject);
+    public void Disable()
+    {
+        Cursor.visible = true;
+        gameObject.SetActive(false);
+    }
 
     /// <summary>
     /// Включает игровой курсор
     /// </summary>
-    public static void Activate(PlayerCrosshair crosshair)
+    public void Activate()
     {
-        Instantiate(crosshair, Vector2.zero, Quaternion.identity);
         Cursor.visible = false;
+        gameObject.SetActive(true);
     }
 
     private void Start()
     {
-        #region PreLoad
-
-        if (Instance != null)
-        {
-            DestroyImmediate(this);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        #endregion
-
-        Cursor.visible = false;
+        Activate();
     }
 
     private void FixedUpdate()
@@ -49,11 +38,11 @@ public class PlayerCrosshair : MonoBehaviour
             return;
         }
 
-        transform.position = Direction2D.GetMousePosition();
+        transform.position = Input.mousePosition;
     }
 
     private void OnDestroy()
     {
-        Cursor.visible = true;
+        Disable();
     }
 }

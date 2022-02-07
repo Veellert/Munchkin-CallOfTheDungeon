@@ -441,25 +441,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b62e859ca8e784b469a5a795a94cc91f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DropCrystals:
+    _hasMaxValue: 0
+    _value: 0
+    _maxValue: 0
   _unitName: "\u041C\u0443\u0436\u0447\u0438\u043D\u043A\u0430 \u0427\u0435\u043B\u043E\u0432\u0435\u0447\u0438\u0448\u043A\u0430"
   _speed:
+    _hasMaxValue: 1
     _value: 5
     _maxValue: 10
   _hitboxDistance: 0.6
   _hitboxOffset: {x: 0.01, y: 0.15}
   _dodgeForce:
+    _hasMaxValue: 1
     _value: 6
     _maxValue: 10
   _dodgeCooldown:
+    _hasMaxValue: 1
     _value: 2
     _maxValue: 2
   _damage:
+    _hasMaxValue: 1
     _value: 8
     _maxValue: 100
   _attackCooldown:
+    _hasMaxValue: 1
     _value: 0.5
     _maxValue: 0.5
   _hp:
+    _hasMaxValue: 1
     _value: 100
     _maxValue: 100
 --- !u!1 &5573365687522573919
@@ -660,6 +670,14 @@ PrefabInstance:
     - target: {fileID: 2125494594613108810, guid: 0e430cd8d224b2348827f0ac8096a102, type: 3}
       propertyPath: m_Name
       value: Player_indicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416776219510294113, guid: 0e430cd8d224b2348827f0ac8096a102, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416776219510294113, guid: 0e430cd8d224b2348827f0ac8096a102, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 362298787
       objectReference: {fileID: 0}
     - target: {fileID: 3360507961903586346, guid: 0e430cd8d224b2348827f0ac8096a102, type: 3}
       propertyPath: m_RootOrder

@@ -8,9 +8,15 @@ using UnityEngine.UI;
 /// </summary>
 public class PlayerOverlayDisplayer : MonoBehaviour
 {
+    [SerializeField] private Image _lightMap;
+
     [SerializeField] private Text _monsterCounterText;
-    [SerializeField] private Button _lobbyButton;
+    [SerializeField] private Text _dropCounterText;
+    [SerializeField] private Text _lightLevelText;
+
     [SerializeField] private GameObject _minimap;
+    [SerializeField] private MenuTemplate _pauseMenu;
+    [SerializeField] private CheatHandler _cheatMenu;
 
     bool _isLoaded = false;
 
@@ -19,15 +25,11 @@ public class PlayerOverlayDisplayer : MonoBehaviour
         MinimapController.Instance.OnActiveChanged += Minimap_OnActiveChanged;
         Monster.MonstersCount.OnValueChanged += Count_OnValueChanged;
 
-        _lobbyButton.interactable = false;
         DisplayMonsterCounterText();
-    }
+        _dropCounterText.text = ": 0";
 
-    private void OnDestroy()
-    {
-        MinimapController.Instance.OnActiveChanged -= Minimap_OnActiveChanged;
-        Player.Instance.HP.OnValueChanged -= HP_OnValueChanged;
-        Monster.MonstersCount.OnValueChanged -= Count_OnValueChanged;
+        _lightMap.color = new Color(255, 255, 255, PlayerPrefs.GetFloat("LightLevel", 0));
+        _lightLevelText.text = "Уровень света: " + PlayerPrefs.GetFloat("LightLevel", 0);
     }
 
     private void FixedUpdate()
@@ -36,9 +38,18 @@ public class PlayerOverlayDisplayer : MonoBehaviour
         {
             if(Player.Instance != null)
             {
-                Player.Instance.HP.OnValueChanged += HP_OnValueChanged;
+                Player.Instance.DropCrystals.OnValueChanged += Drop_OnValueChanged;
                 _isLoaded = true;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetPause();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            _cheatMenu.SetCheatMode(!_cheatMenu.gameObject.activeSelf);
         }
     }
 
@@ -51,20 +62,27 @@ public class PlayerOverlayDisplayer : MonoBehaviour
     }
 
     /// <summary>
-    /// Событие при изменении здоровья игрока
-    /// </summary>
-    private void HP_OnValueChanged(object sender, System.EventArgs e)
-    {
-        if (Player.Instance.IsDead)
-            _lobbyButton.interactable = true;
-    }
-
-    /// <summary>
     /// Событие при изменении кол-ва монстров на карте
     /// </summary>
     private void Count_OnValueChanged(object sender, System.EventArgs e)
     {
         DisplayMonsterCounterText();
+    }
+    
+    /// <summary>
+    /// Событие при изменении кол-ва дропа монстров
+    /// </summary>
+    private void Drop_OnValueChanged(object sender, System.EventArgs e)
+    {
+        DisplayDropCounterText();
+    }
+
+    /// <summary>
+    /// Отображает текст с кол-вом дропа с моснтров
+    /// </summary>
+    private void DisplayDropCounterText()
+    {
+        _dropCounterText.text = ": " + Player.Instance.DropCrystals.Value;
     }
 
     /// <summary>
@@ -72,6 +90,46 @@ public class PlayerOverlayDisplayer : MonoBehaviour
     /// </summary>
     private void DisplayMonsterCounterText()
     {
-        _monsterCounterText.text = "Осталось монстров на карте: " + Monster.MonstersCount.Value;
+        if(_monsterCounterText)
+            _monsterCounterText.text = ": " + Monster.MonstersCount.Value;
+    }
+
+    public void SetPause()
+    {
+        _pauseMenu.InverseActive();
+
+        Player.Instance.SetDisableState(_pauseMenu.gameObject.activeSelf);
+        Monster.GetMonsters().ForEach(s => s.SetDisableState(_pauseMenu.gameObject.activeSelf));
+    }
+
+    public void DecreaseLightLevel()
+    {
+        float level = PlayerPrefs.GetFloat("LightLevel", 0);
+        if (level == 0)
+            return;
+
+        level -= 0.1f;
+        if (level < 0.1f)
+            level = 0;
+
+        PlayerPrefs.SetFloat("LightLevel", level);
+        PlayerPrefs.Save();
+
+        _lightMap.color = new Color(255, 255, 255, level);
+        _lightLevelText.text = "Уровень света: " + level;
+    }
+
+    public void IncreaseLightLevel()
+    {
+        float level = PlayerPrefs.GetFloat("LightLevel", 0);
+
+        if (level >= 0.7f)
+            return;
+        level += 0.1f;
+        PlayerPrefs.SetFloat("LightLevel", level);
+        PlayerPrefs.Save();
+
+        _lightMap.color = new Color(255, 255, 255, level);
+        _lightLevelText.text = "Уровень света: " + level;
     }
 }

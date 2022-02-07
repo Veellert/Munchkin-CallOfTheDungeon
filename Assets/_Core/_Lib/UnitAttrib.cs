@@ -12,6 +12,8 @@ using UnityEngine;
 [Serializable]
 public class UnitAttrib
 {
+    public bool _hasMaxValue = true;
+
     [SerializeField] private float _value;
     public float Value { get => _value; private set => _value = value; }
     [SerializeField] private float _maxValue;
@@ -22,9 +24,13 @@ public class UnitAttrib
 
     [HideInInspector] public event EventHandler OnValueChanged;
 
-    public UnitAttrib(float value)
+    public UnitAttrib(float value, bool hasMaxValue = true)
     {
-        Value = MaxValue = OriginalValue = OriginalMaxValue = value;
+        _hasMaxValue = hasMaxValue;
+
+        Value = OriginalValue = value;
+        if(_hasMaxValue)
+            MaxValue = OriginalMaxValue = value;
     }
 
     public UnitAttrib(float value, float maxValue)
@@ -39,7 +45,10 @@ public class UnitAttrib
     /// <param name="value">Число на которое увеличить</param>
     public void IncreaseValue(float value = 1)
     {
-        Value = Value + value > MaxValue ? MaxValue : Value + value;
+        if(_hasMaxValue)
+            Value = Value + value > MaxValue ? MaxValue : Value + value;
+        else
+            Value += value;
 
         OnValueChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -60,6 +69,9 @@ public class UnitAttrib
     /// </summary>
     public void FillToMax()
     {
+        if (!_hasMaxValue)
+            return;
+
         Value = MaxValue;
 
         OnValueChanged?.Invoke(this, EventArgs.Empty);

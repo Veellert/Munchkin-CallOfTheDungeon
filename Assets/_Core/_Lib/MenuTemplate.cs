@@ -21,5 +21,5 @@ public class MenuTemplate : MonoBehaviour
     /// <summary>
     /// Меняет видимость меню на противоположную
     /// </summary>
-    private void InverseActive() => gameObject.SetActive(!gameObject.activeSelf);
+    public void InverseActive() => gameObject.SetActive(!gameObject.activeSelf);
 }

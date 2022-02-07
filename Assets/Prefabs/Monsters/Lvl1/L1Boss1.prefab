@@ -155,29 +155,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _unitName: "\u0421\u043C\u0430\u0439\u043B\u0438\u043A"
   _speed:
+    _hasMaxValue: 1
     _value: 1
     _maxValue: 10
   _hitboxDistance: 1.2
   _hitboxOffset: {x: -0.03, y: -0.19}
   _level: 1
   _chaseRadius:
+    _hasMaxValue: 1
     _value: 15
     _maxValue: 20
   _btwTargetDistance:
+    _hasMaxValue: 1
     _value: 3
     _maxValue: 1.3
   _damage:
+    _hasMaxValue: 1
     _value: 30
     _maxValue: 100
   _attackCooldown:
+    _hasMaxValue: 1
     _value: 1
     _maxValue: 1
   _hp:
+    _hasMaxValue: 1
     _value: 100
     _maxValue: 100
   _minion: {fileID: 8264438370985969670, guid: 0f09e9f2716a3ab4ba1d2b07a43ab1c9, type: 3}
   _currentBossPhase: 0
   _spawnMinionDelay:
+    _hasMaxValue: 1
     _value: 8
     _maxValue: 8
 --- !u!1001 &1886894373434187648
