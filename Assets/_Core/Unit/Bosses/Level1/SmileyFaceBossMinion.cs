@@ -27,6 +27,9 @@ public class SmileyFaceBossMinion : Monster
     {
         base.FixedUpdate();
 
+        if (!Player.Instance)
+            return;
+
         CheckAttackCooldown();
         switch (_state)
         {
@@ -60,13 +63,9 @@ public class SmileyFaceBossMinion : Monster
     /// </summary>
     protected override void TryChase()
     {
-        if (_chaseTarget == null)
-            _chaseTarget = Player.Instance.transform;
-        var target = _chaseTarget.GetComponent<IDamageable>();
-
-        if (!target.IsDead)
+        if (!Player.Instance.IsDead)
         {
-            SetDirection(_chaseTarget.position);
+            SetDirection(Player.Instance.transform.position);
             if (_state != eState.Chase)
                 _state = eState.Chase;
         }

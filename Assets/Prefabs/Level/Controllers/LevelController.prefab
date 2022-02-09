@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2661010980145485869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2661010980145485868}
+  - component: {fileID: 2661010980145485867}
+  - component: {fileID: 4039995852483983522}
+  m_Layer: 0
+  m_Name: LevelController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2661010980145485868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661010980145485869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.05956602, y: 6.5482335, z: -0.28376675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2661010980145485867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661010980145485869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c584160695ff61429fd26e5d5620fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visualizer: {fileID: 0}
+  _dungeonSize: {x: 80, y: 80}
+  _roomsCount: 10
+  _roomOffset: 4
+  _roomReferenceList:
+  - iterations: 10
+    floorPositionsCount: 10
+    isRandomEachIteration: 0
+    spawnerList:
+    - monsters:
+      - target: {fileID: 4959706279183797304, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
+        count: 1
+  - iterations: 10
+    floorPositionsCount: 20
+    isRandomEachIteration: 1
+    spawnerList:
+    - monsters:
+      - target: {fileID: 4959706279183797304, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
+        count: 3
+  - iterations: 20
+    floorPositionsCount: 30
+    isRandomEachIteration: 1
+    spawnerList:
+    - monsters:
+      - target: {fileID: 4959706279183797304, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
+        count: 3
+    - monsters:
+      - target: {fileID: 4959706279183797304, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
+        count: 2
+--- !u!114 &4039995852483983522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661010980145485869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4fe242cbe4235449f1f6a1911d25ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraInstance: {fileID: 8627633625380813132, guid: 2d272966b0b431843b6799d40f1a63bd, type: 3}
+  _overlayInstance: {fileID: 4259286538735168660, guid: 3ff14009a129b18408cec2d716d47633, type: 3}
+  _minimapIndicatorList: []

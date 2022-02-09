@@ -7,8 +7,12 @@ using UnityEngine;
 /// </summary>
 public class Lobby : MonoBehaviour
 {
-    [SerializeField] private Vector2 _playerPosition;
-    [SerializeField] private Player _player;
+    [Header("Input Handler")]
+    [SerializeField] private InputObserver _inputInstance;
+
+    [Header("Player")]
+    [SerializeField] private Player _playerInstance;
+    [SerializeField] private Vector2 _playerStartPosition;
 
     private void Start()
     {
@@ -18,9 +22,12 @@ public class Lobby : MonoBehaviour
             Player.Instance = null;
         }
 
+        if (!InputObserver.Instance)
+            Instantiate(_inputInstance, Vector2.zero, Quaternion.identity);
+
         if (!Player.Instance)
-            Instantiate(_player, _playerPosition, Quaternion.identity);
+            Instantiate(_playerInstance, _playerStartPosition, Quaternion.identity);
         else
-            Player.Instance.transform.position = _playerPosition;
+            Player.Instance.transform.position = _playerStartPosition;
     }
 }

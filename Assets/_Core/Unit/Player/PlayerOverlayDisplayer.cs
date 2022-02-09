@@ -18,12 +18,14 @@ public class PlayerOverlayDisplayer : MonoBehaviour
     [SerializeField] private MenuTemplate _pauseMenu;
     [SerializeField] private CheatHandler _cheatMenu;
 
-    bool _isLoaded = false;
-
     private void Start()
     {
-        MinimapController.Instance.OnActiveChanged += Minimap_OnActiveChanged;
+        InputObserver.Instance.minimap.OnButtonEvent += Minimap_OnActiveChanged;
+        InputObserver.Instance.pauseMenu.OnButtonEvent += OnPause;
+        InputObserver.Instance.cheatPanel.OnButtonEvent += OnCheat;
+
         Monster.MonstersCount.OnValueChanged += Count_OnValueChanged;
+        Player.Instance.DropCrystals.OnValueChanged += Drop_OnValueChanged;
 
         DisplayMonsterCounterText();
         _dropCounterText.text = ": 0";
@@ -32,27 +34,26 @@ public class PlayerOverlayDisplayer : MonoBehaviour
         _lightLevelText.text = "Уровень света: " + PlayerPrefs.GetFloat("LightLevel", 0);
     }
 
-    private void FixedUpdate()
+    private void OnDestroy()
     {
-        if(!_isLoaded)
-        {
-            if(Player.Instance != null)
-            {
-                Player.Instance.DropCrystals.OnValueChanged += Drop_OnValueChanged;
-                _isLoaded = true;
-            }
-        }
+        InputObserver.Instance.minimap.OnButtonEvent -= Minimap_OnActiveChanged;
+        InputObserver.Instance.pauseMenu.OnButtonEvent -= OnPause;
+        InputObserver.Instance.cheatPanel.OnButtonEvent -= OnCheat;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SetPause();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            _cheatMenu.SetCheatMode(!_cheatMenu.gameObject.activeSelf);
-        }
+        Monster.MonstersCount.OnValueChanged -= Count_OnValueChanged;
+        Player.Instance.DropCrystals.OnValueChanged -= Drop_OnValueChanged;
     }
 
+    private void OnPause(object sender, System.EventArgs e)
+    {
+        SetPause();
+    }
+
+    private void OnCheat(object sender, System.EventArgs e)
+    {
+        _cheatMenu.SetCheatMode(!_cheatMenu.gameObject.activeSelf);
+    }
+    
     /// <summary>
     /// Событие при изменении видимости миникарты
     /// </summary>
@@ -97,6 +98,11 @@ public class PlayerOverlayDisplayer : MonoBehaviour
     public void SetPause()
     {
         _pauseMenu.InverseActive();
+
+        if (_pauseMenu.gameObject.activeSelf)
+            InputObserver.Instance.SetGameState(eGameState.Pause);
+        else
+            InputObserver.Instance.SetGameState(eGameState.Play);
 
         Player.Instance.SetDisableState(_pauseMenu.gameObject.activeSelf);
         Monster.GetMonsters().ForEach(s => s.SetDisableState(_pauseMenu.gameObject.activeSelf));

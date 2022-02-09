@@ -35,6 +35,9 @@ public class MobileMonster : Monster, IIdleMovable
     {
         base.FixedUpdate();
 
+        if (!Player.Instance)
+            return;
+
         CheckAttackCooldown();
         switch (_state)
         {

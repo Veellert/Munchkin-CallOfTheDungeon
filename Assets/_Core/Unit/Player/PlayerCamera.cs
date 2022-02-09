@@ -6,7 +6,7 @@ using UnityEngine;
 /// Компонент отвечающий за камеру преследующую игрока
 /// </summary>
 [RequireComponent(typeof(Camera))]
-public class PlayerCameraMovment : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
     private void Update()
     {

@@ -12,6 +12,8 @@ public class MainMenu : MonoBehaviour
     {
         if (Player.Instance)
             Destroy(Player.Instance.gameObject);
+        if (InputObserver.Instance)
+            Destroy(InputObserver.Instance.gameObject);
     }
 
     /// <summary>

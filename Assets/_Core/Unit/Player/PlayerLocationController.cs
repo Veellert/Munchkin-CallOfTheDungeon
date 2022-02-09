@@ -18,6 +18,9 @@ public class PlayerLocationController : MonoBehaviour
 
         if (nextLoc < System.Enum.GetValues(typeof(eLocations)).Length)
             SetLocation(nextLoc);
+        else
+            SetLocation(0);
+
     }
 
     /// <summary>
@@ -43,7 +46,7 @@ public class PlayerLocationController : MonoBehaviour
 /// </summary>
 public enum eLocations
 {
-    Lobby,
+    Lobby = 0,
     Level1,
     Boss1,
 }

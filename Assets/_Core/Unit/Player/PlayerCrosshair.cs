@@ -28,21 +28,23 @@ public class PlayerCrosshair : MonoBehaviour
     private void Start()
     {
         Activate();
+        Player.Instance.HP.OnValueChanged += HP_OnValueChanged;
     }
 
     private void FixedUpdate()
     {
-        if(Player.Instance && Player.Instance.IsDead)
-        {
-            Disable();
-            return;
-        }
-
         transform.position = Input.mousePosition;
     }
 
     private void OnDestroy()
     {
         Disable();
+        Player.Instance.HP.OnValueChanged -= HP_OnValueChanged;
+    }
+
+    private void HP_OnValueChanged(object sender, System.EventArgs e)
+    {
+        if (((UnitAttrib)sender).IsValueEmpty())
+            Disable();
     }
 }

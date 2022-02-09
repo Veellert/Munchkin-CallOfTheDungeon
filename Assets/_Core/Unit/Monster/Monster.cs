@@ -142,7 +142,6 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     }
 
     protected Vector2 _movementDirection;
-    protected Transform _chaseTarget;
 
     private void Awake()
     {
@@ -157,23 +156,17 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
         name = UnitName;
 
-        if(Player.Instance)
-            _chaseTarget = Player.Instance.transform;
-
         AddMonsterToStack(this);
     }
 
     protected virtual void FixedUpdate()
     {
-        if (Player.Instance)
-            _chaseTarget = Player.Instance.transform;
-
-        if (_chaseTarget == null)
+        if (!Player.Instance)
             return;
 
-        if(!IsDead)
+        if (!IsDead)
         {
-            if (Vector2.Distance(transform.position, _chaseTarget.position) > new TileHalf(20))
+            if (Vector2.Distance(transform.position, Player.Instance.transform.position) > new TileHalf(20))
             {
                 if (_state != eState.Disabled)
                     SetDisableState(true);
@@ -261,10 +254,13 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     /// </summary>
     public virtual void AttackHandler(float attackRange)
     {
+        if (!Player.Instance)
+            return;
+
         if (!AttackCooldown.IsValueEmpty())
             return;
 
-        var attackDirection = (_chaseTarget.position - transform.position).normalized;
+        var attackDirection = (Player.Instance.transform.position - transform.position).normalized;
         var attackPosition = transform.position + attackDirection * new TileHalf(BtwTargetDistance);
 
         if (Vector2.Distance(Player.Instance.transform.position, transform.position) < new TileHalf(BtwTargetDistance))
@@ -275,8 +271,8 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
 
         _animation.PlayATTACK(() =>
         {
-            if (Vector2.Distance(attackPosition, _chaseTarget.position + (Vector3)Player.Instance.HitboxOffset) < attackRange + new TileHalf(Player.Instance.HitboxDistance))
-                _chaseTarget.GetComponent<IDamageable>().GetDamage(Damage);
+            if (Vector2.Distance(attackPosition, Player.Instance.transform.position + (Vector3)Player.Instance.HitboxOffset) < attackRange + new TileHalf(Player.Instance.HitboxDistance))
+                Player.Instance.GetDamage(Damage);
 
             TryChase();
         });
@@ -296,10 +292,13 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
     /// </summary>
     protected virtual void ChaseHandler()
     {
+        if (!Player.Instance)
+            return;
+
         TryChase();
 
-        if (Vector2.Distance(transform.position, _chaseTarget.position) > new TileHalf(BtwTargetDistance))
-            MoveTo(_chaseTarget.position, 1);
+        if (Vector2.Distance(transform.position, Player.Instance.transform.position) > new TileHalf(BtwTargetDistance))
+            MoveTo(Player.Instance.transform.position, 1);
         else
         {
             _animation.PlayIDLE(Vector2.zero);
@@ -315,13 +314,10 @@ public abstract class Monster : MonoBehaviour, IUnit, IDamager, IDamageable
         if (!Player.Instance)
             return;
 
-        if (_chaseTarget == null)
-            _chaseTarget = Player.Instance.transform;
-
-        if (Vector2.Distance(transform.position, _chaseTarget.position) <= new TileHalf(ChaseRadius))
-            if(!_chaseTarget.GetComponent<IDamageable>().IsDead)
+        if (Vector2.Distance(transform.position, Player.Instance.transform.position) <= new TileHalf(ChaseRadius))
+            if(!Player.Instance.IsDead)
             {
-                SetDirection(_chaseTarget.position);
+                SetDirection(Player.Instance.transform.position);
 
                 if(_state != eState.Chase)
                     _state = eState.Chase;

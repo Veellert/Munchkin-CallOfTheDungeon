@@ -32,6 +32,7 @@ public class CheatHandler : MonoBehaviour
     private void OnDestroy()
     {
         FinishPositions = new List<Vector2>();
+        ResetAllCheats();
     }
 
     private void Start()

@@ -61,6 +61,9 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
     {
         base.FixedUpdate();
 
+        if (!Player.Instance)
+            return;
+
         CheckAttackCooldown();
         switch (_state)
         {
@@ -135,7 +138,7 @@ public class SmileyFaceBoss : Monster, IBoss<ePhaseSmileyFace>
         if (IsDead)
             return;
 
-        var spawnDirection = (_chaseTarget.position - transform.position).normalized;
+        var spawnDirection = (Player.Instance.transform.position - transform.position).normalized;
         var spawnPoint = transform.position + spawnDirection * new TileHalf(BtwTargetDistance);
 
         minionCount++;
