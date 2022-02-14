@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 6308489}
   - component: {fileID: 6308488}
   - component: {fileID: 6308487}
+  - component: {fileID: 6308490}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -205,19 +206,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6308488}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1596286946}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: MainMenuPlayButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6308488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +245,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6308485}
   m_CullTransparentMesh: 1
+--- !u!114 &6308490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6308485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebeac31d1708006418e5e41578093dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isApplicationQuit: 0
+  _isLobbyQuit: 1
 --- !u!1 &78617551
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,6 +452,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3020786175454372588, guid: 982768a2c1094024cbf6ee2eb712fc64, type: 3}
+      propertyPath: _activeButtons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020786175454372588, guid: 982768a2c1094024cbf6ee2eb712fc64, type: 3}
+      propertyPath: _activeButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 553262929}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 982768a2c1094024cbf6ee2eb712fc64, type: 3}
 --- !u!1 &427025875
@@ -891,13 +902,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 651385907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc2cde0d9852dac4dafe379cdb9a897c, type: 3}
+  m_Script: {fileID: 11500000, guid: 752a21c1387b31447b1869adab8c8406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _activeButtons:
-  - {fileID: 1006868667}
-  - {fileID: 1764985592}
   _activeOnLoad: 0
+  _activeButtons:
+  - {fileID: 1764985592}
+  - {fileID: 1006868667}
 --- !u!1 &663588773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,19 +1056,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 693243605}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1596286946}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: MainMenuQuitButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &693243605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1105,7 +1104,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 693243602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 622685c20722c76409e3513bde5c5b46, type: 3}
+  m_Script: {fileID: 11500000, guid: ebeac31d1708006418e5e41578093dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isApplicationQuit: 1
@@ -1591,7 +1590,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1596286941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a434752bec401614cb116101da0d3e9d, type: 3}
+  m_Script: {fileID: 11500000, guid: dc8a79b5332362f4d9cd181ac2e5e290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1623286368
@@ -1677,8 +1676,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+      - m_Target: {fileID: 651385911}
+        m_TargetAssemblyTypeName: Assets.UI.SettingsMenu, Assembly-CSharp
         m_MethodName: SettingsMenuApplyButtonClick
         m_Mode: 1
         m_Arguments:
@@ -1874,19 +1873,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1764985593}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: SettingsMenuReturnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1764985593
 MonoBehaviour:
   m_ObjectHideFlags: 0

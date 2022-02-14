@@ -259,6 +259,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 687320849}
     - target: {fileID: 6293517110259726121, guid: 37b130a1a3774ce4b96fd7ecdeaf9cda, type: 3}
+      propertyPath: _finishTilemap
+      value: 
+      objectReference: {fileID: 2217960}
+    - target: {fileID: 6293517110259726121, guid: 37b130a1a3774ce4b96fd7ecdeaf9cda, type: 3}
       propertyPath: _leaderTilemap
       value: 
       objectReference: {fileID: 2217960}
@@ -272,7 +276,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8576187833ea35d459800d57e08c5948, type: 3}
+  m_Script: {fileID: 11500000, guid: 157aed5aa4c21a749a42e2f8e3880d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1510496747 stripped
@@ -287,6 +291,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _dungeonVisualizer
+      value: 
+      objectReference: {fileID: 925648515}
     - target: {fileID: 2661010980145485867, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
       propertyPath: _visualizer
       value: 

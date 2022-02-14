@@ -1,24 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-/// <summary>
-/// Класс "Половинка тайла"
+п»ї/// <summary>
+/// РљР»Р°СЃСЃ "РџРѕР»РѕРІРёРЅРєР° С‚Р°Р№Р»Р°"
 /// </summary>
 /// <remarks>
-/// Используется для подсчета половинок тайлов
+/// РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ РїРѕРґСЃС‡РµС‚Р° РїРѕР»РѕРІРёРЅРѕРє С‚Р°Р№Р»РѕРІ
 /// </remarks>
 public class TileHalf
 {
-    /// <returns>
-    /// Размер тайла
-    /// </returns>
+    /// <value>
+    /// Р Р°Р·РјРµСЂ РїРѕР»РѕРІРёРЅРєРё С‚Р°Р№Р»Р° => 0.5
+    /// </value>
     public static float Size => 0.5f;
 
     /// <summary>
-    /// Выдает размер ориентируясь на кол-во из параметра
+    /// Р’С‹РґР°РµС‚ СЂР°Р·РјРµСЂ РѕСЂРёРµРЅС‚РёСЂСѓСЏСЃСЊ РЅР° РєРѕР»-РІРѕ РёР· РїР°СЂР°РјРµС‚СЂР°
     /// </summary>
-    /// <param name="tileHalfCount">Количество половинок тайла</param>
+    /// <param name="tileHalfCount">РљРѕР»РёС‡РµСЃС‚РІРѕ РїРѕР»РѕРІРёРЅРѕРє С‚Р°Р№Р»Р°</param>
     public static float GetTileHalf(float tileHalfCount) => Size * tileHalfCount;
 
     public float Value { get; private set; }
@@ -26,11 +22,6 @@ public class TileHalf
     public TileHalf()
     {
         Value = GetTileHalf(1);
-    }
-
-    public TileHalf(int tileHalfCount)
-    {
-        Value = GetTileHalf(tileHalfCount);
     }
 
     public TileHalf(float tileHalfCount)

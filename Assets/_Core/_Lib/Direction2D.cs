@@ -1,118 +1,166 @@
-using System.Collections;
-using System.Collections.Generic;
+п»їusing System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Вспомогательный класс работающий с направлениями в 2D пространстве
+/// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ СЂР°Р±РѕС‚Р°СЋС‰РёР№ СЃ РЅР°РїСЂР°РІР»РµРЅРёСЏРјРё Рё 2D РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕРј
 /// </summary>
 public static class Direction2D
 {
     /// <summary>
-    /// Список стандартных направлений
+    /// РЎРїРёСЃРѕРє СЃС‚Р°РЅРґР°СЂС‚РЅС‹С… РЅР°РїСЂР°РІР»РµРЅРёР№
     /// </summary>
     /// <returns>
-    /// 4 направления
+    /// 4 РЅР°РїСЂР°РІР»РµРЅРёСЏ
     /// </returns>
-    public static List<Vector2> StandartDirectionsList => new List<Vector2>
+    public static List<Vector2> StandartDirectionList => new List<Vector2>
     {
         Vector2.up, Vector2.right, Vector2.down, Vector2.left,
     };
+    /// <returns>
+    /// Р Р°РЅРґРѕРјРЅРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ РёР·<see cref="StandartDirectionList"/>
+    /// </returns>
+    public static Vector2 GetRandomStandartDirection() => StandartDirectionList[Random.Range(0, StandartDirectionList.Count)];
 
     /// <summary>
-    /// Список всех направлений
+    /// РЎРїРёСЃРѕРє РІСЃРµС… РЅР°РїСЂР°РІР»РµРЅРёР№
     /// </summary>
     /// <returns>
-    /// 8 направлений (включая диагональные)
+    /// 8 РЅР°РїСЂР°РІР»РµРЅРёР№ (РІРєР»СЋС‡Р°СЏ РґРёР°РіРѕРЅР°Р»Рё)
     /// </returns>
-    public static List<Vector2> FullDirectionsList => new List<Vector2>
+    public static List<Vector2> FullDirectionList => new List<Vector2>
     {
         Vector2.up, new Vector2(1, 1),
         Vector2.right, new Vector2(1, -1),
         Vector2.down, new Vector2(-1, -1),
         Vector2.left, new Vector2(-1, 1),
     };
+    /// <returns>
+    /// Р Р°РЅРґРѕРјРЅРѕРµ РЅР°РїСЂР°РІР»РµРЅРёРµ РёР· <see cref="FullDirectionList"/>
+    /// </returns>
+    public static Vector2 GetRandomFullDirection() => FullDirectionList[Random.Range(0, FullDirectionList.Count)];
 
-    /// <summary>
-    /// Получает позицию курсора
-    /// </summary>
-    public static Vector3 GetMousePosition()
+    /// <returns>
+    /// РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ С‚РѕС‡РєР° РёР· СЃРїРёСЃРєР° РєРѕРѕСЂРґРёРЅР°С‚
+    /// </returns>
+    /// <param name="positions">РЎРїРёСЃРѕРє РєРѕРѕСЂРґРёРЅР°С‚</param>
+    public static Vector2Int CompareMax(List<Vector2Int> positions)
     {
-        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
-        return mousePosition;
+        var currentMax = new Vector2Int(int.MinValue, int.MinValue);
+
+        positions.ForEach(max =>
+        {
+            currentMax.x = CompareValue(max.x, currentMax.x);
+            currentMax.y = CompareValue(max.y, currentMax.y);
+        });
+
+        return currentMax;
+
+        static int CompareValue(int newValue, int currentValue)
+        {
+            if (newValue > currentValue)
+                return newValue;
+
+            return currentValue;
+        }
+    }
+    /// <returns>
+    /// РњРёРЅРёРјР°Р»СЊРЅР°СЏ С‚РѕС‡РєР° РёР· СЃРїРёСЃРєР° РєРѕРѕСЂРґРёРЅР°С‚
+    /// </returns>
+    /// <param name="positions">РЎРїРёСЃРѕРє РєРѕРѕСЂРґРёРЅР°С‚</param>
+    public static Vector2Int CompareMin(List<Vector2Int> positions)
+    {
+        var currentMin = new Vector2Int(int.MaxValue, int.MaxValue);
+
+        positions.ForEach(min =>
+        {
+            currentMin.x = CompareValue(min.x, currentMin.x);
+            currentMin.y = CompareValue(min.y, currentMin.y);
+        });
+
+        return currentMin;
+
+        static int CompareValue(int newValue, int currentValue)
+        {
+            if (newValue < currentValue)
+                return newValue;
+
+            return currentValue;
+        }
     }
 
     /// <summary>
-    /// Существует ли пустое пространство вокруг точки
+    /// РЎСѓС‰РµСЃС‚РІСѓРµС‚ Р»Рё РїСѓСЃС‚РѕРµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РІРѕРєСЂСѓРі С‚РѕС‡РєРё
     /// </summary>
-    /// <param name="allPos">Коллекция со всеми доступными точками для проверки</param>
-    /// <param name="center">Точка вокруг которой нужно проверить пространство</param>
-    /// <param name="isFullDirList">Использовать ли 8 направлений </param>
+    /// <param name="allPos">РљРѕР»Р»РµРєС†РёСЏ СЃРѕ РІСЃРµРјРё РґРѕСЃС‚СѓРїРЅС‹РјРё С‚РѕС‡РєР°РјРё РґР»СЏ РїСЂРѕРІРµСЂРєРё</param>
+    /// <param name="center">РўРѕС‡РєР° РІРѕРєСЂСѓРі РєРѕС‚РѕСЂРѕР№ РЅСѓР¶РЅРѕ РїСЂРѕРІРµСЂРёС‚СЊ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ</param>
+    /// <param name="isFullDirList">РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р»Рё 8 РЅР°РїСЂР°РІР»РµРЅРёР№ </param>
     public static bool ExistEmptySpace(IEnumerable<Vector2Int> allPos, Vector2Int center, bool isFullDirList = false)
     {
-        bool result;
+        bool result = true;
 
-        // Коллекция со всеми точками
-        var posList = new List<Vector2Int>();
-        posList.AddRange(allPos);
-
-        // Коллекция с точками которые должны быть пустыми
-        var emptyPos = new List<Vector2Int>();
-
-        if(isFullDirList)
-            FullDirectionsList.ForEach(s => emptyPos.Add(Vector2Int.RoundToInt(s) + center));
-        else
-            StandartDirectionsList.ForEach(s => emptyPos.Add(Vector2Int.RoundToInt(s) + center));
-
-        // Совпадают ли пустые точки со списком точек
-        result = posList.Contains(emptyPos[0]);
-        for (int i = 1; i < emptyPos.Count; i++)
+        var posList = new List<Vector2Int>(allPos);
+        var emptyPos = GetDirectionsByCenter(isFullDirList, center);
+        
+        // РЎРѕРІРїР°РґР°СЋС‚ Р»Рё РїСѓСЃС‚С‹Рµ С‚РѕС‡РєРё СЃРѕ СЃРїРёСЃРєРѕРј С‚РѕС‡РµРє
+        for (int i = 0; i < emptyPos.Count; i++)
             result &= posList.Contains(emptyPos[i]);
 
         return result;
+
+        static List<Vector2Int> GetDirectionsByCenter(bool isFullDirectionList, Vector2Int center)
+        {
+            var result = new List<Vector2Int>();
+
+            if (isFullDirectionList)
+                FullDirectionList.ForEach(s => result.Add(Vector2Int.RoundToInt(s) + center));
+            else
+                StandartDirectionList.ForEach(s => result.Add(Vector2Int.RoundToInt(s) + center));
+
+            return result;
+        }
     }
 
-    /// <summary>
-    /// Получает направление от точки до цели
-    /// </summary>
     /// <returns>
-    /// Направление в координатах
+    /// РќР°РїСЂР°РІР»РµРЅРёРµ РѕС‚ С‚РѕС‡РєРё РґРѕ С†РµР»Рё
     /// </returns>
-    /// <param name="position">Точка от которой</param>
-    /// <param name="targetPosition">Точка до которой (цель)</param>
+    /// <param name="position">РўРѕС‡РєР° РѕС‚ РєРѕС‚РѕСЂРѕР№</param>
+    /// <param name="targetPosition">РўРѕС‡РєР° РґРѕ РєРѕС‚РѕСЂРѕР№ (С†РµР»СЊ)</param>
     public static Vector2 GetDirectionTo(Vector2 position, Vector2 targetPosition)
     {
-        float x = 0;
-        float y = 0;
+        return new Vector2(CompareValue(position.x, targetPosition.x), CompareValue(position.y, targetPosition.y));
 
-        // Проверка по Х
-        if (position.x > targetPosition.x)
-            x = -1;
-        else if (position.x < targetPosition.x)
-            x = 1;
-
-        // Проверка по У
-        if (position.y > targetPosition.y)
-            y = -1;
-        else if (position.y < targetPosition.y)
-            y = 1;
-
-        return new Vector2(x, y);
+        static float CompareValue(float val1, float val2)
+        {
+            if (val1 > val2)
+                return -1;
+            else if (val1 < val2)
+                return 1;
+            return 0;
+        }
     }
 
-    /// <summary>
-    /// Получает рандомное направление из <see cref="StandartDirectionsList"/>
-    /// </summary>
     /// <returns>
-    /// Направление в координатах
+    /// РќР°РїСЂР°РІР»РµРЅРёРµ РѕС‚ РёРіСЂРѕРєР° РґРѕ РєСѓСЂСЃРѕСЂР°
     /// </returns>
-    public static Vector2 GetRandomStandartDirection() => StandartDirectionsList[Random.Range(0, StandartDirectionsList.Count)];
+    public static Vector2 GetMouseDirection()
+    {
+        return GetDirectionToPlayer(InputObserver.GetMousePosition());
+    }
 
-    /// <summary>
-    /// Получает рандомное направление из <see cref="FullDirectionsList"/>
-    /// </summary>
     /// <returns>
-    /// Направление в координатах
+    /// РќР°РїСЂР°РІР»РµРЅРёРµ РѕС‚ С‚РѕС‡РєРё РґРѕ РёРіСЂРѕРєР°
     /// </returns>
-    public static Vector2 GetRandomFullDirection() => FullDirectionsList[Random.Range(0, FullDirectionsList.Count)];
+    /// <param name="position">РўРѕС‡РєР° РѕС‚ РєРѕС‚РѕСЂРѕР№</param>
+    public static Vector2 GetDirectionToPlayer(Vector2 position)
+    {
+        return (position- (Vector2)Player.Instance.transform.position).normalized;
+    }
+    /// <returns>
+    /// РќР°РїСЂР°РІР»РµРЅРёРµ РѕС‚ РёРіСЂРѕРєР° РґРѕ С‚РѕС‡РєРё
+    /// </returns>
+    /// <param name="position">РўРѕС‡РєР° РґРѕ РєРѕС‚РѕСЂРѕР№</param>
+    public static Vector2 GetPlayerDirectionFrom(Vector2 position)
+    {
+        return ((Vector2)Player.Instance.transform.position - position).normalized;
+    }
 }

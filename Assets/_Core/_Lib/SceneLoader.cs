@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+п»їusing UnityEngine.SceneManagement;
 
 /// <summary>
-/// Скрипт отвечающий за загрузку доступных сцен
+/// РљР»Р°СЃСЃ РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° Р·Р°РіСЂСѓР·РєСѓ РґРѕСЃС‚СѓРїРЅС‹С… СЃС†РµРЅ
 /// </summary>
 public static class SceneLoader
 {
     /// <summary>
-    /// Список названий всех досьупных сцен
+    /// РЎРїРёСЃРѕРє РЅР°Р·РІР°РЅРёР№ РІСЃРµС… РґРѕСЃС‚СѓРїРЅС‹С… СЃС†РµРЅ
     /// </summary>
     private enum eScenes
     {
@@ -20,28 +17,28 @@ public static class SceneLoader
     }
 
     /// <summary>
-    /// Запускает комнату 1 босса 1 уровня 
+    /// Р—Р°РїСѓСЃРєР°РµС‚ РєРѕРјРЅР°С‚Сѓ 1 Р±РѕСЃСЃР° 1 СѓСЂРѕРІРЅСЏ 
     /// </summary>
-    public static void FirstBoss() => LoadScene(eScenes.Level1Boss1);
+    public static void L1FirstBoss() => LoadScene(eScenes.Level1Boss1);
 
     /// <summary>
-    /// Запускает подземелье 1 уровня 
+    /// Р—Р°РїСѓСЃРєР°РµС‚ 1 СѓСЂРѕРІРµРЅСЊ РїРѕРґР·РµРјРµР»СЊСЏ
     /// </summary>
     public static void FirstLevel() => LoadScene(eScenes.Level1);
 
     /// <summary>
-    /// Запускает лобби
+    /// Р—Р°РїСѓСЃРєР°РµС‚ Р»РѕР±Р±Рё
     /// </summary>
     public static void Lobby() => LoadScene(eScenes.Level0);
 
     /// <summary>
-    /// Запускает главное меню
+    /// Р—Р°РїСѓСЃРєР°РµС‚ РіР»Р°РІРЅРѕРµ РјРµРЅСЋ
     /// </summary>
     public static void MainMenu() => LoadScene(eScenes.MainMenu);
 
     /// <summary>
-    /// Запускает сцену из параметра
+    /// Р—Р°РїСѓСЃРєР°РµС‚ СЃС†РµРЅСѓ РёР· РїР°СЂР°РјРµС‚СЂР°
     /// </summary>
-    /// <param name="scene">Название сцены из списка всех доступных сцен</param>
+    /// <param name="scene">РЎС†РµРЅР°</param>
     private static void LoadScene(eScenes scene) => SceneManager.LoadScene(scene.ToString());
 }

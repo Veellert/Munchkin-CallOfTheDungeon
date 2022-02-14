@@ -40,12 +40,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6293517110259726119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8576187833ea35d459800d57e08c5948, type: 3}
+  m_Script: {fileID: 11500000, guid: 157aed5aa4c21a749a42e2f8e3880d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _floorTilemap: {fileID: 0}
   _floorTile: {fileID: 11400000, guid: 73a19cb9bd6941749a4622a090bdd6e6, type: 2}
   _wallTilemap: {fileID: 0}
   _wallTile: {fileID: 11400000, guid: 0983487c9e281d14daf89151eaec86ff, type: 2}
-  _leaderTilemap: {fileID: 0}
-  _leaderTile: {fileID: 11400000, guid: 18c56ab31c018bd40a7934db66631c37, type: 2}
+  _finishTilemap: {fileID: 0}
+  _finishTile: {fileID: 11400000, guid: 18c56ab31c018bd40a7934db66631c37, type: 2}

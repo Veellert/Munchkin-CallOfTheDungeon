@@ -360,7 +360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2978486944531937370}
-  - component: {fileID: 5656084021121480823}
+  - component: {fileID: 3020786175454372588}
   m_Layer: 5
   m_Name: TutorPanel
   m_TagString: Untagged
@@ -389,7 +389,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5656084021121480823
+--- !u!114 &3020786175454372588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -398,9 +398,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2978486944531937373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ca58c46d72b44468f8ab1202905f5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b48c8af16891f842ab7a758e14dcb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _activeOnLoad: 0
   _activeButtons:
   - {fileID: 2978486943688213179}
-  _activeOnLoad: 0

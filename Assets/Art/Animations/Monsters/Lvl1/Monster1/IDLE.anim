@@ -65,7 +65,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Model/Body/Chest
+    path: DirectionalModel/Model/Body/Chest
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -99,7 +99,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Model/Body/Chest/Head
+    path: DirectionalModel/Model/Body/Chest/Head
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -133,7 +133,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Model/Body/Chest/Head/BackHair
+    path: DirectionalModel/Model/Body/Chest/Head/BackHair
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -167,7 +167,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Model/Body/Chest/Head/FrontHair
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -219,7 +219,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Model/Body/Chest/Head/FrontHair/Hair1
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair1
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -271,7 +271,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Model/Body/Chest/Head/FrontHair/Hair2
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair2
   m_PositionCurves:
   - curve:
       serializedVersion: 2
@@ -306,7 +306,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Model/Body
+    path: DirectionalModel/Model/Body
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -340,7 +340,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Model/Body/Chest/Head/Eyes
+    path: DirectionalModel/Model/Body/Chest/Head/Eyes
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -356,7 +356,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Model/LHand-IK/LHand-IK_Target
+    path: DirectionalModel/Model/LHand-IK/LHand-IK_Target
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -372,7 +372,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Model/RHand-IK/RHand-IK_Target
+    path: DirectionalModel/Model/RHand-IK/RHand-IK_Target
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -384,70 +384,70 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3762449268
+      path: 39914666
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 503496006
+      path: 215692165
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1563505779
+      path: 1190585967
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1219596321
+      path: 1546309871
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1597513610
+      path: 1932027894
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1195384494
+      path: 517944257
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3052921930
+      path: 4081735357
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 754890224
+      path: 1782777607
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 2476367751
+      path: 3213502459
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 667994478
+      path: 197177618
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -509,7 +509,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Model/Body
+    path: DirectionalModel/Model/Body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -546,7 +546,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Model/Body
+    path: DirectionalModel/Model/Body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -583,7 +583,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Model/Body
+    path: DirectionalModel/Model/Body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -638,7 +638,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Model/Body/Chest
+    path: DirectionalModel/Model/Body/Chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -693,7 +693,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Model/Body/Chest
+    path: DirectionalModel/Model/Body/Chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -748,7 +748,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Model/Body/Chest
+    path: DirectionalModel/Model/Body/Chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -785,7 +785,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Model/Body/Chest/Head
+    path: DirectionalModel/Model/Body/Chest/Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -822,7 +822,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Model/Body/Chest/Head
+    path: DirectionalModel/Model/Body/Chest/Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -859,7 +859,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Model/Body/Chest/Head
+    path: DirectionalModel/Model/Body/Chest/Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -896,7 +896,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Model/Body/Chest/Head/BackHair
+    path: DirectionalModel/Model/Body/Chest/Head/BackHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -933,7 +933,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Model/Body/Chest/Head/BackHair
+    path: DirectionalModel/Model/Body/Chest/Head/BackHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -970,7 +970,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Model/Body/Chest/Head/BackHair
+    path: DirectionalModel/Model/Body/Chest/Head/BackHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1007,7 +1007,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Model/Body/Chest/Head/Eyes
+    path: DirectionalModel/Model/Body/Chest/Head/Eyes
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1044,7 +1044,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Model/Body/Chest/Head/Eyes
+    path: DirectionalModel/Model/Body/Chest/Head/Eyes
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1081,7 +1081,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Model/Body/Chest/Head/Eyes
+    path: DirectionalModel/Model/Body/Chest/Head/Eyes
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1118,7 +1118,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Model/Body/Chest/Head/FrontHair
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1155,7 +1155,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Model/Body/Chest/Head/FrontHair
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1192,7 +1192,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Model/Body/Chest/Head/FrontHair
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1247,7 +1247,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Model/Body/Chest/Head/FrontHair/Hair1
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair1
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1302,7 +1302,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Model/Body/Chest/Head/FrontHair/Hair1
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair1
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1357,7 +1357,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Model/Body/Chest/Head/FrontHair/Hair1
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair1
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1412,7 +1412,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Model/Body/Chest/Head/FrontHair/Hair2
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair2
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1467,7 +1467,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Model/Body/Chest/Head/FrontHair/Hair2
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair2
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1522,7 +1522,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Model/Body/Chest/Head/FrontHair/Hair2
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair2
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1541,7 +1541,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Model/LHand-IK/LHand-IK_Target
+    path: DirectionalModel/Model/LHand-IK/LHand-IK_Target
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1560,7 +1560,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Model/LHand-IK/LHand-IK_Target
+    path: DirectionalModel/Model/LHand-IK/LHand-IK_Target
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1579,7 +1579,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Model/LHand-IK/LHand-IK_Target
+    path: DirectionalModel/Model/LHand-IK/LHand-IK_Target
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1598,7 +1598,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Model/RHand-IK/RHand-IK_Target
+    path: DirectionalModel/Model/RHand-IK/RHand-IK_Target
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1617,7 +1617,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Model/RHand-IK/RHand-IK_Target
+    path: DirectionalModel/Model/RHand-IK/RHand-IK_Target
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1636,7 +1636,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Model/RHand-IK/RHand-IK_Target
+    path: DirectionalModel/Model/RHand-IK/RHand-IK_Target
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -1647,7 +1647,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Body/Chest/Head/BackHair
+    path: DirectionalModel/Model/Body/Chest/Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1657,7 +1657,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Body/Chest/Head/BackHair
+    path: DirectionalModel/Model/Body/Chest/Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1667,7 +1667,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Body/Chest/Head/BackHair
+    path: DirectionalModel/Model/Body/Chest/Head
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1677,7 +1677,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Body/Chest
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair1
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1687,7 +1687,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Body/Chest
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair1
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1697,7 +1697,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Body/Chest
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair1
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1707,7 +1707,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Body/Chest/Head
+    path: DirectionalModel/Model/Body/Chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1717,7 +1717,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Body/Chest/Head
+    path: DirectionalModel/Model/Body/Chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1727,7 +1727,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Body/Chest/Head
+    path: DirectionalModel/Model/Body/Chest
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1737,7 +1737,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Body/Chest/Head/FrontHair/Hair1
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1747,7 +1747,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Body/Chest/Head/FrontHair/Hair1
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1757,7 +1757,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Body/Chest/Head/FrontHair/Hair1
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1767,7 +1767,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Body/Chest/Head/FrontHair
+    path: DirectionalModel/Model/Body/Chest/Head/BackHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1777,7 +1777,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Body/Chest/Head/FrontHair
+    path: DirectionalModel/Model/Body/Chest/Head/BackHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1787,7 +1787,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Body/Chest/Head/FrontHair
+    path: DirectionalModel/Model/Body/Chest/Head/BackHair
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1797,7 +1797,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Body/Chest/Head/FrontHair/Hair2
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair2
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1807,7 +1807,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Body/Chest/Head/FrontHair/Hair2
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair2
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -1817,7 +1817,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Body/Chest/Head/FrontHair/Hair2
+    path: DirectionalModel/Model/Body/Chest/Head/FrontHair/Hair2
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

@@ -149,12 +149,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 320944416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4621f55212f169d4685cea8a869902ae, type: 3}
+  m_Script: {fileID: 11500000, guid: faa547d9c49e2404cb4208fda852cc22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPosition: {x: -4, y: -9}
-  _bossPosition: {x: -4, y: 2}
-  _bossTarget: {fileID: 2640431374391964591, guid: 81ba73e2033506044a19f56546062883, type: 3}
+  _playerPosition: {x: -16, y: 0.5}
+  _bossTarget: {fileID: 3312636122258233578, guid: 81ba73e2033506044a19f56546062883, type: 3}
+  _bossPosition: {x: -5.5, y: 5}
 --- !u!4 &320944418
 Transform:
   m_ObjectHideFlags: 0
@@ -223,6 +223,34 @@ PrefabInstance:
     - target: {fileID: 5072070442502818074, guid: c7b43d921b8d9cf4fb4e901a1c31dd98, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051260190061780293, guid: c7b43d921b8d9cf4fb4e901a1c31dd98, type: 3}
+      propertyPath: _minimapIndicatorList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051260190061780293, guid: c7b43d921b8d9cf4fb4e901a1c31dd98, type: 3}
+      propertyPath: _minimapIndicatorList.Array.data[0]._indicator
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051260190061780293, guid: c7b43d921b8d9cf4fb4e901a1c31dd98, type: 3}
+      propertyPath: _minimapIndicatorList.Array.data[1]._indicator
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051260190061780293, guid: c7b43d921b8d9cf4fb4e901a1c31dd98, type: 3}
+      propertyPath: _minimapIndicatorList.Array.data[0]._position.x
+      value: -17.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051260190061780293, guid: c7b43d921b8d9cf4fb4e901a1c31dd98, type: 3}
+      propertyPath: _minimapIndicatorList.Array.data[0]._position.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051260190061780293, guid: c7b43d921b8d9cf4fb4e901a1c31dd98, type: 3}
+      propertyPath: _minimapIndicatorList.Array.data[1]._position.x
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051260190061780293, guid: c7b43d921b8d9cf4fb4e901a1c31dd98, type: 3}
+      propertyPath: _minimapIndicatorList.Array.data[1]._position.y
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7b43d921b8d9cf4fb4e901a1c31dd98, type: 3}

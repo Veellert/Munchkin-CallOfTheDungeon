@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3836373747371013970}
   - component: {fileID: 3836373747371013971}
-  - component: {fileID: 3836373747371013969}
+  - component: {fileID: -8371552309096425772}
   m_Layer: 0
   m_Name: LobbyController
   m_TagString: Untagged
@@ -41,15 +41,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3836373747371013968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a4fe242cbe4235449f1f6a1911d25ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fb670f159bad06489e602e453ea5475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraInstance: {fileID: 8627633625380813132, guid: 2d272966b0b431843b6799d40f1a63bd, type: 3}
   _overlayInstance: {fileID: 4259286538735168660, guid: 3ff14009a129b18408cec2d716d47633, type: 3}
-  _minimapIndicatorList:
-  - _indicatorPosition: {x: 4.5, y: -6}
-    _indicator: 3
---- !u!114 &3836373747371013969
+  _minimapIndicatorList: []
+--- !u!114 &-8371552309096425772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,9 +56,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3836373747371013968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2ff3eef4ad651a47944edc32aa02494, type: 3}
+  m_Script: {fileID: 11500000, guid: e986aa427d99f88498521c4c2bd91f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _inputInstance: {fileID: 6422815308580270926, guid: 1d79c9ab9c56b704795d5fedc2b0c591, type: 3}
-  _playerInstance: {fileID: 2231915583802237273, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
-  _playerStartPosition: {x: 5, y: 14}
+  _playerInstance: {fileID: 7082644843430218455, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+  _playerStartPosition: {x: 4.5, y: 12}
+  _finishIndicator: {fileID: 1766744975112242159, guid: 2a4e50a5cb88b40419261b1f119def63, type: 3}
+  _indicatorPosition: {x: 4.5, y: -6.5}

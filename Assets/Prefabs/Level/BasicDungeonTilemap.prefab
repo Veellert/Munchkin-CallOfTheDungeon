@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2062366663}
   - component: {fileID: 1676427814682555929}
   m_Layer: 6
-  m_Name: Leader
+  m_Name: Finish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2062366661}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 162f1d5fdf46e314a9b8c11e44690f2a, type: 3}
+  m_Script: {fileID: 11500000, guid: fb12bf7ee8926454b83c082cb5b62103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5784136437741320016

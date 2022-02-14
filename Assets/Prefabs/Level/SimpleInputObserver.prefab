@@ -40,16 +40,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1094870546108017150}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2498abd3986aa8c4696d996766077111, type: 3}
+  m_Script: {fileID: 11500000, guid: 952a60b9afe0aab48830251438dc5424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu:
-    _buttonCode: 27
-  minimap:
-    _buttonCode: 9
-  minimapIncrease:
-    _buttonCode: 45
-  minimapDecrease:
-    _buttonCode: 61
-  cheatPanel:
-    _buttonCode: 108
+  _pauseMenu:
+    _button: 27
+    _isButtonHold: 0
+  _minimap:
+    _button: 9
+    _isButtonHold: 0
+  _minimapIncrease:
+    _button: 45
+    _isButtonHold: 1
+  _minimapDecrease:
+    _button: 61
+    _isButtonHold: 1
+  _cheatPanel:
+    _button: 108
+    _isButtonHold: 0
+  _dodge:
+    _button: 32
+    _isButtonHold: 0
