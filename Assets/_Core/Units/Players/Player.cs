@@ -3,16 +3,15 @@
 /// <summary>
 /// Компонент отвечающий за логику игрока
 /// </summary>
+[RequireComponent(typeof(PlayerInventory))]
 public class Player : BaseUnit, IDamager, IDamageable
 {
     public static Player Instance { get; set; }
 
 
-    public NumericAttrib DropCrystals { get; private set; }
-
     [Header("Damager Attribs")]
     [SerializeField] private NumericAttrib _damage = new NumericAttrib(8, 100);
-    public NumericAttrib Damage { get => _damage; set => _damage = value; } // private set
+    public NumericAttrib Damage { get => _damage; private set => _damage = value; }
     [SerializeField] private NumericAttrib _attackRange = new TileHalf(0.7f).Value;
     public NumericAttrib AttackRange { get => _attackRange; private set => _attackRange = value; }
     [SerializeField] private NumericAttrib _attackCooldown = 0.5f;
@@ -31,6 +30,8 @@ public class Player : BaseUnit, IDamager, IDamageable
     public bool IsDead => HP.IsValueEmpty();
     public bool CanDodge => DodgeCooldown.IsValueEmpty();
     public bool CanAttack => AttackCooldown.IsValueEmpty();
+
+    public PlayerInventory Inventory { get; set; }
 
 
     private readonly UnitState _dodgeState = new UnitState("Dodge");
@@ -57,7 +58,6 @@ public class Player : BaseUnit, IDamager, IDamageable
     {
         base.Start();
 
-        DropCrystals = new NumericAttrib(0, false);
         _lastMovementDirection = Vector2.right;
         _dodgeImpulse = new NumericAttrib(DodgeForce);
     }
@@ -86,7 +86,7 @@ public class Player : BaseUnit, IDamager, IDamageable
     public void AttackHandler()
     {
         var mouseDirection = Direction2D.GetMouseDirection();
-        
+
         // position + direction * offset
         _tempAttackPosition = (Vector2)transform.position + mouseDirection * new TileHalf();
 
@@ -95,7 +95,6 @@ public class Player : BaseUnit, IDamager, IDamageable
 
         StateMachine.EnterTo(_duringAttackState);
     }
-
     protected override void ReleaseAttack(IDamageable target, float damage)
     {
         if (StateMachine.IsCurrent(_dodgeState))
@@ -141,7 +140,7 @@ public class Player : BaseUnit, IDamager, IDamageable
     }
     protected override void GetRequiredComponents()
     {
-
+        Inventory = GetComponent<PlayerInventory>();
     }
     protected override void SubscribeOnEvents()
     {
@@ -166,11 +165,11 @@ public class Player : BaseUnit, IDamager, IDamageable
         StateMachine.InitializeState(_dodgeState,
             onExecute: ExecuteDodge,
             onEnter: EnterDodge);
-        
+
         StateMachine.InitializeState(_attackState,
             onExecute: ExecuteAttack,
             onEnter: EnterAttack);
-        
+
         StateMachine.InitializeState(_duringAttackState,
             onExecute: ExecuteDuringAttack,
             onEnter: EnterDuringAttack);
@@ -228,7 +227,7 @@ public class Player : BaseUnit, IDamager, IDamageable
     private void ExecuteAttack()
     {
         AttackHandler();
-    } 
+    }
     /// <summary>
     /// Логика рывка (кувырка)
     /// </summary>

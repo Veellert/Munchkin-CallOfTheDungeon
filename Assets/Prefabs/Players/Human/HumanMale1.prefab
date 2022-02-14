@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 2930112217441046029}
   - component: {fileID: 738277049013731172}
   - component: {fileID: 7082644843430218455}
+  - component: {fileID: 5049382011076064040}
   m_Layer: 0
   m_Name: HumanMale1
   m_TagString: Player
@@ -470,6 +471,22 @@ MonoBehaviour:
     _hasMaxValue: 1
     _value: 2
     _maxValue: 2
+--- !u!114 &5049382011076064040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5145696488535039385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7943ae6360f07246b1713be645e9660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dropCrystals:
+    _hasMaxValue: 0
+    _value: 0
+    _maxValue: 0
 --- !u!1 &5509331692275999686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,29 +1530,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: -8525763756018113938, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
---- !u!4 &6107382223005754021 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8162566339441935146, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
-  m_PrefabInstance: {fileID: 2703994932870537615}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &381730322497304929 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2362886377244596462, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
-  m_PrefabInstance: {fileID: 2703994932870537615}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &304890019544005635 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2431287166300528012, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
+--- !u!1 &2064441632462805701 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5106840451121579190, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
   m_PrefabInstance: {fileID: 2703994932870537615}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8589269002796196216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3263504757343092489, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
-  m_PrefabInstance: {fileID: 2703994932870537615}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2064441632462805701 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -5106840451121579190, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
   m_PrefabInstance: {fileID: 2703994932870537615}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8143918955120503710 stripped
@@ -1573,14 +1575,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 211862073272636995, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
   m_PrefabInstance: {fileID: 2703994932870537615}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &3351489711425328656 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8429499137584105569, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
+  m_PrefabInstance: {fileID: 2703994932870537615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6107382223005754021 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8162566339441935146, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
+  m_PrefabInstance: {fileID: 2703994932870537615}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3650924893475093030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1669768696182266793, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
   m_PrefabInstance: {fileID: 2703994932870537615}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3351489711425328656 stripped
+--- !u!4 &381730322497304929 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8429499137584105569, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2362886377244596462, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
+  m_PrefabInstance: {fileID: 2703994932870537615}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &304890019544005635 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2431287166300528012, guid: ee9ac0d77ee93444ea9fe858eeb775aa, type: 3}
   m_PrefabInstance: {fileID: 2703994932870537615}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6327953703561206313

@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraInstance: {fileID: 8627633625380813132, guid: 2d272966b0b431843b6799d40f1a63bd, type: 3}
-  _overlayInstance: {fileID: 4259286538735168660, guid: 3ff14009a129b18408cec2d716d47633, type: 3}
+  _overlayInstance: {fileID: 2518968961868992419, guid: 3ff14009a129b18408cec2d716d47633, type: 3}
   _minimapIndicatorList: []

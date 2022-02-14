@@ -50,7 +50,7 @@ public class SmileyFaceBoss : Boss
     /// </summary>
     private void SpawnMinion()
     {
-        if (IsDead)
+        if (IsDead || !StateMachine.IsCurrent(_specialAttackState))
             return;
         
         var spawnDirection = (Player.Instance.transform.position - transform.position).normalized;

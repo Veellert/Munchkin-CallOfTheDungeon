@@ -83,7 +83,7 @@ public class CheatHandler : MonoBehaviour
 
         _isExtraForce = true;
         Player.Instance.Damage.FillEmpty();
-        Player.Instance.Damage += 40;
+        Player.Instance.Damage.IncreaseValue(40);
     }
 
     private void DisableExtraForce()

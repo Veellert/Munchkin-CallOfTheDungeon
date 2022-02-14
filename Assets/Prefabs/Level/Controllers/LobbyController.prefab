@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraInstance: {fileID: 8627633625380813132, guid: 2d272966b0b431843b6799d40f1a63bd, type: 3}
-  _overlayInstance: {fileID: 4259286538735168660, guid: 3ff14009a129b18408cec2d716d47633, type: 3}
+  _overlayInstance: {fileID: 2518968961868992419, guid: 3ff14009a129b18408cec2d716d47633, type: 3}
   _minimapIndicatorList: []
 --- !u!114 &-8371552309096425772
 MonoBehaviour:
@@ -62,5 +62,3 @@ MonoBehaviour:
   _inputInstance: {fileID: 6422815308580270926, guid: 1d79c9ab9c56b704795d5fedc2b0c591, type: 3}
   _playerInstance: {fileID: 7082644843430218455, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
   _playerStartPosition: {x: 4.5, y: 12}
-  _finishIndicator: {fileID: 1766744975112242159, guid: 2a4e50a5cb88b40419261b1f119def63, type: 3}
-  _indicatorPosition: {x: 4.5, y: -6.5}

@@ -9,7 +9,9 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public abstract class Monster : BaseUnit, IDamager, IDamageable
 {
-    private static List<Monster> _monsterList = new List<Monster>();
+    private const float DestroySelfDelay = 3;
+
+    private static readonly List<Monster> _monsterList = new List<Monster>();
 
     public static NumericAttrib MonstersCount { get; set; }
 
@@ -60,7 +62,7 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
 
         return closestMonster;
 
-        float GetDistance(Vector2 position, Monster monster)
+        static float GetDistance(Vector2 position, Monster monster)
             => Vector2.Distance(position, monster.transform.position + (Vector3)monster.HitboxOffset);
     }
     /// <returns>
@@ -304,10 +306,12 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
     /// </summary>
     private void ExecuteDie()
     {
-        _animation.DIE();
+        _animation.DIE(() =>
+        {
+            RemoveMonsterFromStack(this);
+            Invoke(nameof(DestroySelf), DestroySelfDelay);
+        });
         GetComponent<Collider2D>().isTrigger = true;
-        RemoveMonsterFromStack(this);
-        Invoke(nameof(DestroySelf), 10);
     }
 
     /// <summary>

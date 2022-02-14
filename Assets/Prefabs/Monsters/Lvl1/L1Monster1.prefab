@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 2513523558338518367}
   - component: {fileID: 3440321076367629735}
   - component: {fileID: 4233876460335488791}
+  - component: {fileID: 9150456272349507536}
   m_Layer: 0
   m_Name: L1Monster1
   m_TagString: Monster
@@ -311,6 +312,22 @@ MonoBehaviour:
     _hasMaxValue: 1
     _value: 5
     _maxValue: 5
+--- !u!114 &9150456272349507536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5844992778124207404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cc1657a6c9f394388445fbd186c876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dropCount:
+    _hasMaxValue: 1
+    _value: 5
+    _maxValue: 15
 --- !u!1 &7228453001890651990
 GameObject:
   m_ObjectHideFlags: 0

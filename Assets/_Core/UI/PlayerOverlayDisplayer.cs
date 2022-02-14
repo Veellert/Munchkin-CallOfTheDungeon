@@ -30,7 +30,7 @@ namespace Assets.UI
             InputObserver.Instance._cheatPanel.OnButtonUse += OnCheatClick;
 
             Monster.MonstersCount.OnValueChanged += Count_OnValueChanged;
-            Player.Instance.DropCrystals.OnValueChanged += Drop_OnValueChanged;
+            Player.Instance.Inventory.DropCrystals.OnValueChanged += Drop_OnValueChanged;
 
             DisplayOnce();
         }
@@ -42,7 +42,7 @@ namespace Assets.UI
             InputObserver.Instance._cheatPanel.OnButtonUse -= OnCheatClick;
 
             Monster.MonstersCount.OnValueChanged -= Count_OnValueChanged;
-            Player.Instance.DropCrystals.OnValueChanged -= Drop_OnValueChanged;
+            Player.Instance.Inventory.DropCrystals.OnValueChanged -= Drop_OnValueChanged;
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Assets.UI
         /// </summary>
         private void DisplayDropCounterText()
         {
-            _dropCounterText.text = ": " + Player.Instance.DropCrystals.Value;
+            _dropCounterText.text = ": " + Player.Instance.Inventory.DropCrystals.Value;
         }
 
         /// <summary>
