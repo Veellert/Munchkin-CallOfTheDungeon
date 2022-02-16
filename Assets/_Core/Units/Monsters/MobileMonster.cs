@@ -62,21 +62,21 @@ public class MobileMonster : Monster, IIdleMovable
     {
         base.InitializeStates();
 
-        StateMachine.InitializeState(_defaultState, onExecute: ExecuteDefault);
-        StateMachine.InitializeState(_attackState, onExecute: ExecuteAttack);
+        StateMachine.InitializeState(_defaultState, onExecute: OnExecuteDefault);
+        StateMachine.InitializeState(_attackState, onExecute: OnExecuteAttack);
     }
 
     /// <summary>
     /// Логика атаки
     /// </summary>
-    private void ExecuteAttack()
+    private void OnExecuteAttack()
     {
         AttackHandler();
     }
     /// <summary>
     /// Обычная логика
     /// </summary>
-    private void ExecuteDefault()
+    private void OnExecuteDefault()
     {
         SetDirectionTo(_movePoint);
         MoveTo(_movePoint);

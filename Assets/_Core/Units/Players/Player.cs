@@ -147,7 +147,7 @@ public class Player : BaseUnit, IDamager, IDamageable
         InputObserver.Instance._dodge.OnButtonUse += DodgeInput;
         InputObserver.Instance.OnLeftMouseButton += AttackInput;
 
-        HP.OnValueChanged += HP_OnValueChanged;
+        HP.OnValueChanged += OnHPChanged;
     }
     protected override void InitializeStates()
     {
@@ -160,28 +160,28 @@ public class Player : BaseUnit, IDamager, IDamageable
         });
 
         StateMachine.InitializeState(_defaultState,
-            onExecute: ExecuteDefault);
+            onExecute: OnExecuteDefault);
 
         StateMachine.InitializeState(_dodgeState,
-            onExecute: ExecuteDodge,
-            onEnter: EnterDodge);
+            onExecute: OnExecuteDodge,
+            onEnter: OnEnterDodge);
 
         StateMachine.InitializeState(_attackState,
-            onExecute: ExecuteAttack,
-            onEnter: EnterAttack);
+            onExecute: OnExecuteAttack,
+            onEnter: OnEnterAttack);
 
         StateMachine.InitializeState(_duringAttackState,
-            onExecute: ExecuteDuringAttack,
-            onEnter: EnterDuringAttack);
+            onExecute: OnExecuteDuringAttack,
+            onEnter: OnEnterDuringAttack);
 
         StateMachine.InitializeState(_dieState,
-            onEnter: EnterDie);
+            onEnter: OnEnterDie);
     }
 
     /// <summary>
     /// При начале рывка (кувырка)
     /// </summary>
-    private void EnterDodge()
+    private void OnEnterDodge()
     {
         _dodgeImpulse.FillToMax();
         DodgeCooldown.FillToMax();
@@ -189,7 +189,7 @@ public class Player : BaseUnit, IDamager, IDamageable
     /// <summary>
     /// При начале проведения атаки
     /// </summary>
-    private void EnterDuringAttack()
+    private void OnEnterDuringAttack()
     {
         _animation.ATTACK(() =>
         {
@@ -199,14 +199,14 @@ public class Player : BaseUnit, IDamager, IDamageable
     /// <summary>
     /// При начале атаки
     /// </summary>
-    private void EnterAttack()
+    private void OnEnterAttack()
     {
         ResetVelocity();
     }
     /// <summary>
     /// При начале смерти
     /// </summary>
-    private void EnterDie()
+    private void OnEnterDie()
     {
         ResetVelocity();
         GetComponent<Collider2D>().isTrigger = true;
@@ -217,28 +217,28 @@ public class Player : BaseUnit, IDamager, IDamageable
     /// <summary>
     /// Логика проведения атаки
     /// </summary>
-    private void ExecuteDuringAttack()
+    private void OnExecuteDuringAttack()
     {
         SetDirection(InputObserver.Instance.GetInputDirection(), false);
     }
     /// <summary>
     /// Логика атаки
     /// </summary>
-    private void ExecuteAttack()
+    private void OnExecuteAttack()
     {
         AttackHandler();
     }
     /// <summary>
     /// Логика рывка (кувырка)
     /// </summary>
-    private void ExecuteDodge()
+    private void OnExecuteDodge()
     {
         DodgeHandler();
     }
     /// <summary>
     /// Обычная логика
     /// </summary>
-    private void ExecuteDefault()
+    private void OnExecuteDefault()
     {
         SetDirection(InputObserver.Instance.GetInputDirection());
         RunHandler();
@@ -248,7 +248,7 @@ public class Player : BaseUnit, IDamager, IDamageable
     /// Событие при изменении здоровья
     /// </summary>
     /// <param name="hp">Отслеживаемый атрибут</param>
-    private void HP_OnValueChanged(NumericAttrib hp)
+    private void OnHPChanged(NumericAttrib hp)
     {
         if (IsDead && !StateMachine.IsCurrent(_dieState))
             Die();

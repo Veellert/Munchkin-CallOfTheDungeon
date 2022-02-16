@@ -23,7 +23,7 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
     {
         if (!monster)
             return;
-        
+
         _monsterList.Remove(monster);
         MonstersCount--;
     }
@@ -35,7 +35,7 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
     {
         if (!monster)
             return;
-        
+
         _monsterList.Add(monster);
 
         if (_monsterList.Count > MonstersCount.MaxValue)
@@ -88,8 +88,6 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
     public NumericAttrib HP { get => _hp; protected set => _hp = value; }
 
     [Header("Monster Attribs")]
-    [SerializeField] private int _level = 1;
-    public int Level { get => _level; protected set => _level = value; }
     [SerializeField] private NumericAttrib _chaseRadius = new NumericAttrib(4, 10);
     public NumericAttrib ChaseRadius { get => _chaseRadius; protected set => _chaseRadius = value; }
     [SerializeField] private NumericAttrib _btwTargetDistance = 1.3f;
@@ -178,6 +176,13 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
 
         StateMachine.EnterTo(_duringAttackState);
     }
+    protected override void ReleaseAttack(IDamageable target, float damage)
+    {
+        var playerDistance = Player.Instance.transform.position + (Vector3)Player.Instance.HitboxOffset;
+        if (Vector2.Distance(_tempAttackPosition, playerDistance) < AttackRange + new TileHalf(Player.Instance.HitboxDistance))
+            base.ReleaseAttack(target, damage);
+        AttackCooldown.FillToMax();
+    }
 
     /// <summary>
     /// Начать преследование
@@ -231,7 +236,7 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
     }
     protected override void SubscribeOnEvents()
     {
-        HP.OnValueChanged += HP_OnValueChanged;
+        HP.OnValueChanged += OnHPChanged;
     }
     protected override void InitializeStates()
     {
@@ -245,45 +250,37 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
         });
 
         StateMachine.InitializeState(_defaultState,
-            onExecute: ExecuteDefault);
+            onExecute: OnExecuteDefault);
 
         StateMachine.InitializeState(_chaseState,
-            onExecute: ExecuteChase,
-            onEnter: EnterChase);
-        
+            onExecute: OnExecuteChase,
+            onEnter: OnEnterChase);
+
         StateMachine.InitializeState(_duringAttackState,
-            onEnter: ExecuteDuringAttack);
-        
+            onEnter: OnExecuteDuringAttack);
+
         StateMachine.InitializeState(_dieState,
-            onEnter: ExecuteDie);
+            onEnter: OnExecuteDie);
     }
 
     /// <summary>
     /// Логика преследования
     /// </summary>
-    private void ExecuteChase()
+    private void OnExecuteChase()
     {
         ChaseHandler();
     }
     /// <summary>
     /// Обычная логика
     /// </summary>
-    private void ExecuteDefault()
+    private void OnExecuteDefault()
     {
         ChaseInput();
-    }
-
-    /// <summary>
-    /// При начале преследования
-    /// </summary>
-    private void EnterChase()
-    {
-        SetDirectionTo(Player.Instance.transform.position);
     }
     /// <summary>
     /// При начале проведении атаки
     /// </summary>
-    private void ExecuteDuringAttack()
+    private void OnExecuteDuringAttack()
     {
         _animation.ATTACK(() =>
         {
@@ -292,19 +289,10 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
             ChaseInput();
         });
     }
-
-    protected override void ReleaseAttack(IDamageable target, float damage)
-    {
-        var playerDistance = Player.Instance.transform.position + (Vector3)Player.Instance.HitboxOffset;
-        if (Vector2.Distance(_tempAttackPosition, playerDistance) < AttackRange + new TileHalf(Player.Instance.HitboxDistance))
-            base.ReleaseAttack(target, damage);
-        AttackCooldown.FillToMax();
-    }
-
     /// <summary>
     /// При начале смерти
     /// </summary>
-    private void ExecuteDie()
+    private void OnExecuteDie()
     {
         _animation.DIE(() =>
         {
@@ -315,10 +303,18 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
     }
 
     /// <summary>
+    /// При начале преследования
+    /// </summary>
+    private void OnEnterChase()
+    {
+        SetDirectionTo(Player.Instance.transform.position);
+    }
+
+    /// <summary>
     /// Событие при изменении здоровья
     /// </summary>
     /// <param name="obj">Отслеживаемый атрибут</param>
-    private void HP_OnValueChanged(NumericAttrib obj)
+    private void OnHPChanged(NumericAttrib obj)
     {
         if (IsDead && !StateMachine.IsCurrent(_dieState))
             Die();

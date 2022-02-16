@@ -21,7 +21,6 @@ public class SmileyFaceBoss : Boss
     private readonly UnitState _specialAttackState = new UnitState("SpecialAttack");
 
 
-    private bool _isBossHalfHP;
     private bool _canSpecialAttack = true;
 
     public override void Die()
@@ -41,7 +40,7 @@ public class SmileyFaceBoss : Boss
     /// </summary>
     private void SpecialAttackHandler()
     {
-        if(_minionCount.Value < _minionCount.MaxValue)
+        if (_minionCount.Value < _minionCount.MaxValue)
             InvokeLoop(nameof(SpawnMinion), SpawnMinionDelay);
     }
 
@@ -52,7 +51,7 @@ public class SmileyFaceBoss : Boss
     {
         if (IsDead || !StateMachine.IsCurrent(_specialAttackState))
             return;
-        
+
         var spawnDirection = (Player.Instance.transform.position - transform.position).normalized;
         var spawnPoint = transform.position + spawnDirection * new TileHalf(BtwTargetDistance);
 
@@ -78,7 +77,7 @@ public class SmileyFaceBoss : Boss
     {
         base.SubscribeOnEvents();
 
-        HP.OnValueChanged += CheckBossHP;
+        HP.OnValueChanged += OnHPChanged;
         _angry.OnPhaseChanged += OnAngryPhase;
     }
     protected override void InitializeStates()
@@ -87,34 +86,34 @@ public class SmileyFaceBoss : Boss
         StateMachine.Add(_specialAttackState);
 
         StateMachine.InitializeState(_defaultState,
-            onExecute: ExecuteDefault);
-        
+            onExecute: OnExecuteDefault);
+
         StateMachine.InitializeState(_attackState,
-            onExecute: ExecuteAttack);
-        
+            onExecute: OnExecuteAttack);
+
         StateMachine.InitializeState(_specialAttackState,
-            onExecute: ExecuteSpecialAttack,
-            onEnter: EnterSpecialAttack);
+            onExecute: OnExecuteSpecialAttack,
+            onEnter: OnEnterSpecialAttack);
     }
 
     /// <summary>
     /// Логика особой атаки
     /// </summary>
-    private void ExecuteSpecialAttack()
+    private void OnExecuteSpecialAttack()
     {
         SpecialAttackHandler();
     }
     /// <summary>
     /// Логика атаки
     /// </summary>
-    private void ExecuteAttack()
+    private void OnExecuteAttack()
     {
         AttackHandler();
     }
     /// <summary>
     /// Обычная логика
     /// </summary>
-    private void ExecuteDefault()
+    private void OnExecuteDefault()
     {
         SetDirectionTo();
     }
@@ -122,7 +121,7 @@ public class SmileyFaceBoss : Boss
     /// <summary>
     /// При начале особой атаки
     /// </summary>
-    private void EnterSpecialAttack()
+    private void OnEnterSpecialAttack()
     {
         SetDirectionTo();
         _canSpecialAttack = false;
@@ -132,11 +131,9 @@ public class SmileyFaceBoss : Boss
     /// Событие на проверку здоровья босса
     /// </summary>
     /// <param name="hp">Отслеживаемый атрибут</param>
-    private void CheckBossHP(NumericAttrib hp)
+    private void OnHPChanged(NumericAttrib hp)
     {
-        _isBossHalfHP = hp.Value <= hp.MaxValue / 2;
-
-        if (_isBossHalfHP && _canSpecialAttack)
+        if (hp.Value <= hp.MaxValue / 2 && _canSpecialAttack)
             InputSpecialAttack();
 
         if (hp.Value <= hp.MaxValue / 4 && StateMachine.IsCurrent(_specialAttackState))

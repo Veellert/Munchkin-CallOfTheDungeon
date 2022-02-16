@@ -72,9 +72,7 @@ public interface IIdleMovable
 /// </summary>
 public interface IUnit
 {
-    string UnitName { get; }
-    NumericAttrib Speed { get; }
-    UnitStateMachine StateMachine { get; }
-    float HitboxDistance { get; }
+    NumericAttrib HitboxDistance { get; }
     Vector2 HitboxOffset { get; }
+    UnitStateMachine StateMachine { get; }
 }

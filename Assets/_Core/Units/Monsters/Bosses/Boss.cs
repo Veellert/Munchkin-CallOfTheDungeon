@@ -11,7 +11,7 @@ public abstract class Boss : Monster
 {
     [Header("Default Boss Phase")]
     [SerializeField] protected BossPhase _default;
-    
+
     protected SkinChanger _skinner;
 
     protected List<BossPhase> _bossPhases = new List<BossPhase>();

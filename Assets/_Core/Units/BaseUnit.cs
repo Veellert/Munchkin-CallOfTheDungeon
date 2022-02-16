@@ -7,15 +7,18 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(DirectionStatementVisualizer), typeof(AnimationCaller))]
 public abstract class BaseUnit : MonoBehaviour, IUnit
 {
-    [Header("Unit Attribs")]
-    [SerializeField] protected string _unitName;
-    public string UnitName { get => _unitName; protected set => _unitName = value; }
-    [SerializeField] protected NumericAttrib _speed = new NumericAttrib();
-    public NumericAttrib Speed { get => _speed; protected set => _speed = value; }
-    [SerializeField] protected float _hitboxDistance;
-    public float HitboxDistance { get => _hitboxDistance; protected set => _hitboxDistance = value; }
+    [Header("Unit Preferences")]
+    [SerializeField] protected UnitPreferences _preferences;
+
+    [Header("Base Attribs")]
+    [SerializeField] protected NumericAttrib _hitboxDistance;
+    public NumericAttrib HitboxDistance { get => _hitboxDistance; protected set => _hitboxDistance = value; }
     [SerializeField] protected Vector2 _hitboxOffset;
     public Vector2 HitboxOffset { get => _hitboxOffset; protected set => _hitboxOffset = value; }
+
+    [Header("Unit Attribs")]
+    [SerializeField] protected NumericAttrib _speed = new NumericAttrib();
+    public NumericAttrib Speed { get => _speed; protected set => _speed = value; }
 
     public UnitStateMachine StateMachine { get; private set; }
 
@@ -42,12 +45,12 @@ public abstract class BaseUnit : MonoBehaviour, IUnit
         _animation = GetComponent<AnimationCaller>();
         GetComponent<DirectionStatementVisualizer>().SubscribeChangingTo(ref OnDirectionChanged);
 
-        name = UnitName;
+        name = _preferences.ID;
         StateMachine = new UnitStateMachine(_defaultState);
 
         GetRequiredComponents();
         SubscribeOnEvents();
-        
+
         InitializeStates();
         StateMachine.Start();
     }
@@ -79,8 +82,7 @@ public abstract class BaseUnit : MonoBehaviour, IUnit
     /// <param name="target">Цель</param>
     protected virtual void ReleaseAttack(IDamageable target, float damage)
     {
-        if (target != null)
-            target.GetDamage(damage);
+        target?.GetDamage(damage);
     }
 
     /// <summary>
