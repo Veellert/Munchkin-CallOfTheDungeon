@@ -193,7 +193,7 @@ public abstract class Monster : BaseUnit, IDamager, IDamageable
 
         UnitState TryChaseState()
         {
-            if (Vector2.Distance(transform.position, Player.Instance.transform.position) <= new TileHalf(ChaseRadius) && !Player.Instance.IsDead)
+            if (Vector2.Distance(transform.position, Player.Instance.transform.position) <= new TileHalf(ChaseRadius) && !Player.Instance.IsDead && !Player.Instance.IsInvisibleForMonster)
                 return _chaseState;
             return _defaultState;
         }

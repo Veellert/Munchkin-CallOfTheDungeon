@@ -67,14 +67,15 @@ namespace Assets.UI
         {
             float level = PlayerPrefs.GetFloat("LightLevel", 0);
 
-            if (TryChangeLightLevel(level, level != 0, () =>
-            {
-                level -= 0.1f;
-                if (level < 0.1f)
-                    level = 0;
-            }))
-                RenderLightInfo(level);
+            if (level == 0)
+                return;
 
+            level -= 0.1f;
+            if (level < 0.1f)
+                level = 0;
+
+            SaveLightLevel(level);
+            RenderLightInfo(level);
         }
 
         /// <summary>
@@ -84,9 +85,13 @@ namespace Assets.UI
         {
             float level = PlayerPrefs.GetFloat("LightLevel", 0);
 
-            if (TryChangeLightLevel(level, level < 0.7f, () => { level += 0.1f; }))
-                RenderLightInfo(level);
+            if (level >= 0.7f)
+                return;
 
+            level += 0.1f;
+
+            SaveLightLevel(level);
+            RenderLightInfo(level);
         }
 
         /// <summary>
@@ -158,30 +163,11 @@ namespace Assets.UI
         }
 
         /// <returns>
-        /// Изменился ли уровень яркости
-        /// </returns>
-        /// <param name="lightLevel">Уровень яркости</param>
-        /// <param name="condition">Условие</param>
-        /// <param name="changeLevelAction">Действие изменяющее уровень яркости</param>
-        private bool TryChangeLightLevel(float lightLevel, bool condition, Action changeLevelAction)
-        {
-            if (!condition)
-                return false;
-
-            ChangeLightLevel(lightLevel, changeLevelAction);
-
-            return true;
-        }
-
-        /// <returns>
         /// Изменяет уровень яркости
         /// </returns>
         /// <param name="lightLevel">Уровень яркости</param>
-        /// <param name="changeLevelAction">Действие изменяющее уровень яркости</param>
-        private void ChangeLightLevel(float lightLevel, Action changeLevelAction)
+        private void SaveLightLevel(float lightLevel)
         {
-            changeLevelAction?.Invoke();
-
             PlayerPrefs.SetFloat("LightLevel", lightLevel);
             PlayerPrefs.Save();
         }

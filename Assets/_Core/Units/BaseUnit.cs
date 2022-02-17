@@ -4,6 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Компонент родитель отвечающий за логику юнита
 /// </summary>
+[RequireComponent(typeof(PSBRenderer))]
 [RequireComponent(typeof(Rigidbody2D), typeof(DirectionStatementVisualizer), typeof(AnimationCaller))]
 public abstract class BaseUnit : MonoBehaviour, IUnit
 {
@@ -33,6 +34,7 @@ public abstract class BaseUnit : MonoBehaviour, IUnit
 
     protected Rigidbody2D _rigBody;
     protected AnimationCaller _animation;
+    protected PSBRenderer _renderer;
 
     protected Vector2 _movementDirection;
     protected Vector2 _lastMovementDirection;
@@ -43,6 +45,7 @@ public abstract class BaseUnit : MonoBehaviour, IUnit
     {
         _rigBody = GetComponent<Rigidbody2D>();
         _animation = GetComponent<AnimationCaller>();
+        _renderer = GetComponent<PSBRenderer>();
         GetComponent<DirectionStatementVisualizer>().SubscribeChangingTo(ref OnDirectionChanged);
 
         name = _preferences.ID;

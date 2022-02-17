@@ -29,6 +29,10 @@ public class InputObserver : MonoBehaviour
     /// Событие по клику левой кнопки мыши
     /// </summary>
     public event Action OnLeftMouseButton;
+    /// <summary>
+    /// Событие по клику правой кнопки мыши
+    /// </summary>
+    public event Action OnRightMouseButton;
 
     /// <summary>
     /// Событие на передвижение влево и вправо
@@ -83,6 +87,7 @@ public class InputObserver : MonoBehaviour
                 _minimapDecrease.UseButton();
 
                 InputMouse(0, OnLeftMouseButton);
+                InputMouse(1, OnRightMouseButton);
             }),
             GameState.PauseState(() =>
             {

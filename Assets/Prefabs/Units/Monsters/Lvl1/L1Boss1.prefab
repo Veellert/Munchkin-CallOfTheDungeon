@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 3312636122258233578}
   - component: {fileID: 4742535607017347551}
   - component: {fileID: 2170612235513667276}
+  - component: {fileID: 5944072984734860465}
   m_Layer: 0
   m_Name: L1Boss1
   m_TagString: Monster
@@ -268,6 +269,19 @@ MonoBehaviour:
   _parent: {fileID: 4839246633912972618}
   _indicator: {fileID: 3372764971101351945, guid: b5c154eb8a5cb5e459967f5708899070, type: 3}
   _indicatorOffset: {x: 0, y: 1}
+--- !u!114 &5944072984734860465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998661377840299969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea09cdc46cd1ed468fd3d31ec487b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteParent: {fileID: 8197570341261394111}
 --- !u!1001 &1886894373434187648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -607,6 +621,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: -236154411001317898, guid: 4f6f0725f369d314682cbd5fcbc51724, type: 3}
+--- !u!1 &8197570341261394111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6838261934906412429, guid: 4f6f0725f369d314682cbd5fcbc51724, type: 3}
+  m_PrefabInstance: {fileID: 5825973237514384076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7410007245516175000 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5327862131075988396, guid: 4f6f0725f369d314682cbd5fcbc51724, type: 3}
@@ -617,7 +636,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -2661141107528067863, guid: 4f6f0725f369d314682cbd5fcbc51724, type: 3}
   m_PrefabInstance: {fileID: 5825973237514384076}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8197570341261394111}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}

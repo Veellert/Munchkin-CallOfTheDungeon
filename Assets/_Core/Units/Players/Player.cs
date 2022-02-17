@@ -26,6 +26,8 @@ public class Player : BaseUnit, IDamager, IDamageable
     public NumericAttrib DodgeForce { get => _dodgeForce; private set => _dodgeForce = value; }
     [SerializeField] private NumericAttrib _dodgeCooldown = new NumericAttrib(2, 5);
     public NumericAttrib DodgeCooldown { get => _dodgeCooldown; private set => _dodgeCooldown = value; }
+    [SerializeField] private bool _isInvisibleForMonster;
+    public bool IsInvisibleForMonster { get => _isInvisibleForMonster; private set => _isInvisibleForMonster = value; }
 
     public bool IsDead => HP.IsValueEmpty();
     public bool CanDodge => DodgeCooldown.IsValueEmpty();
@@ -67,6 +69,8 @@ public class Player : BaseUnit, IDamager, IDamageable
         CheckAllCooldowns();
         StateMachine.ExecuteCurrent();
     }
+
+    public void SetIvisibility(bool isEnabled) => IsInvisibleForMonster = isEnabled;
 
     public void Die() => StateMachine.EnterTo(_dieState);
     public void GetDamage(float damageAmount)
