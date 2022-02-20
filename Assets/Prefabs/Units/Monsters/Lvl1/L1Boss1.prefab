@@ -40,17 +40,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5849650855336150734}
+  - component: {fileID: 3312636122258233578}
   - component: {fileID: 1987161436524763791}
   - component: {fileID: 3999118991229112504}
   - component: {fileID: 8093027020166807988}
   - component: {fileID: 2275983314906909968}
-  - component: {fileID: 800758680328710929}
-  - component: {fileID: 1879776770759742537}
   - component: {fileID: 1996578595614421219}
-  - component: {fileID: 3312636122258233578}
+  - component: {fileID: 800758680328710929}
+  - component: {fileID: 5944072984734860465}
+  - component: {fileID: 3086473846443500658}
   - component: {fileID: 4742535607017347551}
   - component: {fileID: 2170612235513667276}
-  - component: {fileID: 5944072984734860465}
   m_Layer: 0
   m_Name: L1Boss1
   m_TagString: Monster
@@ -74,6 +74,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3312636122258233578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998661377840299969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c58ac6221892c94ab9359bc7df05a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preferences: {fileID: 11400000, guid: f9e8bd65d87c38e408f03b618fb7d223, type: 2}
+  _hitboxOffset: {x: -0.03, y: -0.19}
+  _btwTargetDistance:
+    _hasMaxValue: 1
+    _value: 3
+    _maxValue: 3
+  _angry: {fileID: 11400000, guid: 61c601f374ca08c42a17c85cc03b5271, type: 2}
+  _minion: {fileID: 2696565690090797821, guid: 0f09e9f2716a3ab4ba1d2b07a43ab1c9, type: 3}
+  _spawnMinionDelay:
+    _hasMaxValue: 1
+    _value: 8
+    _maxValue: 8
 --- !u!210 &1987161436524763791
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -141,6 +165,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1996578595614421219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998661377840299969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b872925ede32442a097a4594a6ee4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &800758680328710929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +196,7 @@ MonoBehaviour:
   _skinPartList:
   - {fileID: 8283963753831988167}
   - {fileID: 539275631120984326}
---- !u!114 &1879776770759742537
+--- !u!114 &5944072984734860465
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,75 +205,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 6998661377840299969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f57c7852ca3637f449b3c6e10429e873, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ea09cdc46cd1ed468fd3d31ec487b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteParent: {fileID: 8197570341261394111}
+--- !u!114 &3086473846443500658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998661377840299969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb962a6b456779a4c8dc0bbc8fd42131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _model: {fileID: 4839246633912972618}
---- !u!114 &1996578595614421219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6998661377840299969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5b872925ede32442a097a4594a6ee4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3312636122258233578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6998661377840299969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c58ac6221892c94ab9359bc7df05a97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _preferences: {fileID: 11400000, guid: 237bce7c96c4c864a88a4ccc664526bf, type: 2}
-  _hitboxDistance:
-    _hasMaxValue: 1
-    _value: 1.2
-    _maxValue: 1.2
-  _hitboxOffset: {x: -0.03, y: -0.19}
-  _speed:
-    _hasMaxValue: 1
-    _value: 1
-    _maxValue: 10
-  _damage:
-    _hasMaxValue: 1
-    _value: 30
-    _maxValue: 100
-  _attackRange:
-    _hasMaxValue: 1
-    _value: 0.5
-    _maxValue: 0.5
-  _attackCooldown:
-    _hasMaxValue: 1
-    _value: 1
-    _maxValue: 1
-  _hp:
-    _hasMaxValue: 1
-    _value: 100
-    _maxValue: 100
-  _chaseRadius:
-    _hasMaxValue: 1
-    _value: 15
-    _maxValue: 20
-  _btwTargetDistance:
-    _hasMaxValue: 1
-    _value: 3
-    _maxValue: 3
-  _default: {fileID: 11400000, guid: b49c41f8f7ea34543b73a0b21ee7f0f1, type: 2}
-  _angry: {fileID: 11400000, guid: 61c601f374ca08c42a17c85cc03b5271, type: 2}
-  _minion: {fileID: 2696565690090797821, guid: 0f09e9f2716a3ab4ba1d2b07a43ab1c9, type: 3}
-  _spawnMinionDelay:
-    _hasMaxValue: 1
-    _value: 8
-    _maxValue: 8
 --- !u!114 &4742535607017347551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,19 +253,6 @@ MonoBehaviour:
   _parent: {fileID: 4839246633912972618}
   _indicator: {fileID: 3372764971101351945, guid: b5c154eb8a5cb5e459967f5708899070, type: 3}
   _indicatorOffset: {x: 0, y: 1}
---- !u!114 &5944072984734860465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6998661377840299969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea09cdc46cd1ed468fd3d31ec487b76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spriteParent: {fileID: 8197570341261394111}
 --- !u!1001 &1886894373434187648
 PrefabInstance:
   m_ObjectHideFlags: 0

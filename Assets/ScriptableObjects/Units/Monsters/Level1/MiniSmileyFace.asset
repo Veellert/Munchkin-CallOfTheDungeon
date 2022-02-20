@@ -9,9 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b213bd04908e13478e363ae4479037c, type: 3}
+  m_Script: {fileID: 11500000, guid: 27c49d2f988731145a388284d4b9bb42, type: 3}
   m_Name: MiniSmileyFace
   m_EditorClassIdentifier: 
   _id: Monster_MiniSmileyFace
   _name: "\u041C\u0438\u043D\u0438 \u0421\u043C\u0430\u0439\u043B\u0438\u043A"
+  _description: "\u041E\u0442\u0431\u0438\u0442\u044B\u0439 \u043C\u0430\u043B\u043E\u0439.
+    \u041C\u0438\u043D\u044C\u043E\u043D \u0431\u043E\u0441\u0441\u0430 \u0421\u043C\u0430\u0439\u043B\u0438\u043A\u0430"
+  _hitboxRange: 0.4
+  _speed: 1
+  _hp: 20
   _level: 1
+  _chaseRadius: 0
+  _damage: 4
+  _attackCooldown: 1
+  _attackRange: 0.2

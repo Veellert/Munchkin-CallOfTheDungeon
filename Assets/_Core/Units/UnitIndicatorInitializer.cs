@@ -5,6 +5,8 @@ using UnityEngine;
 /// </summary>
 public class UnitIndicatorInitializer : MonoBehaviour
 {
+    //===>> Inspector <<===\\
+
     [Header("Parent for Indicator")]
     [SerializeField] private Transform _parent;
     [Header("Indicator Object")]
@@ -12,7 +14,11 @@ public class UnitIndicatorInitializer : MonoBehaviour
     [Header("Indicator Position")]
     [SerializeField] private Vector2 _indicatorOffset;
 
-    private GameObject _current;
+    //===>> Components & Fields <<===\\
+
+    private GameObject _currentIndicator;
+
+    //===>> Unity <<===\\
 
     private void Start()
     {
@@ -20,17 +26,23 @@ public class UnitIndicatorInitializer : MonoBehaviour
             InstantiateIndicator();
     }
 
+    //===>> Editor Methods <<===\\
+
+    /// <summary>
+    /// Удаляет текущий индикатор
+    /// </summary>
+    public void ClearIndicator() => DestroyImmediate(_currentIndicator);
+
+    //===>> Public Methods <<===\\
+
     /// <summary>
     /// Устанваливает индикатор на место модели
     /// </summary>
     public void InstantiateIndicator()
     {
-        _current = Instantiate(_indicator, (Vector2)_parent.position + _indicatorOffset * _parent.parent.localScale, Quaternion.identity, _parent).gameObject;
-        _current.name = "Indicator";
-    }
+        _currentIndicator = Instantiate(_indicator, _parent.position + GetCorrectOffset(), Quaternion.identity, _parent).gameObject;
+        _currentIndicator.name = "Indicator";
 
-    /// <summary>
-    /// Удаляет поставленный индикатор
-    /// </summary>
-    public void ClearIndicator() => DestroyImmediate(_current);
+        Vector3 GetCorrectOffset() => _indicatorOffset * _parent.parent.localScale;
+    }
 }

@@ -5,23 +5,34 @@
 /// </summary>
 public class HealthBar : MonoBehaviour
 {
+    //===>> Inspector <<===\\
+
     [Header("Health Bar Object")]
     [SerializeField] private Transform _indicator;
-    [Header("Indicator & Its Color")]
+    [Header("Indicator & It's Color")]
     [SerializeField] private SpriteRenderer _indicatorSprite;
     [SerializeField] private Color _indicatorColor = Color.red;
 
-    private Transform _target;
-    private IDamageable _attrib;
+    //===>> Attributes & Properties <<===\\
+
     private float HpPercent => _attrib.HP.Value / _attrib.HP.MaxValue;
 
-    private void Awake()
+    //===>> Components & Fields <<===\\
+
+    private Transform _target;
+    private IDamageable _attrib;
+
+    //===>> Unity <<===\\
+
+    private void Start()
     {
         ChangeIndicatorColor();
 
-        _target = gameObject.transform.parent;
+        _target = transform.parent;
         InitializeHPBar();
     }
+
+    //===>> Private & Protected Methods <<===\\
 
     /// <summary>
     /// Инициализирует индикатор здоровья
@@ -41,6 +52,14 @@ public class HealthBar : MonoBehaviour
             _indicatorSprite.color = _indicatorColor;
     }
 
+    /// <returns>
+    /// Обновленный размер индикатора
+    /// </returns>
+    /// <param name="indicatorScale">Старый размер индикатора</param>
+    private Vector2 UpdateIndicatorScale(Vector2 indicatorScale) => new Vector2(HpPercent, indicatorScale.y);
+
+    //===>> On Events <<===\\
+
     /// <summary>
     /// Обновляет индикатор
     /// </summary>
@@ -52,15 +71,9 @@ public class HealthBar : MonoBehaviour
 
         _indicator.localScale = UpdateIndicatorScale(_indicator.localScale);
 
-        if (_attrib.IsDead)
+        if (_attrib.HP.IsValueEmpty())
             gameObject.SetActive(false);
-        else if(!gameObject.activeSelf)
+        else if (!gameObject.activeSelf)
             gameObject.SetActive(true);
     }
-
-    /// <returns>
-    /// Обновленный размер индикатора
-    /// </returns>
-    /// <param name="indicatorScale">Старый размер индикатора</param>
-    private Vector2 UpdateIndicatorScale(Vector2 indicatorScale) => new Vector2(HpPercent, indicatorScale.y);
 }

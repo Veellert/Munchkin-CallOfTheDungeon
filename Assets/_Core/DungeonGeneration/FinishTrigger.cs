@@ -13,7 +13,7 @@ namespace Assets.DungeonGeneration
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                if (Monster.GetMonsters().Count == 0)
+                if (BaseMonster.MonstersCount.IsValueEmpty())
                     PlayerLocation.MoveToNextLocation();
             }
         }

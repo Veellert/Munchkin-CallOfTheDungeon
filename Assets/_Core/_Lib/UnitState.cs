@@ -1,56 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 /// <summary>
 /// Состояние юнита
 /// </summary>
 public class UnitState
 {
-    public string Tag { get; private set; }
+    public delegate void OnState();
 
     /// <summary>
-    /// При изменении состояния
+    /// При вхождении в состояние
     /// </summary>
-    public event Action OnEnter;
+    public OnState OnEnter;
     /// <summary>
     /// При выполнении состояния
     /// </summary>
-    public event Action OnExecute;
-
-    public UnitState(string tag) => Tag = tag;
-
+    public OnState OnExecute;
     /// <summary>
-    /// Изменяет текущий экземпляр состояния на новое состояние
+    /// При выходе из в состояния
     /// </summary>
-    /// <param name="state">Новое состояние</param>
-    public void Enter(UnitState state)
-    {
-        Tag = state.Tag;
-        OnEnter = state.OnEnter;
-        OnExecute = state.OnExecute;
+    public OnState OnExit;
 
-        OnEnter?.Invoke();
+    public UnitState(OnState onEnter, OnState onExecute, OnState onExit)
+    {
+        OnEnter = onEnter;
+        OnExecute = onExecute;
+        OnExit = onExit;
     }
 
-    /// <summary>
-    /// Выполняет событие состояния
-    /// </summary>
-    /// <param name="condition">Условие</param>
-    public void Execute(bool condition = true)
-    {
-        if (condition)
-            OnExecute?.Invoke();
-    }
+    public static bool operator ==(UnitState a, UnitState b) => a?.GetHashCode() == b?.GetHashCode();
+    public static bool operator !=(UnitState a, UnitState b) => a?.GetHashCode() != b?.GetHashCode();
 
     public override bool Equals(object obj)
     {
         return obj is UnitState state &&
-               Tag == state.Tag;
+               EqualityComparer<OnState>.Default.Equals(OnEnter, state.OnEnter) &&
+               EqualityComparer<OnState>.Default.Equals(OnExecute, state.OnExecute) &&
+               EqualityComparer<OnState>.Default.Equals(OnExit, state.OnExit);
     }
     public override int GetHashCode()
     {
-        return 1005349675 + EqualityComparer<string>.Default.GetHashCode(Tag);
+        int hashCode = 1745298373;
+        hashCode = hashCode * -1521134295 + EqualityComparer<OnState>.Default.GetHashCode(OnEnter);
+        hashCode = hashCode * -1521134295 + EqualityComparer<OnState>.Default.GetHashCode(OnExecute);
+        hashCode = hashCode * -1521134295 + EqualityComparer<OnState>.Default.GetHashCode(OnExit);
+        return hashCode;
     }
-    public static bool operator ==(UnitState a, UnitState b) => a?.Tag == b?.Tag;
-    public static bool operator !=(UnitState a, UnitState b) => a?.Tag != b?.Tag;
 }

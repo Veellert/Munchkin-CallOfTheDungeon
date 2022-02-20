@@ -291,16 +291,16 @@ GameObject:
   m_Component:
   - component: {fileID: 5145696488535039384}
   - component: {fileID: 2929466657238795860}
+  - component: {fileID: 3459475614946206594}
+  - component: {fileID: 5049382011076064040}
   - component: {fileID: 6035898076550514794}
   - component: {fileID: 847932048801801347}
   - component: {fileID: 1058840120893003277}
   - component: {fileID: 4850699366083416831}
   - component: {fileID: 2930112217441046029}
-  - component: {fileID: 738277049013731172}
-  - component: {fileID: 7082644843430218455}
-  - component: {fileID: 5049382011076064040}
-  - component: {fileID: 8154384649498093774}
+  - component: {fileID: 6755337317149198389}
   - component: {fileID: 8340695777950492937}
+  - component: {fileID: 8154384649498093774}
   m_Layer: 0
   m_Name: HumanMale1
   m_TagString: Player
@@ -338,6 +338,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentLocation: 0
+--- !u!114 &3459475614946206594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5145696488535039385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 098ffa469e4311144956229cd99553c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preferences: {fileID: 11400000, guid: 3b95d314d2247af4489983548864ede9, type: 2}
+  _hitboxOffset: {x: 0.01, y: 0.15}
+--- !u!114 &5049382011076064040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5145696488535039385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7943ae6360f07246b1713be645e9660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dropCrystals:
+    _hasMaxValue: 0
+    _value: 0
+    _maxValue: 0
 --- !u!70 &6035898076550514794
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -417,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b872925ede32442a097a4594a6ee4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &738277049013731172
+--- !u!114 &6755337317149198389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -426,11 +456,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5145696488535039385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f57c7852ca3637f449b3c6e10429e873, type: 3}
+  m_Script: {fileID: 11500000, guid: fb962a6b456779a4c8dc0bbc8fd42131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _model: {fileID: 8873887911999676249}
---- !u!114 &7082644843430218455
+--- !u!114 &8340695777950492937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -439,59 +469,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5145696488535039385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3710edaa50dbbc4ea1602dcc7ab25e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ea09cdc46cd1ed468fd3d31ec487b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _preferences: {fileID: 11400000, guid: 70a8f3217841df24c85f6f2f53e2419e, type: 2}
-  _hitboxDistance:
-    _hasMaxValue: 1
-    _value: 0.6
-    _maxValue: 0.6
-  _hitboxOffset: {x: 0.01, y: 0.15}
-  _speed:
-    _hasMaxValue: 1
-    _value: 5
-    _maxValue: 10
-  _damage:
-    _hasMaxValue: 1
-    _value: 8
-    _maxValue: 100
-  _attackRange:
-    _hasMaxValue: 1
-    _value: 0.35
-    _maxValue: 0.35
-  _attackCooldown:
-    _hasMaxValue: 1
-    _value: 0.25
-    _maxValue: 0.25
-  _hp:
-    _hasMaxValue: 1
-    _value: 100
-    _maxValue: 100
-  _dodgeForce:
-    _hasMaxValue: 1
-    _value: 6
-    _maxValue: 10
-  _dodgeCooldown:
-    _hasMaxValue: 1
-    _value: 2
-    _maxValue: 2
---- !u!114 &5049382011076064040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5145696488535039385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7943ae6360f07246b1713be645e9660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dropCrystals:
-    _hasMaxValue: 0
-    _value: 0
-    _maxValue: 0
+  _spriteParent: {fileID: 2064441632462805701}
 --- !u!114 &8154384649498093774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,19 +488,6 @@ MonoBehaviour:
   _parent: {fileID: 8873887911999676249}
   _indicator: {fileID: 1243659752918330489, guid: 0e430cd8d224b2348827f0ac8096a102, type: 3}
   _indicatorOffset: {x: 0, y: 2}
---- !u!114 &8340695777950492937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5145696488535039385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea09cdc46cd1ed468fd3d31ec487b76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spriteParent: {fileID: 2064441632462805701}
 --- !u!1 &5509331692275999686
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6965916924240003551}
-  - component: {fileID: 249323287792694380}
   - component: {fileID: 2704910058999190542}
   - component: {fileID: 8550056921738450470}
   - component: {fileID: 2962789622993779187}
   - component: {fileID: 6984649211031845056}
+  - component: {fileID: 249323287792694380}
   m_Layer: 0
   m_Name: PollymorphPotion
   m_TagString: Untagged
@@ -36,20 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &249323287792694380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3311404091813726307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baecac2c65d6a904aac75c9880dd6d94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _basePreferences: {fileID: 11400000, guid: aae8d87917445e648bc5e0e74f6d5795, type: 2}
-  _pollymorphModel: {fileID: 4176731676137323025, guid: 034752c1767c78843ae030f356d382c3, type: 3}
 --- !u!210 &2704910058999190542
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -102,6 +88,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda9d05b19199d040b63ed24d8267083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &249323287792694380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3311404091813726307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baecac2c65d6a904aac75c9880dd6d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _basePreferences: {fileID: 11400000, guid: aae8d87917445e648bc5e0e74f6d5795, type: 2}
+  _pollymorphModel: {fileID: 4176731676137323025, guid: 034752c1767c78843ae030f356d382c3, type: 3}
 --- !u!1001 &8477545007757810860
 PrefabInstance:
   m_ObjectHideFlags: 0

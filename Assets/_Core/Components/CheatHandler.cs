@@ -82,8 +82,8 @@ public class CheatHandler : MonoBehaviour
             return;
 
         _isExtraForce = true;
-        Player.Instance.Damage.FillEmpty();
-        Player.Instance.Damage.IncreaseValue(40);
+        Player.Instance.Damage.SetMax(40);
+        Player.Instance.Damage.FillToMax();
     }
 
     private void DisableExtraForce()
@@ -101,16 +101,13 @@ public class CheatHandler : MonoBehaviour
             return;
 
         if (FinishPositions != null && FinishPositions.Count != 0)
-            Player.Instance.transform.position = (Vector2)FinishPositions[0];
+            Player.Instance.transform.position = FinishPositions[0];
     }
 
     public void KillAllMonsters()
     {
-        var monsterList = new List<Monster>();
-        monsterList.AddRange(Monster.GetMonsters());
-
-        foreach (var monster in monsterList)
-            monster.GetDamage(monster.HP);
+        BaseMonster.GetMonsters().
+            ForEach(monster => monster.ReceiveDamage(monster.HP));
     }
 
     public void InstantHeal()

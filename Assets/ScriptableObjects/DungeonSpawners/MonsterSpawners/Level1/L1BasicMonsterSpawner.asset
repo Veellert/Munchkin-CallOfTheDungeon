@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: L1BasicMonsterSpawner
   m_EditorClassIdentifier: 
   _monsterList:
-  - _target: {fileID: 4233876460335488791, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
+  - _target: {fileID: 4694955391938860018, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
     count: 2

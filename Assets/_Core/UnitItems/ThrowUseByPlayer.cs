@@ -1,27 +1,45 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Компонент отвечающий за логику использования предмета с помощью броска
+/// </summary>
 public class ThrowUseByPlayer : MonoBehaviour
 {
+    //===>> Constants <<===\\
+
     private const float PotionRange = 4;
     private const float Speed = 2.5f;
 
-    private event Action OnPickUp;
-    private event Action UntilThrow;
-    private event Action OnThrow;
+    //===>> Components & Fields <<===\\
 
-    private Monster _target;
+    /// <summary>
+    /// Событие при взятии в руку
+    /// </summary>
+    private event Action OnPickUp;
+    /// <summary>
+    /// Событие во время броска
+    /// </summary>
+    private event Action UntilThrow;
+    /// <summary>
+    /// Событие при конце броска
+    /// </summary>
+    private event Action OnThrowed;
+
+    private BaseMonster _target;
     private Vector2 _throwPosition;
+
+    //===>> Unity <<===\\
 
     private void Start()
     {
         OnPickUp += OnItemPickUp;
-        OnThrow += OnItemThrow;
+        OnThrowed += OnItemThrowed;
     }
 
-    private void OnItemThrow()
+    private void FixedUpdate()
     {
-        GetComponent<BasePotion>().UsePotionOn(_target);
+        UntilThrow?.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,11 +50,19 @@ public class ThrowUseByPlayer : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    //===>> On Events <<===\\
+
+    /// <summary>
+    /// Событие при коце броска
+    /// </summary>
+    private void OnItemThrowed()
     {
-        UntilThrow?.Invoke();
+        GetComponent<BasePotion>().UsePotionOn(_target);
     }
 
+    /// <summary>
+    /// Событие при взятии в руку
+    /// </summary>
     private void OnItemPickUp()
     {
         OnPickUp -= OnItemPickUp;
@@ -45,6 +71,9 @@ public class ThrowUseByPlayer : MonoBehaviour
         InputObserver.Instance.OnRightMouseButton += ThrowItem;
     }
 
+    /// <summary>
+    /// Событие во время броска
+    /// </summary>
     private void ThrowItem()
     {
         UntilThrow -= ChasePlayer;
@@ -52,28 +81,39 @@ public class ThrowUseByPlayer : MonoBehaviour
 
         transform.SetParent(null);
         _throwPosition = InputObserver.GetMousePosition();
-        _target = Monster.GetClosestMonster(_throwPosition, new TileHalf(PotionRange));
+        _target = BaseMonster.GetClosest(_throwPosition, PotionRange.TileHalfed());
 
         UntilThrow += ThrowTo;
     }
 
+    //===>> Private & Protected Methods <<===\\
+
+    /// <summary>
+    /// Преследует мышку игрока
+    /// </summary>
     private void ChasePlayer()
     {
         transform.position = (Vector2)Player.Instance.transform.position + Direction2D.GetMouseDirection() * new TileHalf();
     }
 
+    /// <summary>
+    /// Бросок
+    /// </summary>
     private void ThrowTo()
     {
         transform.position = Vector2.MoveTowards(transform.position, _throwPosition, Speed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, _throwPosition) <= new TileHalf() ||
             (_target && Vector2.Distance(transform.position, _target.transform.position) <= new TileHalf()))
-            Throw();
+            ApproveThrow();
     }
 
-    private void Throw()
+    /// <summary>
+    /// Бросок попал в цель
+    /// </summary>
+    private void ApproveThrow()
     {
         UntilThrow -= ThrowTo;
-        OnThrow?.Invoke();
+        OnThrowed?.Invoke();
     }
 }

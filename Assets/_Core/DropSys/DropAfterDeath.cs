@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Assets.DropSystem
+﻿namespace Assets.DropSystem
 {
     /// <summary>
     /// Система дропа после смерти

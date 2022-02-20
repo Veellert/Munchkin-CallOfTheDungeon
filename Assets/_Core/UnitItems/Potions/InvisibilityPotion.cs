@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Класс отвечающий за логику зелья "Зелье невидимости"
 /// </summary>
 public class InvisibilityPotion : TemporaryPotion
 {
+    //===>> Important Methods <<===\\
+
     protected override void StartPotionEffect()
     {
         SetInvisibility(true);
@@ -16,6 +16,8 @@ public class InvisibilityPotion : TemporaryPotion
         SetInvisibility(false);
         ResetModelTransparency();
     }
+
+    //===>> Private & Protected Methods <<===\\
 
     /// <summary>
     /// Устанавливает невидимость игрока для монстров

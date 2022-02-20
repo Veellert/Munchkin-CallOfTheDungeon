@@ -5,16 +5,17 @@ namespace Assets.BossStages
     /// <summary>
     /// Компонент родитель отвечающий за логику уровня босса
     /// </summary>
-    public abstract class BossStage<T> : MonoBehaviour where T : Boss
+    public abstract class BossStage<TBoss> : MonoBehaviour
+        where TBoss : Boss
     {
         [Header("Player")]
         [SerializeField] protected Vector2 _playerPosition;
 
         [Header("Boss")]
-        [SerializeField] protected T _bossTarget;
+        [SerializeField] protected TBoss _bossTarget;
         [SerializeField] protected Vector2 _bossPosition;
 
-        public T CurrentBoss { get; protected set; }
+        public TBoss CurrentBoss { get; protected set; }
 
         protected virtual void Start()
         {
@@ -25,6 +26,6 @@ namespace Assets.BossStages
         /// <returns>
         /// Заспавненный босс
         /// </returns>
-        protected T SpawnBoss() => (T)Instantiate(_bossTarget, _bossPosition, Quaternion.identity);
+        protected TBoss SpawnBoss() => Instantiate(_bossTarget, _bossPosition, Quaternion.identity);
     }
 }

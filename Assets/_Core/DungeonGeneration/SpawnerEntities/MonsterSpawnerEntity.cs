@@ -9,7 +9,7 @@ namespace Assets.DungeonGeneration
     public class MonsterSpawnerEntity : SpawnerEntity
     {
         [Header("Monster")]
-        [SerializeField] private Monster _target;
+        [SerializeField] private BaseMonster _target;
         [Header("Count In Spawner")]
         [SerializeField] private int count = 1;
 

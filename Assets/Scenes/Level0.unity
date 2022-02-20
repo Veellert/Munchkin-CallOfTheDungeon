@@ -10855,7 +10855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5844992778124207404, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
       propertyPath: m_Name
-      value: L1Monster1
+      value: Monster_HammerRat
       objectReference: {fileID: 0}
     - target: {fileID: 5844992778124207404, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
       propertyPath: m_IsActive
@@ -10869,7 +10869,8 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.9737924
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8187985752697558249, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9071f12e39644ad488c3e1dabedcacf8, type: 3}
 --- !u!1001 &1423068841
 PrefabInstance:

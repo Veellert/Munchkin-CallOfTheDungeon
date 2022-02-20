@@ -6,10 +6,16 @@ using UnityEngine;
 /// </summary>
 public class PollymorphPotion : BasePotion
 {
+    //===>> Inspector <<===\\
+
     [Header("Pollymorph")]
     [SerializeField] private PollymorphMonster _pollymorphModel;
 
+    //===>> Components & Fields <<===\\
+
     private PollymorphMonster _pollymorph;
+
+    //===>> Important Methods <<===\\
 
     protected override void Use()
     {
@@ -22,13 +28,15 @@ public class PollymorphPotion : BasePotion
         InitializePollymorph();
     }
 
+    //===>> Private & Protected Methods <<===\\
+
     /// <summary>
     /// Назначает дроп для полиморфа
     /// </summary>
     private void InitializePollymorph()
     {
-        if (_target.TryGetComponent(out DropSystem drop))
-            _pollymorph.InitializePollymorph(drop, _target);
+        _pollymorph.InitializePollymorph(_target.GetComponent<DropSystem>(),
+            _target.GetComponent<BaseMonster>());
     }
 
     /// <summary>
@@ -37,9 +45,5 @@ public class PollymorphPotion : BasePotion
     private void PollymorphTarget()
     {
         _pollymorph = Instantiate(_pollymorphModel, _target.gameObject.transform.position, Quaternion.identity);
-
-        _target.gameObject.SetActive(false);
-        _target.transform.localScale = new Vector2(0, 0);
-        Monster.RemoveMonsterFromStack((Monster)_target);
     }
 }

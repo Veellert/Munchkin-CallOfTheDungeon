@@ -8,7 +8,7 @@ public abstract class ItemPreferences : ScriptableObject
     [SerializeField] protected string _id = "Item_ID";
     public string ID => _id;
 
-    [SerializeField] protected string _name = "No Named";
+    [SerializeField] [TextArea] protected string _name = "No Named";
     public string Name => _name;
 
     [SerializeField] protected eItemRare _rare;

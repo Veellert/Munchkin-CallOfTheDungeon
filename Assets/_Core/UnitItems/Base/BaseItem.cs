@@ -6,16 +6,25 @@
 [RequireComponent(typeof(PSBRenderer))]
 public abstract class BaseItem : MonoBehaviour
 {
+    //===>> Inspector <<===\\
+
     [Header("Item Preferences")]
     [SerializeField] protected ItemPreferences _basePreferences;
 
-    protected BaseUnit _target;
+    //===>> Components & Fields <<===\\
+
     protected PSBRenderer _renderer;
+
+    protected BaseUnit _target;
+
+    //===>> Unity <<===\\
 
     private void Awake()
     {
         _renderer = GetComponent<PSBRenderer>();
     }
+
+    //===>> Important Methods <<===\\
 
     /// <summary>
     /// Локига использования предмета
@@ -31,11 +40,13 @@ public abstract class BaseItem : MonoBehaviour
         Destroy(GetComponent<CapsuleCollider2D>());
     }
 
+    //===>> Private & Protected Methods <<===\\
+
     /// <summary>
     /// Устанавливает цель
     /// </summary>
     /// <param name="target">Цель</param>
-    protected void SetTarget(BaseUnit target) => _target = target;
+    protected virtual void SetTarget(BaseUnit target) => _target = target;
     /// <summary>
     /// Обнуляет цель
     /// </summary>

@@ -12,12 +12,20 @@ namespace Assets.UI
     {
         public static MinimapRenderer Instance { get; set; }
 
+        //===>> Inspector <<===\\
+
         [Header("Indicator Objects For Minimap")]
         [SerializeField] private List<MinimapIndicatorObject> _indicatorList = new List<MinimapIndicatorObject>();
 
+        //===>> Attributes & Properties <<===\\
+
         public Camera Self { get; private set; }
 
+        //===>> Components & Fields <<===\\
+
         private bool _isActive = true;
+
+        //===>> Unity <<===\\
 
         private void Start()
         {
@@ -35,6 +43,8 @@ namespace Assets.UI
             InputObserver.Instance._minimapIncrease.OnButtonUse -= OnMinimapIncrease;
             InputObserver.Instance._minimapDecrease.OnButtonUse -= OnMinimapDecrease;
         }
+
+        //===>> Public Methods <<===\\
 
         /// <summary>
         /// Устанавливает индикатор на миникарту
@@ -55,11 +65,15 @@ namespace Assets.UI
             Instantiate(indicatorObject, indicator.Position, Quaternion.identity);
         }
 
+        //===>> Private & Protected Methods <<===\\
+
         /// <returns>
         /// Объект индикатора из коллекции
         /// </returns>
         /// <param name="indicator">Тип индикатора</param>
         private MinimapIndicatorObject GetIndicatorObject(eMinimapIndicator indicator) => _indicatorList.Find(s => s.Indicator == indicator);
+
+        //===>> On Events <<===\\
 
         /// <summary>
         /// Инверсия визуализации миникарты

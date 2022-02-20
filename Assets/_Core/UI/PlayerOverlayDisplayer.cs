@@ -9,6 +9,8 @@ namespace Assets.UI
     /// </summary>
     public class PlayerOverlayDisplayer : MonoBehaviour
     {
+        //===>> Inspector <<===\\
+
         [Header("Image For Light")]
         [SerializeField] private Image _lightMap;
 
@@ -23,13 +25,15 @@ namespace Assets.UI
         [SerializeField] private MenuTemplate _pauseMenu;
         [SerializeField] private CheatHandler _cheatMenu;
 
+        //===>> Unity <<===\\
+
         private void Start()
         {
             InputObserver.Instance._minimap.OnButtonUse += OnMinimapActiveChanged;
             InputObserver.Instance._pauseMenu.OnButtonUse += OnPauseClick;
             InputObserver.Instance._cheatPanel.OnButtonUse += OnCheatClick;
 
-            Monster.MonstersCount.OnValueChanged += Count_OnValueChanged;
+            BaseMonster.MonstersCount.OnValueChanged += Count_OnValueChanged;
             Player.Instance.Inventory.DropCrystals.OnValueChanged += Drop_OnValueChanged;
 
             DisplayOnce();
@@ -41,9 +45,11 @@ namespace Assets.UI
             InputObserver.Instance._pauseMenu.OnButtonUse -= OnPauseClick;
             InputObserver.Instance._cheatPanel.OnButtonUse -= OnCheatClick;
 
-            Monster.MonstersCount.OnValueChanged -= Count_OnValueChanged;
+            BaseMonster.MonstersCount.OnValueChanged -= Count_OnValueChanged;
             Player.Instance.Inventory.DropCrystals.OnValueChanged -= Drop_OnValueChanged;
         }
+
+        //===>> Public Methods <<===\\
 
         /// <summary>
         /// Отображает меню и ставит игру на паузу
@@ -57,7 +63,7 @@ namespace Assets.UI
             else
                 InputObserver.Instance.SetGameState(GameState.PlayState());
 
-            Monster.GetMonsters().ForEach(s => s.SetDisableState(_pauseMenu.gameObject.activeSelf));
+            BaseMonster.GetMonsters().ForEach(s => s.SetDisableState(_pauseMenu.gameObject.activeSelf));
         }
 
         /// <summary>
@@ -94,15 +100,7 @@ namespace Assets.UI
             RenderLightInfo(level);
         }
 
-        /// <summary>
-        /// Отображает всю информацию при загрузке компонента
-        /// </summary>
-        private void DisplayOnce()
-        {
-            DisplayMonsterCounterText();
-            DisplayDropCounterText();
-            RenderLightInfo(PlayerPrefs.GetFloat("LightLevel", 0));
-        }
+        //===>> On Events <<===\\
 
         /// <summary>
         /// Событие при нажатии на паузу
@@ -146,6 +144,18 @@ namespace Assets.UI
             DisplayDropCounterText();
         }
 
+        //===>> Private & Protected Methods <<===\\
+
+        /// <summary>
+        /// Отображает всю информацию при загрузке компонента
+        /// </summary>
+        private void DisplayOnce()
+        {
+            DisplayMonsterCounterText();
+            DisplayDropCounterText();
+            RenderLightInfo(PlayerPrefs.GetFloat("LightLevel", 0));
+        }
+
         /// <summary>
         /// Отображает текст с кол-вом дропа с моснтров
         /// </summary>
@@ -159,7 +169,7 @@ namespace Assets.UI
         /// </summary>
         private void DisplayMonsterCounterText()
         {
-            _monsterCounterText.text = ": " + Monster.MonstersCount.Value;
+            _monsterCounterText.text = ": " + BaseMonster.MonstersCount.Value;
         }
 
         /// <returns>

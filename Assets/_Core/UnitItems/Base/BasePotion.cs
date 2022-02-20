@@ -1,17 +1,21 @@
-﻿using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Компонент родитель отвечающий за логику зелья
 /// </summary>
 public abstract class BasePotion : BaseItem
 {
+    //===>> Attributes & Properties <<===\\
+
     public NumericAttrib UsagesCount { get; protected set; }
 
     protected bool CanUse => !UsagesCount.IsValueEmpty();
 
-    protected bool _isUsingNow;
+    //===>> Components & Fields <<===\\
 
     private PotionPreferences _potionPreferences;
+
+    protected bool _isUsingNow;
+
+    //===>> Unity <<===\\
 
     private void Start()
     {
@@ -19,11 +23,15 @@ public abstract class BasePotion : BaseItem
         UsagesCount = new NumericAttrib(_potionPreferences.MaxUsageCount);
     }
 
+    //===>> Important Methods <<===\\
+
     protected override void Use()
     {
         UsagesCount--;
         _isUsingNow = true;
     }
+
+    //===>> Public Methods <<===\\
 
     /// <summary>
     /// Использование зелья на цели

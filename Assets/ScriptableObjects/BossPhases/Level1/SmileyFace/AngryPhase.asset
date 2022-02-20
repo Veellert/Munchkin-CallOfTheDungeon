@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d29fffc5eb75fee4bba235006078397e, type: 3}
+  m_Script: {fileID: 11500000, guid: 67417b0588397504c852d81b241aa02e, type: 3}
   m_Name: AngryPhase
   m_EditorClassIdentifier: 
   _phaseName: "\u0417\u043B\u0430\u044F \u0424\u0430\u0437\u0430"

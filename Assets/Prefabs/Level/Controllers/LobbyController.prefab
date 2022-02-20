@@ -60,5 +60,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputInstance: {fileID: 6422815308580270926, guid: 1d79c9ab9c56b704795d5fedc2b0c591, type: 3}
-  _playerInstance: {fileID: 7082644843430218455, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
+  _playerInstance: {fileID: 3459475614946206594, guid: aaca06a45fef7844c9dc1f5e5b16fad5, type: 3}
   _playerStartPosition: {x: 4.5, y: 12}

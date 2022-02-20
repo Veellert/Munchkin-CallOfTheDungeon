@@ -16,7 +16,6 @@ public class PSBRenderer : MonoBehaviour
         foreach (var part in _modelPartsArray)
             part.material.SetAlpha(alpha);
     }
-
     public void ResetAlpha()
     {
         foreach (var part in _modelPartsArray)

@@ -9,17 +9,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6018217798483032470}
+  - component: {fileID: 2696565690090797821}
   - component: {fileID: 6234842532247697618}
   - component: {fileID: 3878895391334625248}
   - component: {fileID: 8285240628316667628}
   - component: {fileID: 2107343236919112264}
-  - component: {fileID: 6137404822128285595}
-  - component: {fileID: 4795662812655457835}
   - component: {fileID: 6661553329943909999}
-  - component: {fileID: 2696565690090797821}
+  - component: {fileID: 6137404822128285595}
+  - component: {fileID: 2595707340245553885}
+  - component: {fileID: 354689350844174132}
   - component: {fileID: 77007166685963881}
   - component: {fileID: 2765089203629580943}
-  - component: {fileID: 2595707340245553885}
   m_Layer: 0
   m_Name: L1Boss1Minion1
   m_TagString: Monster
@@ -43,6 +43,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2696565690090797821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7172860054007578777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0770706ff5bdaa241aca048ad861696a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preferences: {fileID: 11400000, guid: 4fdb8e7cddb11b741ba7f64c684211ad, type: 2}
+  _hitboxOffset: {x: -0.007, y: -0.07}
+  _btwTargetDistance:
+    _hasMaxValue: 1
+    _value: 1.3
+    _maxValue: 1.3
 --- !u!210 &6234842532247697618
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -110,6 +128,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6661553329943909999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7172860054007578777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b872925ede32442a097a4594a6ee4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6137404822128285595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +159,7 @@ MonoBehaviour:
   _skinPartList:
   - {fileID: 8096819443839091871}
   - {fileID: 419053646192383582}
---- !u!114 &4795662812655457835
+--- !u!114 &2595707340245553885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,68 +168,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7172860054007578777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f57c7852ca3637f449b3c6e10429e873, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ea09cdc46cd1ed468fd3d31ec487b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteParent: {fileID: 8316105123415031783}
+--- !u!114 &354689350844174132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7172860054007578777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb962a6b456779a4c8dc0bbc8fd42131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _model: {fileID: 2085577974135990118}
---- !u!114 &6661553329943909999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7172860054007578777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5b872925ede32442a097a4594a6ee4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2696565690090797821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7172860054007578777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0770706ff5bdaa241aca048ad861696a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _preferences: {fileID: 11400000, guid: ffe34045f341c7a4b807cbdc512172b4, type: 2}
-  _hitboxDistance:
-    _hasMaxValue: 1
-    _value: 0.4
-    _maxValue: 0.4
-  _hitboxOffset: {x: -0.007, y: -0.07}
-  _speed:
-    _hasMaxValue: 1
-    _value: 1
-    _maxValue: 10
-  _damage:
-    _hasMaxValue: 1
-    _value: 4
-    _maxValue: 100
-  _attackRange:
-    _hasMaxValue: 1
-    _value: 0.2
-    _maxValue: 0.2
-  _attackCooldown:
-    _hasMaxValue: 1
-    _value: 1
-    _maxValue: 1
-  _hp:
-    _hasMaxValue: 1
-    _value: 20
-    _maxValue: 20
-  _chaseRadius:
-    _hasMaxValue: 1
-    _value: 0
-    _maxValue: 10
-  _btwTargetDistance:
-    _hasMaxValue: 1
-    _value: 1.3
-    _maxValue: 1.3
 --- !u!114 &77007166685963881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,19 +216,6 @@ MonoBehaviour:
   _parent: {fileID: 2085577974135990118}
   _indicator: {fileID: 106829592820104562, guid: ade34144252887d4dbfe4e2e79200581, type: 3}
   _indicatorOffset: {x: 0, y: 0}
---- !u!114 &2595707340245553885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7172860054007578777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea09cdc46cd1ed468fd3d31ec487b76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spriteParent: {fileID: 8316105123415031783}
 --- !u!1 &8468213425138694678
 GameObject:
   m_ObjectHideFlags: 0

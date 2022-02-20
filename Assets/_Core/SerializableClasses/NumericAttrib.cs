@@ -40,7 +40,7 @@ public class NumericAttrib
         Value = OriginalValue = value;
         MaxValue = OriginalMaxValue = maxValue;
     }
-    
+
     public NumericAttrib()
     {
         Value = OriginalValue = MaxValue = OriginalMaxValue = 1;
@@ -50,6 +50,11 @@ public class NumericAttrib
     /// Пустое ли текущее значение
     /// </returns>
     public bool IsValueEmpty() => Value <= 0;
+
+    /// <returns>
+    /// Заполнено ли текущее значение до максимума
+    /// </returns>
+    public bool IsValueFull() => Value == MaxValue;
 
     /// <summary>
     /// Увеличивает значение на значение параметра

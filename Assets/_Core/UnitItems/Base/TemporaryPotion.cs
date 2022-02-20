@@ -1,13 +1,17 @@
-﻿using UnityEngine;
-
-/// <summary>
+﻿/// <summary>
 /// Компонент родитель отвечающий за логику зелья с временным эффектом
 /// </summary>
 public abstract class TemporaryPotion : BasePotion
 {
+    //===>> Attributes & Properties <<===\\
+
     public float EffectDuration => _temporaryPotionPreferences.EffectDuration;
 
+    //===>> Components & Fields <<===\\
+
     private TemporaryPotionPreferences _temporaryPotionPreferences;
+
+    //===>> Important Methods <<===\\
 
     /// <summary>
     /// Запускает эффект от зелья
@@ -26,6 +30,8 @@ public abstract class TemporaryPotion : BasePotion
         StartPotionEffect();
         Invoke(nameof(StopEffect), EffectDuration);
     }
+
+    //===>> Private & Protected Methods <<===\\
 
     /// <summary>
     /// Остановка эффекта

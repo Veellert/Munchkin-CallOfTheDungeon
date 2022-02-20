@@ -1,6 +1,7 @@
 ﻿using Assets.UI;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Компонент отвечающий за загрузку уровня
@@ -15,6 +16,12 @@ public class LevelInitializer : MonoBehaviour
 
     [Header("Additional Minimap Indicators")]
     [SerializeField] private List<MinimapIndicator> _minimapIndicatorList = new List<MinimapIndicator>();
+
+    private void Awake()
+    {
+        if (!Player.Instance && SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(1))
+            SceneLoader.Lobby();
+    }
 
     private void Start()
     {

@@ -3,7 +3,7 @@
 /// <summary>
 /// Объект хранящий в себе настройки временного зелья
 /// </summary>
-[CreateAssetMenu(fileName = "NewTemporaryPotion", menuName = "Items/Potions/Create Temporary Potion")]
+[CreateAssetMenu(fileName = "NewTemporaryPotion", menuName = "Items/Potions/Create Temporary Potion", order = 1)]
 public class TemporaryPotionPreferences : PotionPreferences
 {
     [SerializeField] private float _effectDuration = 5;

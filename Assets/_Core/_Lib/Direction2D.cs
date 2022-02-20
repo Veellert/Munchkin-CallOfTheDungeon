@@ -153,7 +153,7 @@ public static class Direction2D
     /// <param name="position">Точка от которой</param>
     public static Vector2 GetDirectionToPlayer(Vector2 position)
     {
-        return (position- (Vector2)Player.Instance.transform.position).normalized;
+        return (position - (Vector2)Player.Instance.transform.position).normalized;
     }
     /// <returns>
     /// Направление от игрока до точки
