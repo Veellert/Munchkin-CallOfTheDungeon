@@ -5,11 +5,7 @@ public abstract class TemporaryPotion : BasePotion
 {
     //===>> Attributes & Properties <<===\\
 
-    public float EffectDuration => _temporaryPotionPreferences.EffectDuration;
-
-    //===>> Components & Fields <<===\\
-
-    private TemporaryPotionPreferences _temporaryPotionPreferences;
+    public float EffectDuration => ((TemporaryPotionPreferences)_basePreferences).EffectDuration;
 
     //===>> Important Methods <<===\\
 
@@ -25,7 +21,6 @@ public abstract class TemporaryPotion : BasePotion
     protected override void Use()
     {
         base.Use();
-        _temporaryPotionPreferences = (TemporaryPotionPreferences)_basePreferences;
 
         StartPotionEffect();
         Invoke(nameof(StopEffect), EffectDuration);
@@ -41,5 +36,6 @@ public abstract class TemporaryPotion : BasePotion
         _isUsingNow = false;
         StopPotionEffect();
         ClearTarget();
+        Destroy(gameObject);
     }
 }

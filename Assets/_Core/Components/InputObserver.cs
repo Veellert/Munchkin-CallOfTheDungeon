@@ -19,6 +19,7 @@ public class InputObserver : MonoBehaviour
 
     [Header("Keyboard Buttons")]
     public InputButton _pauseMenu = new InputButton(KeyCode.Escape);
+    public InputButton _inventoryMenu = new InputButton(KeyCode.E);
     public InputButton _minimap = new InputButton(KeyCode.Tab);
     public InputButton _minimapIncrease = new InputButton(KeyCode.Minus, true);
     public InputButton _minimapDecrease = new InputButton(KeyCode.Equals, true);
@@ -70,6 +71,12 @@ public class InputObserver : MonoBehaviour
                 InputAxis(Input.GetAxisRaw("Horizontal"), ref _horizontalAxisInput, OnHorizontalAxisInput);
                 InputAxis(Input.GetAxisRaw("Vertical"), ref _verticalAxisInput, OnVerticalAxisInput);
 
+                _inventoryMenu.UseButton(() =>
+                {
+                    ResetAxis();
+                    SetGameState(GameState.InventoryState());
+                });
+
                 _pauseMenu.UseButton(() =>
                 {
                     ResetAxis();
@@ -88,6 +95,20 @@ public class InputObserver : MonoBehaviour
 
                 InputMouse(0, OnLeftMouseButton);
                 InputMouse(1, OnRightMouseButton);
+            }),
+            GameState.InventoryState(() =>
+            {
+                InputAxis(Input.GetAxisRaw("Horizontal"), ref _horizontalAxisInput, OnHorizontalAxisInput);
+                InputAxis(Input.GetAxisRaw("Vertical"), ref _verticalAxisInput, OnVerticalAxisInput);
+
+                _inventoryMenu.UseButton(() =>
+                {
+                    ResetAxis();
+                    SetGameState(GameState.PlayState());
+                });
+
+                _minimap.UseButton();
+                _dodge.UseButton();
             }),
             GameState.PauseState(() =>
             {

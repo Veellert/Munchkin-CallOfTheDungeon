@@ -11,16 +11,13 @@ public abstract class BasePotion : BaseItem
 
     //===>> Components & Fields <<===\\
 
-    private PotionPreferences _potionPreferences;
-
     protected bool _isUsingNow;
 
     //===>> Unity <<===\\
 
     private void Start()
     {
-        _potionPreferences = (PotionPreferences)_basePreferences;
-        UsagesCount = new NumericAttrib(_potionPreferences.MaxUsageCount);
+        UsagesCount = new NumericAttrib(((PotionPreferences)_basePreferences).MaxUsageCount);
     }
 
     //===>> Important Methods <<===\\
@@ -44,7 +41,5 @@ public abstract class BasePotion : BaseItem
 
         SetTarget(target);
         Use();
-        if (!CanUse)
-            Disappear();
     }
 }

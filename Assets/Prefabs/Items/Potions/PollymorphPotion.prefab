@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2704910058999190542}
   - component: {fileID: 8550056921738450470}
   - component: {fileID: 2962789622993779187}
-  - component: {fileID: 6984649211031845056}
+  - component: {fileID: 6236863986610828409}
+  - component: {fileID: 2011079338409844424}
   - component: {fileID: 249323287792694380}
   m_Layer: 0
   m_Name: PollymorphPotion
@@ -76,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteParent: {fileID: 8516064874981399385}
---- !u!114 &6984649211031845056
+--- !u!114 &6236863986610828409
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,9 +86,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3311404091813726307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fda9d05b19199d040b63ed24d8267083, type: 3}
+  m_Script: {fileID: 11500000, guid: ef13fae83d6998147807fd8b29390641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2011079338409844424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3311404091813726307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55445072460af0d48bf7e8329ea901d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _potionRange: 4
+  _throwSpeed: 2.5
 --- !u!114 &249323287792694380
 MonoBehaviour:
   m_ObjectHideFlags: 0

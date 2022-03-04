@@ -7,9 +7,10 @@ public class GameState
 {
     public enum eState
     {
-        Play,
-        Pause,
-        Cheat,
+        Play = 0,
+        Pause = 1,
+        Cheat = 2,
+        Inventory = 3,
     }
 
     /// <returns>
@@ -17,6 +18,11 @@ public class GameState
     /// </returns>
     /// <param name="stateAction">Действие которое происходит во время этого состояния</param>
     public static GameState PlayState(Action stateAction = null) => new GameState(eState.Play, stateAction);
+    /// <returns>
+    /// Состояние в инвентаре
+    /// </returns>
+    /// <param name="stateAction">Действие которое происходит во время этого состояния</param>
+    public static GameState InventoryState(Action stateAction = null) => new GameState(eState.Inventory, stateAction);
     /// <returns>
     /// Состояние паузы
     /// </returns>

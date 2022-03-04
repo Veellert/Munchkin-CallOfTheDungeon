@@ -26,6 +26,8 @@ public class PollymorphPotion : BasePotion
 
         PollymorphTarget();
         InitializePollymorph();
+
+        Destroy(gameObject);
     }
 
     //===>> Private & Protected Methods <<===\\

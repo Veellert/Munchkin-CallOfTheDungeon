@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7392560942920372529}
   - component: {fileID: 5540173329441747162}
   - component: {fileID: 246846921975464455}
+  - component: {fileID: 6239393675600112290}
   - component: {fileID: 5172444575895652164}
   m_Layer: 0
   m_Name: InvisibilityPotion
@@ -86,6 +87,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef13fae83d6998147807fd8b29390641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6239393675600112290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2839274971696409251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88426774cf2eae84386d42ceb1f728d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5172444575895652164

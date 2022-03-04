@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.PickUpSystem;
+using Assets.UsingSystem;
+using UnityEngine;
 
 /// <summary>
 /// Компонент родитель отвечающий за логику предмета
 /// </summary>
-[RequireComponent(typeof(PSBRenderer))]
+[RequireComponent(typeof(PSBRenderer), typeof(PickUpPotion), typeof(UsingSystem))]
 public abstract class BaseItem : MonoBehaviour
 {
     //===>> Inspector <<===\\
@@ -14,6 +16,7 @@ public abstract class BaseItem : MonoBehaviour
     //===>> Components & Fields <<===\\
 
     protected PSBRenderer _renderer;
+    protected UsingSystem _usingSystem;
 
     protected BaseUnit _target;
 
@@ -22,6 +25,7 @@ public abstract class BaseItem : MonoBehaviour
     private void Awake()
     {
         _renderer = GetComponent<PSBRenderer>();
+        _usingSystem = GetComponent<UsingSystem>();
     }
 
     //===>> Important Methods <<===\\
@@ -31,14 +35,16 @@ public abstract class BaseItem : MonoBehaviour
     /// </summary>
     protected abstract void Use();
 
+    //===>> Public Methods <<===\\
+
     /// <summary>
-    /// Исчезновение предмета
+    /// Использовать предмет
     /// </summary>
-    public virtual void Disappear()
-    {
-        _renderer.SetAlpha(0);
-        Destroy(GetComponent<CapsuleCollider2D>());
-    }
+    public void UseItem() => _usingSystem.Use();
+    /// <returns>
+    /// Настройки предмета
+    /// </returns>
+    public ItemPreferences GetPreferences() => _basePreferences;
 
     //===>> Private & Protected Methods <<===\\
 
