@@ -110,10 +110,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2839274971696409251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e200545788ce7b14ca5d45a0c0ebcfd4, type: 3}
+  m_Script: {fileID: 11500000, guid: ea797dc67458e7c4ea648686d3e9f361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _basePreferences: {fileID: 11400000, guid: 637def4ebfb931940920bfbb3e739d05, type: 2}
+  _mainEffect: {fileID: 11400000, guid: a2cdcabe142b333408794625a233398a, type: 2}
 --- !u!1001 &1573354097956781115
 PrefabInstance:
   m_ObjectHideFlags: 0

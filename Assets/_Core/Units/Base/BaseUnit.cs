@@ -4,8 +4,8 @@ using UnityEngine.Rendering;
 /// <summary>
 /// Компонент родитель отвечающий за логику юнита
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
-[RequireComponent(typeof(PSBRenderer), typeof(SortingGroup), typeof(AnimationCaller))]
+[RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D), typeof(SortingGroup))]
+[RequireComponent(typeof(PSBRenderer), typeof(AnimationCaller), typeof(EffectSystem))]
 public abstract class BaseUnit : MonoBehaviour
 {
     //===>> Inspector <<===\\

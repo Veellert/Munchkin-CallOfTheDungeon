@@ -1,23 +1,19 @@
 ﻿/// <summary>
-/// Класс отвечающий за логику зелья "Зелье невидимости"
+/// Логика эфекта невидимости игрока
 /// </summary>
-public class InvisibilityPotion : TemporaryPotion
+public class PlayerInvisibilityEffect : BaseEffect
 {
-    //===>> Important Methods <<===\\
-
-    protected override void StartPotionEffect()
+    public override void StartEffect()
     {
         SetInvisibility(true);
         VisualizeModelTransparency();
     }
 
-    protected override void StopPotionEffect()
+    public override void StopEffect()
     {
         SetInvisibility(false);
         ResetModelTransparency();
     }
-
-    //===>> Private & Protected Methods <<===\\
 
     /// <summary>
     /// Устанавливает невидимость игрока для монстров

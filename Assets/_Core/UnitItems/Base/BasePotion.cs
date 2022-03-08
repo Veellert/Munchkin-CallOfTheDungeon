@@ -6,12 +6,7 @@ public abstract class BasePotion : BaseItem
     //===>> Attributes & Properties <<===\\
 
     public NumericAttrib UsagesCount { get; protected set; }
-
     protected bool CanUse => !UsagesCount.IsValueEmpty();
-
-    //===>> Components & Fields <<===\\
-
-    protected bool _isUsingNow;
 
     //===>> Unity <<===\\
 
@@ -22,10 +17,15 @@ public abstract class BasePotion : BaseItem
 
     //===>> Important Methods <<===\\
 
+    /// <summary>
+    /// Инициализирует эфекты зелья
+    /// </summary>
+    protected abstract void InitializeEffects();
+
     protected override void Use()
     {
         UsagesCount--;
-        _isUsingNow = true;
+        InitializeEffects();
     }
 
     //===>> Public Methods <<===\\
@@ -36,10 +36,10 @@ public abstract class BasePotion : BaseItem
     /// <param name="target">Цель</param>
     public void UsePotionOn(BaseUnit target)
     {
-        if (_isUsingNow || !CanUse)
-            return;
-
         SetTarget(target);
         Use();
+
+        if (!CanUse)
+            Destroy(gameObject);
     }
 }
