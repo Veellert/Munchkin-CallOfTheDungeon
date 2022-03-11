@@ -25,7 +25,7 @@ public abstract class BaseEffectPreferences : ScriptableObject
     /// Создает эфект для цели
     /// </summary>
     /// <param name="target">Цель</param>
-    public abstract void CreateEffectFor(BaseUnit target);
+    public abstract BaseEffect CreateEffectFor(BaseUnit target, bool isEndless = false);
     /// <returns>
     /// Тип эфекта
     /// </returns>

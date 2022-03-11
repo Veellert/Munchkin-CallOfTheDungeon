@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b7fd2a92a791c9489b745c225ef002c, type: 3}
+  m_Script: {fileID: 11500000, guid: 00a7d42be5735d743808bb94246cdc03, type: 3}
   m_Name: InvisibilityPotion
   m_EditorClassIdentifier: 
   _id: Potion_InvisibilityPotion
@@ -19,4 +19,3 @@ MonoBehaviour:
   _sprite: {fileID: 5895159797339806707, guid: 22cb8d610bc8a2a4cbccd7ba4ee65823, type: 3}
   _rare: 1
   _maxUsageCount: 1
-  _effectDuration: 10

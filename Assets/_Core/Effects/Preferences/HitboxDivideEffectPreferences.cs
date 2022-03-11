@@ -9,10 +9,8 @@ public class HitboxDivideEffectPreferences : BaseEffectPreferences
     [SerializeField] [Min(0.1f)] protected float _divideValue = 3;
     public float DivideValue => _divideValue;
 
-    public override void CreateEffectFor(BaseUnit target)
-    {
-        new HitboxDivideEffect().Instantiate(this, target);
-    }
+    public override BaseEffect CreateEffectFor(BaseUnit target, bool isEndless = false)
+        => new HitboxDivideEffect().Instantiate(this, target, isEndless);
 
     protected override eEffectType GetEffectType()
         => eEffectType.Hitbox;

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 246846921975464455}
   - component: {fileID: 6239393675600112290}
   - component: {fileID: 5172444575895652164}
+  - component: {fileID: 7657435899150847952}
   m_Layer: 0
   m_Name: InvisibilityPotion
   m_TagString: Untagged
@@ -86,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2839274971696409251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef13fae83d6998147807fd8b29390641, type: 3}
+  m_Script: {fileID: 11500000, guid: bae81e8bb21fc5343a0212667c3391ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6239393675600112290
@@ -115,6 +116,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _basePreferences: {fileID: 11400000, guid: 637def4ebfb931940920bfbb3e739d05, type: 2}
   _mainEffect: {fileID: 11400000, guid: a2cdcabe142b333408794625a233398a, type: 2}
+--- !u!114 &7657435899150847952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2839274971696409251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae81e8bb21fc5343a0212667c3391ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1573354097956781115
 PrefabInstance:
   m_ObjectHideFlags: 0

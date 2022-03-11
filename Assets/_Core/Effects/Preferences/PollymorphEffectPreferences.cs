@@ -9,10 +9,8 @@ public class PollymorphEffectPreferences : BaseEffectPreferences
     [SerializeField] protected PollymorphMonster _pollymorphMonster;
     public PollymorphMonster PollymorphMonster => _pollymorphMonster;
 
-    public override void CreateEffectFor(BaseUnit target)
-    {
-        new PollymorphEffect().Instantiate(this, target);
-    }
+    public override BaseEffect CreateEffectFor(BaseUnit target, bool isEndless = false)
+        => new PollymorphEffect().Instantiate(this, target, isEndless);
 
     protected override eEffectType GetEffectType()
         => eEffectType.Pollymorph;

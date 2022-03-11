@@ -5,7 +5,6 @@ namespace Assets.UsingSystem
     /// <summary>
     /// Компонент родитель отвечающий за логику использования зелья
     /// </summary>
-    [RequireComponent(typeof(BasePotion))]
     public abstract class UsingPotion : UsingSystem
     {
         protected BasePotion _potion;

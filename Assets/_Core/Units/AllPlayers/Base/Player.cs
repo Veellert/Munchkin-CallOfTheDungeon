@@ -14,6 +14,7 @@ public class Player : MobileUnit, IDamager, IDamageable
 
     public NumericAttrib Damage { get; protected set; }
     public NumericAttrib AttackRange { get; protected set; }
+    public NumericAttrib AttackDistance { get; protected set; }
     public NumericAttrib AttackCooldown { get; protected set; }
     public bool CanAttack => AttackCooldown.IsValueEmpty();
 
@@ -66,6 +67,7 @@ public class Player : MobileUnit, IDamager, IDamageable
 
         Damage = PlayerPreferences.Damage;
         AttackRange = PlayerPreferences.AttackRange;
+        AttackDistance = PlayerPreferences.AttackDistance;
         AttackCooldown = PlayerPreferences.AttackCooldown;
 
         Gender = PlayerPreferences.Gender;
@@ -163,6 +165,15 @@ public class Player : MobileUnit, IDamager, IDamageable
     {
         base.OnDrawGizmos();
 
+        Gizmos.color = Color.blue;
+        #region AttackDistance
+
+        if(AttackDistance != null)
+            Gizmos.DrawWireSphere(transform.position, AttackDistance.TileHalfed());
+        else
+            Gizmos.DrawWireSphere(transform.position, PlayerPreferences.AttackDistance.TileHalfed());
+
+        #endregion
         Gizmos.color = Color.white;
         #region Attack
 

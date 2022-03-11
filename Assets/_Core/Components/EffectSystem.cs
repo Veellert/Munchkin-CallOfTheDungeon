@@ -18,7 +18,8 @@ public class EffectSystem : MonoBehaviour
         _effectList.Add(effect);
         effect.StartEffect();
 
-        StartCoroutine(RemoveEffect(effect));
+        if(!effect.IsEndless)
+            StartCoroutine(RemoveEffect(effect));
     }
     /// <summary>
     /// Удаляет эфект и останавливает его
@@ -28,6 +29,10 @@ public class EffectSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(effect.GetPreferences().Duration);
 
+        RemoveEffectImmediate(effect);
+    }
+    public void RemoveEffectImmediate(BaseEffect effect)
+    {
         effect.StopEffect();
         _effectList.Remove(effect);
     }

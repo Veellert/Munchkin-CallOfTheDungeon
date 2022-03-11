@@ -13,6 +13,7 @@ public class PlayerAttackState : IUnitState
     protected NumericAttrib AttackCooldown => CurrentPlayer.AttackCooldown;
     protected NumericAttrib DodgeImpulse => CurrentPlayer.DodgeImpulse;
     protected NumericAttrib AttackRange => CurrentPlayer.AttackRange;
+    protected NumericAttrib AttackDistance => CurrentPlayer.AttackDistance.TileHalfed();
     protected NumericAttrib Damage => CurrentPlayer.Damage;
     protected bool IsDodging => CurrentPlayer.IsDodging;
 
@@ -42,7 +43,7 @@ public class PlayerAttackState : IUnitState
 
         // position + direction * дальность атаки
         CurrentPlayer.SetTempAttackPosition((Vector2)Transform.position +
-            mouseDirection * new TileHalf());
+            mouseDirection * AttackDistance);
 
         _animation.ATTACK(() =>
         {

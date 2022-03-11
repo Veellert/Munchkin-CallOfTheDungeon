@@ -33,4 +33,6 @@ public class PlayerPreferences : UnitPreferences, IDamagerAttrib
 
     [SerializeField] [Min(0.1f)] protected float _attackRange = 0.5f;
     public float AttackRange => _attackRange;
+    [SerializeField] [Min(0.1f)] protected float _attackDistance = 1;
+    public float AttackDistance => _attackDistance;
 }

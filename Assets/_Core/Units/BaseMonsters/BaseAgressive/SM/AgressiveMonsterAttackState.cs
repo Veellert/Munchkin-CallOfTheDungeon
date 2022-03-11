@@ -8,7 +8,7 @@ public class AgressiveMonsterAttackState : IUnitState
     //===>> Properties <<===\\
 
     protected Transform Transform => _monster.transform;
-    protected float BtwTargetDistance => _monster.BtwTargetDistance.TileHalfed();
+    protected NumericAttrib AttackDistance => _monster.BtwTargetDistance.TileHalfed();
     protected NumericAttrib AttackCooldown => _monster.AttackCooldown;
     protected NumericAttrib AttackRange => _monster.AttackRange;
     protected NumericAttrib Damage => _monster.Damage;
@@ -32,9 +32,8 @@ public class AgressiveMonsterAttackState : IUnitState
 
     public virtual void OnEnter()
     {
-        var attackOffset = BtwTargetDistance.TileHalfed();
-        _monster.SetTempAttackPosition((Vector2)Transform.position + Direction2D.GetPlayerDirectionFrom(Transform.position) * attackOffset);
-        if (Transform.DistanceToPlayer() < attackOffset)
+        _monster.SetTempAttackPosition((Vector2)Transform.position + Direction2D.GetPlayerDirectionFrom(Transform.position) * AttackDistance);
+        if (Transform.DistanceToPlayer() < AttackDistance)
             _monster.SetTempAttackPosition(Player.Instance.transform.position);
 
         _animation.ATTACK(() =>

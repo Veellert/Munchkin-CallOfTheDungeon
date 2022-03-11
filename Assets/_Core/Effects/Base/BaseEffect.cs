@@ -3,6 +3,8 @@
 /// </summary>
 public abstract class BaseEffect
 {
+    public bool IsEndless { get; private set; }
+
     protected BaseUnit _target;
     protected BaseEffectPreferences _effectPreferences;
 
@@ -11,12 +13,15 @@ public abstract class BaseEffect
     /// </summary>
     /// <param name="effectPreferences">Настройки эфекта</param>
     /// <param name="target">Цель</param>
-    public void Instantiate(BaseEffectPreferences effectPreferences, BaseUnit target)
+    public BaseEffect Instantiate(BaseEffectPreferences effectPreferences, BaseUnit target, bool isEndless)
     {
         _target = target;
         _effectPreferences = effectPreferences;
+        IsEndless = isEndless;
 
         _target.GetComponent<EffectSystem>().AddEffect(this);
+
+        return this;
     }
 
     /// <summary>
