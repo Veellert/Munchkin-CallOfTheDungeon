@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 209443084356082969}
   - component: {fileID: 544444464424718584}
   - component: {fileID: 6397763411907293311}
-  - component: {fileID: 7838340951994969448}
   m_Layer: 0
   m_Name: BabyOil
   m_TagString: Untagged
@@ -116,18 +115,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _basePreferences: {fileID: 11400000, guid: a1671009321926c45bd6831942147ad5, type: 2}
   _mainEffect: {fileID: 11400000, guid: be7ee83cb394349429ea22a506de21df, type: 2}
---- !u!114 &7838340951994969448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681720207491714985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bae81e8bb21fc5343a0212667c3391ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1058295855202894242
 PrefabInstance:
   m_ObjectHideFlags: 0

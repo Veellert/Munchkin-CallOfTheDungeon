@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +22,7 @@ public class InventoryItemDescription : MonoBehaviour
     /// Инициализация описания
     /// </summary>
     /// <param name="item">Выбранная ячейка</param>
-    public void InitializeData(InventoryCell item)
+    public void InitializeData(InventoryCell item, List<BaseItem> itemContainer)
     {
         VisualizeData();
 
@@ -30,8 +31,24 @@ public class InventoryItemDescription : MonoBehaviour
         _itemName.text = item.ItemPreferences.Name;
         _itemDescription.text = item.ItemPreferences.Description;
 
-        int selectedItemCount = Player.Instance.Inventory.GetInventoryItems().
-            FindAll(s => s.GetPreferences().ID == item.ItemPreferences.ID).Count;
+        int selectedItemCount = itemContainer.FindAll(s => s.GetPreferences().ID == item.ItemPreferences.ID).Count;
+
+        _inventoryInfo.text = "Всего в инвентаре: " + selectedItemCount + " шт.";
+    }
+    /// <summary>
+    /// Инициализация описания
+    /// </summary>
+    /// <param name="item">Выбранная ячейка</param>
+    public void InitializeData(InventoryCell item, List<BaseEquipment> itemContainer)
+    {
+        VisualizeData();
+
+        _image.sprite = item.ItemPreferences.Sprite;
+
+        _itemName.text = item.ItemPreferences.Name;
+        _itemDescription.text = item.ItemPreferences.Description;
+
+        int selectedItemCount = itemContainer.FindAll(s => s.GetPreferences().ID == item.ItemPreferences.ID).Count;
 
         _inventoryInfo.text = "Всего в инвентаре: " + selectedItemCount + " шт.";
     }

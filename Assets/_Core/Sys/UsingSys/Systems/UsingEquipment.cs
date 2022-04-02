@@ -14,8 +14,10 @@
 
         public override void Use()
         {
-            _equipment.UnEquipCurrent();
-            _equipment.EquipOn();
+            if(_equipment.IsEquiped)
+                _equipment.UnEquipCurrent();
+            else
+                _equipment.EquipOn();
         }
     }
 }

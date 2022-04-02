@@ -14,6 +14,7 @@ public class SingleEffectPotion : BasePotion
 
     protected override void InitializeEffects()
     {
-        _mainEffect.CreateEffectFor(_target);
+        if(_target)
+            _mainEffect.CreateEffectFor(_target);
     }
 }

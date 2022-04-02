@@ -3,7 +3,7 @@
 /// <summary>
 /// Компонент отвечающий за базовую логику игрока
 /// </summary>
-[RequireComponent(typeof(PlayerInventory))]
+[RequireComponent(typeof(PlayerInventory), typeof(PlayerEquipmentInventory))]
 public class Player : MobileUnit, IDamager, IDamageable
 {
     public static Player Instance { get; set; }
@@ -24,8 +24,8 @@ public class Player : MobileUnit, IDamager, IDamageable
     public NumericAttrib DodgeCooldown { get; protected set; }
     public bool CanDodge => DodgeCooldown.IsValueEmpty();
 
-
     public PlayerInventory Inventory { get; protected set; }
+    public PlayerEquipmentInventory EquipmentInventory { get; protected set; }
 
     public bool IsInvisibleForMonster { get; protected set; }
 
@@ -58,6 +58,7 @@ public class Player : MobileUnit, IDamager, IDamageable
         base.GetRequiredComponents();
 
         Inventory = GetComponent<PlayerInventory>();
+        EquipmentInventory = GetComponent<PlayerEquipmentInventory>();
     }
     protected override void InitializeAttributes()
     {

@@ -12,9 +12,10 @@ namespace Assets.PickUpSystem
         {
             if (collision.CompareTag("Player"))
             {
-                AddToInventory(GetComponent<BaseItem>());
                 GetComponent<Collider2D>().enabled = false;
                 GetComponent<PSBRenderer>().SetAlpha(0);
+                gameObject.transform.SetParent(Player.Instance.transform);
+                AddToInventory(GetComponent<BaseItem>());
             }
         }
 
@@ -24,7 +25,10 @@ namespace Assets.PickUpSystem
         /// <param name="item">Предмет</param>
         private void AddToInventory(BaseItem item)
         {
-            Player.Instance?.Inventory?.AddItemToInventory(item);
+            if (GetComponent<BaseEquipment>() != null)
+                Player.Instance?.EquipmentInventory?.AddEquipmentToInventory((BaseEquipment)item);
+            else
+                Player.Instance?.Inventory?.AddItemToInventory(item);
         }
     }
 }
