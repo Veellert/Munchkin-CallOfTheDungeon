@@ -295,6 +295,54 @@ PrefabInstance:
       propertyPath: _dungeonVisualizer
       value: 
       objectReference: {fileID: 925648515}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[3]._roomParameters
+      value: 
+      objectReference: {fileID: 11400000, guid: c21c50e9fbdbe79499465013611c709f, type: 2}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[0]._spawnerList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[1]._spawnerList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[2]._spawnerList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[3]._spawnerList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[0]._spawnerList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: b069c1e2c858e4540a5cd95579b9c60f, type: 2}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[1]._spawnerList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: a3091c3a1a168814b98858d5d4543b9b, type: 2}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[2]._spawnerList.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: d3ccf10d3f293784b8ff366fa7778dd0, type: 2}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[3]._spawnerList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b069c1e2c858e4540a5cd95579b9c60f, type: 2}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[3]._spawnerList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e60003398c284d4ea67cb496cc66f66, type: 2}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _defaultRoomReferenceList.Array.data[3]._spawnerList.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: cbdfd689e7e0d5447ad674462adf8446, type: 2}
     - target: {fileID: 2661010980145485867, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
       propertyPath: _visualizer
       value: 

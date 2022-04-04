@@ -45,6 +45,7 @@ namespace Assets.UI
         {
             InputObserver.Instance._minimap.OnButtonUse -= OnMinimapActiveChanged;
             InputObserver.Instance._pauseMenu.OnButtonUse -= OnPauseClick;
+            InputObserver.Instance._inventoryMenu.OnButtonUse -= OnInventoryClick;
             InputObserver.Instance._cheatPanel.OnButtonUse -= OnCheatClick;
 
             BaseMonster.MonstersCount.OnValueChanged -= Count_OnValueChanged;
@@ -53,6 +54,19 @@ namespace Assets.UI
 
         //===>> Public Methods <<===\\
 
+        /// <summary>
+        /// Отображает инвентарь и ставит игру на паузу
+        /// </summary>
+        public void OpenInventory()
+        {
+            _inventoryMenu.InverseActive();
+
+            if (_inventoryMenu.gameObject.activeSelf)
+                InputObserver.Instance.SetGameState(GameState.InventoryState());
+            else
+                InputObserver.Instance.SetGameState(GameState.PlayState());
+        }
+        
         /// <summary>
         /// Отображает меню и ставит игру на паузу
         /// </summary>
@@ -108,7 +122,7 @@ namespace Assets.UI
         /// Событие при нажатии на инвентарь
         /// </summary>
         /// <param name="obj">Нажатая кнопка</param>
-        private void OnInventoryClick(InputButton obj) => _inventoryMenu.InverseActive();
+        private void OnInventoryClick(InputButton obj) => OpenInventory();
         
         /// <summary>
         /// Событие при нажатии на паузу

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Компонент родитель отвечающий за логику предмета
 /// </summary>
-[RequireComponent(typeof(PSBRenderer), typeof(PickUpItemSystem), typeof(UsingSystem))]
+[RequireComponent(typeof(PSBRenderer), typeof(PickUpItem), typeof(UsingSystem))]
 public abstract class BaseItem : MonoBehaviour
 {
     //===>> Inspector <<===\\
