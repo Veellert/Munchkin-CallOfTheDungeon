@@ -27,6 +27,11 @@ public class InputObserver : MonoBehaviour
     public InputButton _dodge = new InputButton(KeyCode.Space);
 
     /// <summary>
+    /// Событие по взаимодействии с торговцем
+    /// </summary>
+    public event Action OnTraderCollision;
+
+    /// <summary>
     /// Событие по клику левой кнопки мыши
     /// </summary>
     public event Action OnLeftMouseButton;
@@ -110,6 +115,14 @@ public class InputObserver : MonoBehaviour
                 _minimap.UseButton();
                 _dodge.UseButton();
             }),
+            GameState.TraderState(() =>
+            {
+                InputAxis(Input.GetAxisRaw("Horizontal"), ref _horizontalAxisInput, OnHorizontalAxisInput);
+                InputAxis(Input.GetAxisRaw("Vertical"), ref _verticalAxisInput, OnVerticalAxisInput);
+
+                _minimap.UseButton();
+                _dodge.UseButton();
+            }),
             GameState.PauseState(() =>
             {
                 _pauseMenu.UseButton(() => SetGameState(GameState.PlayState()));
@@ -128,6 +141,11 @@ public class InputObserver : MonoBehaviour
         _currentGameState?.InvokeState();
     }
 
+    /// <summary>
+    /// Взаимодействие с торговцем
+    /// </summary>
+    public void CollisionTrader() => OnTraderCollision?.Invoke();
+    
     /// <returns>
     /// Направление игрока
     /// </returns>

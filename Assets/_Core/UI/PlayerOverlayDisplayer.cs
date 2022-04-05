@@ -23,6 +23,7 @@ namespace Assets.UI
         [Header("Menues")]
         [SerializeField] private MenuTemplate _pauseMenu;
         [SerializeField] private MenuTemplate _inventoryMenu;
+        [SerializeField] private MenuTemplate _traderMenu;
         [SerializeField] private CheatHandler _cheatMenu;
 
         //===>> Unity <<===\\
@@ -33,6 +34,7 @@ namespace Assets.UI
 
             InputObserver.Instance._pauseMenu.OnButtonUse += OnPauseClick;
             InputObserver.Instance._inventoryMenu.OnButtonUse += OnInventoryClick;
+            InputObserver.Instance.OnTraderCollision += OnTraderCollision;
             InputObserver.Instance._cheatPanel.OnButtonUse += OnCheatClick;
 
             BaseMonster.MonstersCount.OnValueChanged += Count_OnValueChanged;
@@ -46,6 +48,7 @@ namespace Assets.UI
             InputObserver.Instance._minimap.OnButtonUse -= OnMinimapActiveChanged;
             InputObserver.Instance._pauseMenu.OnButtonUse -= OnPauseClick;
             InputObserver.Instance._inventoryMenu.OnButtonUse -= OnInventoryClick;
+            InputObserver.Instance.OnTraderCollision -= OnTraderCollision;
             InputObserver.Instance._cheatPanel.OnButtonUse -= OnCheatClick;
 
             BaseMonster.MonstersCount.OnValueChanged -= Count_OnValueChanged;
@@ -54,6 +57,19 @@ namespace Assets.UI
 
         //===>> Public Methods <<===\\
 
+        /// <summary>
+        /// Отображает меню торговца и ставит игру на паузу
+        /// </summary>
+        public void OpenTraderMenu()
+        {
+            _traderMenu.InverseActive();
+
+            if (_traderMenu.gameObject.activeSelf)
+                InputObserver.Instance.SetGameState(GameState.TraderState());
+            else
+                InputObserver.Instance.SetGameState(GameState.PlayState());
+        }
+        
         /// <summary>
         /// Отображает инвентарь и ставит игру на паузу
         /// </summary>
@@ -118,6 +134,11 @@ namespace Assets.UI
 
         //===>> On Events <<===\\
 
+        /// <summary>
+        /// Событие при взаимодействии с торговцем
+        /// </summary>
+        private void OnTraderCollision() => OpenTraderMenu();
+        
         /// <summary>
         /// Событие при нажатии на инвентарь
         /// </summary>

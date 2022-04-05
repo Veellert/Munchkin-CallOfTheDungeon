@@ -300,6 +300,22 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _startRoomReference._spawnerList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _finishRoomReference._spawnerList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _startRoomReference._spawnerList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 55c66ebe2584d794b8c1e3441544a77a, type: 2}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _finishRoomReference._spawnerList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8965baf3b96a8734dbd9de3877e9797e, type: 2}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
       propertyPath: _defaultRoomReferenceList.Array.data[3]._roomParameters
       value: 
       objectReference: {fileID: 11400000, guid: c21c50e9fbdbe79499465013611c709f, type: 2}

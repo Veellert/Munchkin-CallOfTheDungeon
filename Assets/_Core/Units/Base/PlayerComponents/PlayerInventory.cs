@@ -28,9 +28,18 @@ public class PlayerInventory : MonoBehaviour
     //===>> Public Methods <<===\\
 
     /// <summary>
+    /// Убирает из инвентаря кристаллы
+    /// </summary>
+    /// <param name="crystalsCount">Кол-во кристаллов которое нужно убрать</param>
+    public void RemoveDropCrystals(int crystalsCount)
+    {
+        DropCrystals -= crystalsCount;
+    }
+    
+    /// <summary>
     /// Добавляет в инвентарь кристаллы
     /// </summary>
-    /// <param name="crystalsCount">Кол-во кристаллов которые нужно добавить</param>
+    /// <param name="crystalsCount">Кол-во кристаллов которое нужно добавить</param>
     public void AddDropCrystals(NumericAttrib crystalsCount)
     {
         DropCrystals += crystalsCount;

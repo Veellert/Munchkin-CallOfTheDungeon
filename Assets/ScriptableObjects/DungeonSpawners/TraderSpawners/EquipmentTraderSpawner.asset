@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc58d096cda05845828d327d5dca08e, type: 3}
+  m_Name: EquipmentTraderSpawner
+  m_EditorClassIdentifier: 
+  _traderTarget: {fileID: 7137963951111244691, guid: ac5d507fc094ca3458f94ce62ece1efd, type: 3}

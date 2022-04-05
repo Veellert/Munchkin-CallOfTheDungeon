@@ -11,6 +11,7 @@ public class GameState
         Pause = 1,
         Cheat = 2,
         Inventory = 3,
+        Trader = 4,
     }
 
     /// <returns>
@@ -23,6 +24,11 @@ public class GameState
     /// </returns>
     /// <param name="stateAction">Действие которое происходит во время этого состояния</param>
     public static GameState InventoryState(Action stateAction = null) => new GameState(eState.Inventory, stateAction);
+    /// <returns>
+    /// Состояние в меню торговца
+    /// </returns>
+    /// <param name="stateAction">Действие которое происходит во время этого состояния</param>
+    public static GameState TraderState(Action stateAction = null) => new GameState(eState.Trader, stateAction);
     /// <returns>
     /// Состояние паузы
     /// </returns>

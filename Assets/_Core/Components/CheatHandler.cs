@@ -19,6 +19,7 @@ public class CheatHandler : MonoBehaviour
     [Header("Панель")]
     [SerializeField] private GameObject _cheatPanel;
     [Header("Кнопки")]
+    [SerializeField] private Button _crystallsBut;
     [SerializeField] private Button _teleportBut;
     [SerializeField] private Button _killAllBut;
     [SerializeField] private Button _healBut;
@@ -37,6 +38,7 @@ public class CheatHandler : MonoBehaviour
 
     private void Start()
     {
+        _crystallsBut.onClick.AddListener(() => Player.Instance?.Inventory.AddDropCrystals(100));
         _teleportBut.onClick.AddListener(() => TeleportToFinish());
         _killAllBut.onClick.AddListener(() => KillAllMonsters());
         _healBut.onClick.AddListener(() => InstantHeal());
