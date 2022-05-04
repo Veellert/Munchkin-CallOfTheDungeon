@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f3a94187a93c240b12b91dc8fcb97a, type: 3}
+  m_Name: L1EasyMonsterSpawner
+  m_EditorClassIdentifier: 
+  _monsterList:
+  - _target: {fileID: 5724832303940270278, guid: 5ba95a1be7e1b59489cc209a25d90710, type: 3}
+    count: 1
+  - _target: {fileID: 6211716472858051453, guid: c37a8302b4483744d85853e4dc692df5, type: 3}
+    count: 2

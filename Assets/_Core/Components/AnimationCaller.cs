@@ -79,7 +79,10 @@ public class AnimationCaller : MonoBehaviour
     /// <summary>
     /// Играет пустую анимацию, чтобы не нагружать систему
     /// </summary>
-    public void Disabled() => _animator.Play("Disabled");
+    public void Disabled()
+    {
+        _animator.Play("Disabled");
+    }
 
     /// <summary>
     /// Играет анимацию

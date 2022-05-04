@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class Extentions
@@ -34,6 +36,18 @@ public static class Extentions
     public static float DistanceToPlayer(this Transform current)
     {
         return Vector2.Distance(current.position, Player.Instance.transform.position);
+    }
+    
+
+
+    // Animator
+    public static List<AnimatorClipInfo> GetAllClips(this Animator current, int layerIndex)
+    {
+        return current.GetCurrentAnimatorClipInfo(layerIndex).ToList();
+    }
+    public static bool IsExistClip(this Animator current, string clipName, int layerIndex = 0)
+    {
+        return current.GetAllClips(layerIndex).Exists(s => s.clip.name == clipName);
     }
 
 

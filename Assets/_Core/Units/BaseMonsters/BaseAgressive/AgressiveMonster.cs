@@ -3,7 +3,7 @@
 /// <summary>
 /// Компонент родитель отвечающий за логику агрессивного монстра
 /// </summary>
-public abstract partial class AgressiveMonster : BaseMonster, IDamager
+public partial class AgressiveMonster : BaseMonster, IDamager
 {
     //===>> Attributes & Properties <<===\\
 
@@ -68,7 +68,7 @@ public abstract partial class AgressiveMonster : BaseMonster, IDamager
         if (AttackRange != null)
             Gizmos.DrawWireSphere(_tempAttackPosition, AttackRange);
         else
-            Gizmos.DrawWireSphere(transform.position + Vector3.right, MonsterPreferences.AttackRange);
+            Gizmos.DrawWireSphere(transform.position + (BtwTargetDistance.TileHalfed() * Vector3.right), MonsterPreferences.AttackRange);
 
         #endregion
     }
