@@ -44,7 +44,15 @@ public class PlayerLocationController : MonoBehaviour
         if (nextLoc < System.Enum.GetValues(typeof(eLocations)).Length)
             SetLocation(nextLoc);
         else
-            SetLocation(0);
+            SceneLoader.MainMenu();
+    }
+    
+    /// <summary>
+    /// Запускает лобби
+    /// </summary>
+    public void SetLobby()
+    {
+        SetLocation(0);
     }
 
     //===>> Private & Protected Methods <<===\\
@@ -53,7 +61,7 @@ public class PlayerLocationController : MonoBehaviour
     /// Устанавливает локацию по номеру
     /// </summary>
     /// <param name="location">Номер локации</param>
-    private void SetLocation(int location)
+    public void SetLocation(int location)
     {
         _currentLocation = (eLocations)location;
 

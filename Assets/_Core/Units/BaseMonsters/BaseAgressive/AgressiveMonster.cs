@@ -35,8 +35,6 @@ public partial class AgressiveMonster : BaseMonster, IDamager
         base.InitializeStateMachine();
 
         _stateMachine = new AgressiveMonsterStateMachine((MonsterStateMachine)_stateMachine);
-
-        ((AgressiveMonsterStateMachine)_stateMachine).TransitToDefault();
     }
 
     //===>> Interfaces Methods <<===\\

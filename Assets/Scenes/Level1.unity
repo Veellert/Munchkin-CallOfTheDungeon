@@ -292,6 +292,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _roomOffset
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _roomsCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _dungeonSize.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: _dungeonSize.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
       propertyPath: _dungeonVisualizer
       value: 
       objectReference: {fileID: 925648515}

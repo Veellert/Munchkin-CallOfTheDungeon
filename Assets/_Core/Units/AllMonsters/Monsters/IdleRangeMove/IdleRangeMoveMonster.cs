@@ -36,8 +36,6 @@ public class IdleRangeMoveMonster : AgressiveMonster, IIdleMovable
         base.InitializeStateMachine();
 
         _stateMachine = new IdleRangeMoveMonsterStateMachine((AgressiveMonsterStateMachine)_stateMachine);
-
-        ((IdleRangeMoveMonsterStateMachine)_stateMachine).TransitToDefault();
     }
 
     //===>> Interfaces Methods <<===\\

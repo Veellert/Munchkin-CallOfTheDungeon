@@ -90,8 +90,8 @@ MonoBehaviour:
   _hitboxOffset: {x: 0, y: 0}
   _btwTargetDistance:
     _hasMaxValue: 1
-    _value: 1.1
-    _maxValue: 1.1
+    _value: 1.2
+    _maxValue: 1.2
 --- !u!50 &6780189316153330191
 Rigidbody2D:
   serializedVersion: 4
@@ -127,7 +127,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.06323969, y: -0.3561205}
-  m_Size: {x: 3.2514477, y: 1.3541943}
+  m_Size: {x: 2.97, y: 1.3541943}
   m_Direction: 1
 --- !u!210 &3046000793091838475
 SortingGroup:

@@ -138,7 +138,7 @@ public class InventoryMenu : MonoBehaviour
 
         inventoryEquipment.OnItemSelect += OnEquipmentSelect;
         inventoryEquipment.OnItemUse += OnEquipmentUse;
-        inventoryEquipment.OnItemDrop += OnItemDrop;
+        inventoryEquipment.OnItemDrop += OnEquipmentDrop;
         inventoryEquipment.OnItemBeginDrag += OnItemBeginDrag;
         inventoryEquipment.OnItemEndDrag += OnItemEndDrag;
 
@@ -240,25 +240,34 @@ public class InventoryMenu : MonoBehaviour
     /// </summary>
     /// <param name="selectedItem">Выбранная ячейка</param>
     /// <param name="targetItem">Целевая ячейка</param>
-    private void SwapItems(InventoryCell selectedItem, InventoryCell targetItem)
+    private void SwapItems(InventoryCell selectedItem, InventoryCell targetItem, ref List<InventoryCell> content)
     {
-        var currentIndex = _inventoryItemList.IndexOf(selectedItem);
-        var dropIndex = _inventoryItemList.IndexOf(targetItem);
+        var currentIndex = content.IndexOf(selectedItem);
+        var dropIndex = content.IndexOf(targetItem);
 
         var currentItem = selectedItem.GetCurrentItem();
         var dropItem = targetItem.GetCurrentItem();
 
-        _inventoryItemList[currentIndex].Initialize(dropItem);
-        _inventoryItemList[dropIndex].Initialize(currentItem);
+        content[currentIndex].Initialize(dropItem);
+        content[dropIndex].Initialize(currentItem);
     }
     /// <summary>
-    /// При отпускании ячейки
+    /// При отпускании ячейки с предметом
     /// </summary>
     /// <param name="inventoryItem">Ячейка</param>
     private void OnItemDrop(InventoryCell inventoryItem)
     {
-        SwapItems(_selectedItem, inventoryItem);
+        SwapItems(_selectedItem, inventoryItem, ref _inventoryItemList);
         OnItemSelect(inventoryItem);
+    }
+    /// <summary>
+    /// При отпускании ячейки с экипировкой
+    /// </summary>
+    /// <param name="inventoryItem">Ячейка</param>
+    private void OnEquipmentDrop(InventoryCell inventoryItem)
+    {
+        SwapItems(_selectedItem, inventoryItem, ref _inventoryEquipmentList);
+        OnEquipmentSelect(inventoryItem);
     }
 
     /// <summary>

@@ -13,8 +13,12 @@ namespace Assets.DungeonGeneration
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                if (BaseMonster.MonstersCount.IsValueEmpty())
+                if (BaseMonster.MonstersCount.IsValueEmpty() || PlayerLocation.GetCurrentLocation() == eLocations.Lobby)
+                {
+                    if (PlayerLocation.GetCurrentLocation() == eLocations.Lobby)
+                        Player.Instance.Heal(Player.Instance.HP.MaxValue);
                     PlayerLocation.MoveToNextLocation();
+                }
             }
         }
     }

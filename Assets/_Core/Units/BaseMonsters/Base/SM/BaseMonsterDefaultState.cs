@@ -16,6 +16,7 @@ public class BaseMonsterDefaultState : IUnitState
 
     protected BaseMonster _monster;
     protected float _tileHalfDisableDistance;
+    protected AnimationCaller _animation;
 
     //===>> Constructor <<===\\
 
@@ -24,13 +25,14 @@ public class BaseMonsterDefaultState : IUnitState
         _stateMachine = stateMachine;
         _monster = monster;
         _tileHalfDisableDistance = tileHalfDisableDistance.TileHalfed();
+        _animation = _monster.GetComponent<AnimationCaller>();
     }
 
     //===>> Interfaces Methods <<===\\
 
     public virtual void OnEnter()
     {
-
+        _animation.IDLE(_monster.GetMovementDirection());
     }
 
     public virtual void OnExecute()
@@ -40,7 +42,7 @@ public class BaseMonsterDefaultState : IUnitState
             _stateMachine.TransitToDisabled();
             return;
         }
-
+        
         if (CanChase)
             _stateMachine.TransitToChase();
     }

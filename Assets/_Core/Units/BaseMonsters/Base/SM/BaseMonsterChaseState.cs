@@ -36,15 +36,15 @@ public class BaseMonsterChaseState : IUnitState
 
     public virtual void OnExecute()
     {
-        if(!CanChase)
-            _stateMachine.TransitToDefault();
-
         _monster.SetDirectionToPlayer();
 
         if (Transform.DistanceTo(Player.Instance.transform) <= BtwTargetDistance.TileHalfed())
             _animation.IDLE(Vector2.zero);
         else
             _monster.MoveTo(Player.Instance.transform.position, 1);
+
+        if (!CanChase)
+            _stateMachine.TransitToDefault();
     }
 
     public virtual void OnExit()

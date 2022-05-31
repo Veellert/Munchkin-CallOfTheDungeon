@@ -40,8 +40,15 @@ namespace Assets.DungeonGeneration
             InitializeDungeonSpawners();
 
             VisualizeDungeonTiles();
+        }
+
+        private void OnDestroy()
+        {
+            _dungeonVisualizer.Clear();
 
             ResetCachedValues();
+
+            Debug.Log("dfd");
         }
 
         /// <summary>
@@ -125,14 +132,13 @@ namespace Assets.DungeonGeneration
                 while (initedRooms.Exists(s => s.RoomOverlaped(room, _roomOffset)))
                 {
                     SpawnRoom(ref room, maxX, maxY);
-                    if (debugIndex++ == 100) break;
+                    if (debugIndex++ >= 250) break;
                 }
 
                 initedRooms.Add(room);
             }
 
             _preparedRooms = initedRooms;
-            //_preparedRooms = preparedRooms;
         }
 
         /// <summary>
@@ -241,7 +247,8 @@ namespace Assets.DungeonGeneration
             _preparedRooms = new List<Room>();
             _floorPositions = new HashSet<Vector2Int>();
             _wallPositions = new HashSet<Vector2Int>();
-        }
+            _corridorPositions = new HashSet<Vector2Int>();
+    }
 
         private void OnDrawGizmos()
         {

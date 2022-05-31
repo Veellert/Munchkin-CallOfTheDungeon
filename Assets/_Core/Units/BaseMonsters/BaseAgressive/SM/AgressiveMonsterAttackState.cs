@@ -51,8 +51,9 @@ public class AgressiveMonsterAttackState : IUnitState
     {
         AttackCooldown.FillToMax();
 
+        _monster.SetDirection(Vector2.zero);
         var playerHitboxPosition = Player.Instance.transform.position + (Vector3)Player.Instance.HitboxOffset;
-        if (Vector2.Distance(_monster.GetTempAttackPosition(), playerHitboxPosition) < AttackRange + Player.Instance.HitboxRange.TileHalfed())
+        if (Vector2.Distance(_monster.GetTempAttackPosition(), playerHitboxPosition) < ((float)AttackRange) + Player.Instance.HitboxRange.TileHalfed())
             _monster.AttackTo(Player.Instance, Damage);
     }
 }

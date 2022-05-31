@@ -17,8 +17,6 @@ public class PollymorphMonster : BaseMonster
         base.InitializeStateMachine();
 
         _stateMachine = new PollymorphMonsterStateMachine((MonsterStateMachine)_stateMachine, _drop);
-
-        ((PollymorphMonsterStateMachine)_stateMachine).TransitToDefault();
     }
 
     //===>> Public Methods <<===\\

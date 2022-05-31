@@ -28,6 +28,8 @@ public class MonsterStateMachine : UnitStateMachine
         Chase = new BaseMonsterChaseState(this, Monster);
         Die = new BaseMonsterDieState(Monster, DestroyAfterDeathDelay);
         Disable = new BaseMonsterDisableState(this, Monster, TileHalfDisableDistance);
+
+        TransitToDisabled();
     }
 
     //===>> Important Methods <<===\\

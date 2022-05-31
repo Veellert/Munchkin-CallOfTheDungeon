@@ -17,6 +17,7 @@ public class AnimationCaller : MonoBehaviour
         DODGE,
         ATTACK,
         DIE,
+        Disabled,
     }
 
     private Animator _animator;
@@ -27,6 +28,7 @@ public class AnimationCaller : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _currentAnimation = eAnimation.Disabled;
     }
 
     /// <summary>
@@ -82,6 +84,9 @@ public class AnimationCaller : MonoBehaviour
     public void Disabled()
     {
         _animator.Play("Disabled");
+
+        if(_currentAnimation != eAnimation.Disabled)
+            _currentAnimation = eAnimation.Disabled;
     }
 
     /// <summary>

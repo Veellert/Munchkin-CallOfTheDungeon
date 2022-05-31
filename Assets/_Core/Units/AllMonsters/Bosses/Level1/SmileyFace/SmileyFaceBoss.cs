@@ -37,8 +37,6 @@ public partial class SmileyFaceBoss : Boss
         base.InitializeStateMachine();
 
         _stateMachine = new SmilyFaceBossStateMachine((AgressiveMonsterStateMachine)_stateMachine);
-
-        ((SmilyFaceBossStateMachine)_stateMachine).TransitToDefault();
     }
     protected override void InitializeBossPhases()
     {

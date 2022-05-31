@@ -51,8 +51,6 @@ public abstract partial class BaseMonster : MobileUnit, IDamageable
     protected override void InitializeStateMachine()
     {
         _stateMachine = new MonsterStateMachine(this, TileHalfDisableDistance, DestroyAfterDeathDelay);
-
-        ((MonsterStateMachine)_stateMachine).TransitToDefault();
     }
 
     //===>> Interfaces Methods <<===\\
