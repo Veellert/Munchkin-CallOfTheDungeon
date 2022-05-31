@@ -292,6 +292,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005041772068042586, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
       propertyPath: _roomOffset
       value: 4
       objectReference: {fileID: 0}
@@ -453,3 +457,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+--- !u!1 &2661010979440296392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2661010980145485869, guid: 52aaa32edc6fa4547a639c2de10b5596, type: 3}
+  m_PrefabInstance: {fileID: 2661010979440296391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2661010979440296393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2661010979440296392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51603a95b2a07824bbcc78253c8984f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dungeonVisualizer: {fileID: 925648515}
+  _roomTarget: {fileID: 2944831281755962807, guid: 9a4d843d52828d743a80ee72a829bec8, type: 3}
+  _roomsCount: 12
+  _roomOffset: 3
+  _defaultRoomPreferences:
+  - _roomParameters: {fileID: 11400000, guid: e5e5fa223254d704ca170d28f9e5912d, type: 2}
+    _spawnerList:
+    - {fileID: 11400000, guid: b069c1e2c858e4540a5cd95579b9c60f, type: 2}
+  - _roomParameters: {fileID: 11400000, guid: fcf07067f563ba84289ba9adf6a2d985, type: 2}
+    _spawnerList:
+    - {fileID: 11400000, guid: 0e60003398c284d4ea67cb496cc66f66, type: 2}
+    - {fileID: 11400000, guid: a3091c3a1a168814b98858d5d4543b9b, type: 2}
+  - _roomParameters: {fileID: 11400000, guid: c21c50e9fbdbe79499465013611c709f, type: 2}
+    _spawnerList:
+    - {fileID: 11400000, guid: 071ceb24c31f2b648afb8b80567582a3, type: 2}
+    - {fileID: 11400000, guid: 0e60003398c284d4ea67cb496cc66f66, type: 2}
+    - {fileID: 11400000, guid: d3ccf10d3f293784b8ff366fa7778dd0, type: 2}
+  - _roomParameters: {fileID: 11400000, guid: c21c50e9fbdbe79499465013611c709f, type: 2}
+    _spawnerList:
+    - {fileID: 11400000, guid: d63e6c9b70050cf4386d1b035c7ab8f0, type: 2}
+    - {fileID: 11400000, guid: 0e60003398c284d4ea67cb496cc66f66, type: 2}
+    - {fileID: 11400000, guid: cbdfd689e7e0d5447ad674462adf8446, type: 2}
+  - _roomParameters: {fileID: 11400000, guid: e5e5fa223254d704ca170d28f9e5912d, type: 2}
+    _spawnerList:
+    - {fileID: 11400000, guid: 09978980a5a080f499c022063f162480, type: 2}
+  _startRoomPreference:
+    _roomParameters: {fileID: 11400000, guid: e5e5fa223254d704ca170d28f9e5912d, type: 2}
+    _spawnerList:
+    - {fileID: 11400000, guid: 55c66ebe2584d794b8c1e3441544a77a, type: 2}
+  _finishRoomPreference:
+    _roomParameters: {fileID: 11400000, guid: e5e5fa223254d704ca170d28f9e5912d, type: 2}
+    _spawnerList:
+    - {fileID: 11400000, guid: 8965baf3b96a8734dbd9de3877e9797e, type: 2}

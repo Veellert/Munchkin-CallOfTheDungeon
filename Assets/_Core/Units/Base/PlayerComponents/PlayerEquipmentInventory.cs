@@ -49,6 +49,11 @@ public class PlayerEquipmentInventory : MonoBehaviour
         _equipmentList.RemoveAt(_equipmentList.IndexOf(equipment));
     }
 
+    public void RemoveAllFromEquipment()
+    {
+        _equipmentList.Clear();
+    }
+
     /// <returns>
     /// Вся экипировка из инвентаря
     /// </returns>
@@ -77,6 +82,11 @@ public class PlayerEquipmentInventory : MonoBehaviour
             return;
 
         _currentEquipmentList.RemoveAt(_currentEquipmentList.IndexOf(equipment));
+    }
+
+    public void RemoveAllFromCurrentEquipment()
+    {
+        _currentEquipmentList.Clear();
     }
 
     /// <returns>

@@ -15,6 +15,9 @@ namespace Assets.DungeonGeneration
         [Header("Spawners In Room")]
         [SerializeField] private List<Spawner> _spawnerList = new List<Spawner>();
 
+        public RoomGenerationParameters GetParameters() => _roomParameters;
+        public List<Spawner> GetSpawners() => _spawnerList;
+
         /// <returns>
         /// Координаты пола комнаты
         /// </returns>

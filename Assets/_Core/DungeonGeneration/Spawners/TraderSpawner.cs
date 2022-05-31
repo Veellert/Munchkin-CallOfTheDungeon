@@ -12,7 +12,7 @@ namespace Assets.DungeonGeneration
 
         public override void Spawn(Vector2Int spawnerPosition)
         {
-            Vector2 spawnPosition = new Vector2(spawnerPosition.x + 0.5f, spawnerPosition.y);
+            Vector2 spawnPosition = new Vector2(spawnerPosition.x + 0.5f, spawnerPosition.y + 0.5f);
             Instantiate(_traderTarget, spawnPosition, Quaternion.identity);
         }
     }

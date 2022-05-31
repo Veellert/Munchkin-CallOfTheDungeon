@@ -42,15 +42,6 @@ namespace Assets.DungeonGeneration
             VisualizeDungeonTiles();
         }
 
-        private void OnDestroy()
-        {
-            _dungeonVisualizer.Clear();
-
-            ResetCachedValues();
-
-            Debug.Log("dfd");
-        }
-
         /// <summary>
         /// Генерирует пол подземелья
         /// </summary>

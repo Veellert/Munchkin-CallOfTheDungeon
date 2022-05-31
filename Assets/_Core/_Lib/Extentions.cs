@@ -68,6 +68,15 @@ public static class Extentions
 
 
 
+    // Vector2
+    /// <returns>
+    /// Округляет координату до целого числа
+    /// </returns>
+    /// <param name="current">Текущая координата</param>
+    public static Vector2Int Rounded(this Vector2 current) => Vector2Int.RoundToInt(current);
+
+
+
     // MonoBehaviour
     /// <summary>
     /// Выполняет метод проверяя не выполняется ли он уже

@@ -23,7 +23,9 @@ namespace Assets.UI
             else if (_isLobbyQuit)
                 InitializeButtonClick(() =>
                 {
-                    if (Player.Instance)
+                    if (Player.Instance && Player.Instance.IsDead)
+                        SceneLoader.MainMenu();
+                    else if (Player.Instance)
                         Player.Instance.GetComponent<PlayerLocationController>().SetLobby();
                     else
                         SceneLoader.Lobby();

@@ -17,7 +17,7 @@ namespace Assets.DungeonGeneration
         {
             if (_target)
                 for (int i = 0; i < count; i++)
-                    Object.Instantiate(_target, (Vector2)spawnPosition, Quaternion.identity);
+                    Object.Instantiate(_target, spawnPosition + new Vector2(0.5f, 0.5f), Quaternion.identity);
         }
     }
 }

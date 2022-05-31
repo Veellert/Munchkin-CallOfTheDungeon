@@ -44,7 +44,7 @@ public class PlayerLocationController : MonoBehaviour
         if (nextLoc < System.Enum.GetValues(typeof(eLocations)).Length)
             SetLocation(nextLoc);
         else
-            SceneLoader.MainMenu();
+            SetLocation(1);
     }
     
     /// <summary>
@@ -67,7 +67,13 @@ public class PlayerLocationController : MonoBehaviour
 
         switch (_currentLocation)
         {
-            case eLocations.Lobby: SceneLoader.Lobby(); break;
+            case eLocations.Lobby: SceneLoader.Lobby();
+                Player.Instance.Inventory.DropCrystals.FillEmpty();
+                Player.Instance.HP.FillToMax();
+                Player.Instance.Inventory.RemoveAllFromInventory();
+                Player.Instance.EquipmentInventory.RemoveAllFromCurrentEquipment();
+                Player.Instance.EquipmentInventory.RemoveAllFromEquipment();
+                break;
             case eLocations.Level1: SceneLoader.FirstLevel(); break;
             case eLocations.L1Boss1: SceneLoader.L1FirstBoss(); break;
             default: SceneLoader.Lobby(); break;

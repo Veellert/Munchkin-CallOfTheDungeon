@@ -69,6 +69,10 @@ public class PlayerInventory : MonoBehaviour
 
         _itemList.RemoveAt(_itemList.IndexOf(item));
     }
+    public void RemoveAllFromInventory()
+    {
+        _itemList.Clear();
+    }
 
     /// <returns>
     /// Все предметы из инвентаря
